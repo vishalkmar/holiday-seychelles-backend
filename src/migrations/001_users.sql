@@ -1,0 +1,31 @@
+-- Users (customers). Auth is via email OTP. Profile fields from My Profile screen.
+CREATE TABLE IF NOT EXISTS users (
+    id BIGSERIAL PRIMARY KEY,
+    email VARCHAR(190) NOT NULL UNIQUE,
+    first_middle_name VARCHAR(120),
+    last_name VARCHAR(120),
+    gender VARCHAR(20),
+    date_of_birth DATE,
+    nationality VARCHAR(100),
+    marital_status VARCHAR(30),
+    anniversary DATE,
+    city_of_residence VARCHAR(120),
+    state VARCHAR(120),
+    country VARCHAR(120),
+    mobile_country_code VARCHAR(10),
+    mobile_number VARCHAR(30),
+    mobile_verified BOOLEAN NOT NULL DEFAULT FALSE,
+    passport_no VARCHAR(50),
+    passport_expiry DATE,
+    passport_issuing_country VARCHAR(100),
+    pan_card_number VARCHAR(20),
+    profile_image VARCHAR(500),
+    is_profile_complete BOOLEAN NOT NULL DEFAULT FALSE,
+    status VARCHAR(20) NOT NULL DEFAULT 'active',
+    last_login_at TIMESTAMPTZ,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_users_status ON users(status);

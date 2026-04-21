@@ -1,0 +1,4 @@
+CREATE TABLE IF NOT EXISTS migrations_log (
+    filename VARCHAR(200) PRIMARY KEY,
+    ran_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
