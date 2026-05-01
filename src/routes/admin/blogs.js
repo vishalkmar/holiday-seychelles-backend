@@ -1,11 +1,119 @@
 const express = require('express');
+const fs = require('fs');
+const path = require('path');
+const crypto = require('crypto');
 const { body, validationResult } = require('express-validator');
+const multer = require('multer');
 const slugify = require('slugify');
 const { pool } = require('../../config/db');
 const adminAuth = require('../../middleware/adminAuth');
 const { sendSuccess, sendError } = require('../../utils/response');
 
 const router = express.Router();
+const uploadsDir = path.join(__dirname, '../../..', process.env.UPLOAD_DIR || 'uploads');
+const hasCloudinaryConfig = Boolean(
+  process.env.CLOUDINARY_CLOUD_NAME &&
+    process.env.CLOUDINARY_API_KEY &&
+    process.env.CLOUDINARY_API_SECRET
+);
+
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
+
+const diskStorage = multer.diskStorage({
+  destination: (_req, _file, cb) => cb(null, uploadsDir),
+  filename: (_req, file, cb) => {
+    const ext = path.extname(file.originalname || '').toLowerCase() || '.jpg';
+    const base = slugify(path.basename(file.originalname || 'blog-image', ext), {
+      lower: true,
+      strict: true,
+    }) || 'blog-image';
+    cb(null, `blog-${Date.now()}-${base}${ext}`);
+  },
+});
+
+const upload = multer({
+  storage: hasCloudinaryConfig ? multer.memoryStorage() : diskStorage,
+  limits: { fileSize: 5 * 1024 * 1024 },
+  fileFilter: (_req, file, cb) => {
+    if (!file.mimetype?.startsWith('image/')) {
+      cb(new Error('Only image uploads are allowed'));
+      return;
+    }
+    cb(null, true);
+  },
+});
+
+async function uploadToCloudinary(file) {
+  const timestamp = Math.floor(Date.now() / 1000);
+  const folder = process.env.CLOUDINARY_FOLDER || 'holiday-seychelles/blogs';
+  const publicIdBase = slugify(path.basename(file.originalname || 'blog-image', path.extname(file.originalname || '')), {
+    lower: true,
+    strict: true,
+  }) || 'blog-image';
+  const publicId = `${publicIdBase}-${Date.now()}`;
+
+  const signaturePayload = `folder=${folder}&public_id=${publicId}&timestamp=${timestamp}${process.env.CLOUDINARY_API_SECRET}`;
+  const signature = crypto.createHash('sha1').update(signaturePayload).digest('hex');
+
+  const formData = new FormData();
+  formData.append('file', new Blob([file.buffer], { type: file.mimetype }), file.originalname || 'blog-image');
+  formData.append('api_key', process.env.CLOUDINARY_API_KEY);
+  formData.append('timestamp', String(timestamp));
+  formData.append('folder', folder);
+  formData.append('public_id', publicId);
+  formData.append('signature', signature);
+
+  const response = await fetch(
+    `https://api.cloudinary.com/v1_1/${process.env.CLOUDINARY_CLOUD_NAME}/image/upload`,
+    {
+      method: 'POST',
+      body: formData,
+    }
+  );
+
+  const data = await response.json();
+  if (!response.ok) {
+    throw new Error(data?.error?.message || 'Cloudinary upload failed');
+  }
+
+  return {
+    filename: data.public_id,
+    path: data.public_id,
+    url: data.secure_url,
+    absoluteUrl: data.secure_url,
+    publicPath: data.secure_url,
+  };
+}
+
+router.post('/upload', adminAuth, upload.single('image'), async (req, res) => {
+  try {
+    if (!req.file) {
+      return sendError(res, null, 'Image file is required', 400);
+    }
+
+    const uploaded = hasCloudinaryConfig
+      ? await uploadToCloudinary(req.file)
+      : {
+          filename: req.file.filename,
+          path: req.file.filename,
+          url: `/uploads/${req.file.filename}`,
+          absoluteUrl: `${req.protocol}://${req.get('host')}/uploads/${req.file.filename}`,
+          publicPath: `/uploads/${req.file.filename}`,
+        };
+
+    sendSuccess(
+      res,
+      uploaded,
+      'Image uploaded successfully',
+      201
+    );
+  } catch (err) {
+    console.error('blog image upload error:', err);
+    sendError(res, err, 'Failed to upload image', 500);
+  }
+});
 
 // Get all blogs (admin view - includes drafts)
 router.get('/', adminAuth, async (req, res) => {
@@ -13,7 +121,7 @@ router.get('/', adminAuth, async (req, res) => {
     const { page = 1, limit = 20, status = '' } = req.query;
     const offset = (page - 1) * limit;
 
-    let query = `SELECT id, slug, title, excerpt, status, published_at, views, created_at
+    let query = `SELECT id, slug, title, excerpt, cover_image, tags, status, published_at, views, created_at
                  FROM blogs`;
     let countQuery = 'SELECT COUNT(*) as total FROM blogs';
     const params = [];

@@ -3,8 +3,35 @@ const { body, validationResult } = require('express-validator');
 const { v4: uuidv4 } = require('uuid');
 const { pool } = require('../../config/db');
 const { sendSuccess, sendError } = require('../../utils/response');
+const { generateVoucherPDF } = require('../../utils/voucher');
+const { sendVoucherEmail } = require('../../utils/mailer');
 
 const router = express.Router();
+
+/**
+ * Generate voucher + email it to the lead guest.
+ * Persists voucher_path on success. Errors are swallowed (logged) so the booking
+ * response never blocks on email/PDF issues.
+ */
+async function sendBookingVoucher(bookingId) {
+  try {
+    const { rows } = await pool.query('SELECT * FROM bookings WHERE id = $1', [bookingId]);
+    if (rows.length === 0) return;
+    const booking = rows[0];
+
+    const { absolutePath, relativePath } = await generateVoucherPDF(booking);
+    await pool.query(
+      'UPDATE bookings SET voucher_path = $1, voucher_generated_at = NOW() WHERE id = $2',
+      [relativePath, bookingId]
+    );
+
+    if (booking.lead_email) {
+      await sendVoucherEmail(booking, absolutePath);
+    }
+  } catch (err) {
+    console.error('sendBookingVoucher error:', err.message);
+  }
+}
 
 // Create booking after payment success (called by payment gateway webhook)
 router.post(
@@ -72,6 +99,10 @@ router.post(
           typeof details === 'string' ? JSON.parse(details) : details,
         ]
       );
+
+      // Fire-and-forget: generate voucher PDF + email to lead guest.
+      // Do NOT await — booking response should return immediately.
+      setImmediate(() => sendBookingVoucher(rows[0].id));
 
       sendSuccess(res, rows[0], 'Booking created successfully', 201);
     } catch (err) {

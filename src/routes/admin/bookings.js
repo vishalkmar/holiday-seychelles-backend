@@ -3,9 +3,9 @@ const { body, validationResult } = require('express-validator');
 const { pool } = require('../../config/db');
 const adminAuth = require('../../middleware/adminAuth');
 const { sendSuccess, sendError } = require('../../utils/response');
-const PDFDocument = require('pdfkit');
-const path = require('path');
-const fs = require('fs');
+const { generateVoucherPDF } = require('../../utils/voucher');
+const { sendVoucherEmail, sendRefundEmail } = require('../../utils/mailer');
+const { processRefund, isLive: cybersourceLive } = require('../../utils/cybersource');
 
 const router = express.Router();
 
@@ -164,83 +164,231 @@ router.patch('/:bookingId', adminAuth,
   }
 );
 
-// Generate voucher PDF
+// Generate voucher PDF (and optionally email it).
+// Body: { email: true } to also send the voucher to the lead guest.
 router.post('/:bookingId/voucher', adminAuth, async (req, res) => {
   try {
     const { bookingId } = req.params;
+    const shouldEmail = req.body?.email === true || req.body?.email === 'true';
 
-    const { rows } = await pool.query(
-      'SELECT * FROM bookings WHERE id = $1',
-      [bookingId]
-    );
+    const { rows } = await pool.query('SELECT * FROM bookings WHERE id = $1', [bookingId]);
 
     if (rows.length === 0) {
       return sendError(res, null, 'Booking not found', 404);
     }
 
     const booking = rows[0];
+    const { absolutePath, relativePath } = await generateVoucherPDF(booking);
 
-    // Create voucher PDF
-    const doc = new PDFDocument();
-    const uploadsDir = path.join(__dirname, '../../..', process.env.UPLOAD_DIR || 'uploads');
-    const voucherFilename = `voucher-${booking.booking_reference}.pdf`;
-    const voucherPath = path.join(uploadsDir, voucherFilename);
+    await pool.query(
+      'UPDATE bookings SET voucher_path = $1, voucher_generated_at = NOW() WHERE id = $2',
+      [relativePath, bookingId]
+    );
 
-    // Create uploads dir if not exists
-    if (!fs.existsSync(uploadsDir)) {
-      fs.mkdirSync(uploadsDir, { recursive: true });
+    let emailResult = null;
+    if (shouldEmail && booking.lead_email) {
+      emailResult = await sendVoucherEmail(booking, absolutePath);
     }
 
-    const stream = fs.createWriteStream(voucherPath);
-    doc.pipe(stream);
-
-    // Add content
-    doc.fontSize(20).text('Holiday Seychelles', { align: 'center' });
-    doc.fontSize(16).text('Booking Voucher', { align: 'center' });
-    doc.moveDown();
-
-    doc.fontSize(12);
-    doc.text(`Booking Reference: ${booking.booking_reference}`, { underline: true });
-    doc.text(`Name: ${booking.lead_first_name} ${booking.lead_last_name}`);
-    doc.text(`Email: ${booking.lead_email}`);
-    doc.text(`Mobile: ${booking.lead_mobile}`);
-    doc.moveDown();
-
-    doc.text(`Product: ${booking.product_title}`);
-    doc.text(`Type: ${booking.booking_type}`);
-    doc.text(`Total Amount: ${booking.currency} ${booking.payment_amount}`);
-    doc.text(`Status: ${booking.status}`);
-
-    if (booking.travel_date) {
-      doc.text(`Travel Date: ${new Date(booking.travel_date).toLocaleDateString()}`);
-    }
-
-    doc.moveDown();
-    doc.fontSize(10).text('This is an automatically generated voucher. Please keep it safe.', {
-      align: 'center',
-      italics: true,
-    });
-
-    doc.end();
-
-    stream.on('finish', async () => {
-      // Update booking with voucher path
-      const relativePath = `voucher-${booking.booking_reference}.pdf`;
-      await pool.query(
-        'UPDATE bookings SET voucher_path = $1, voucher_generated_at = NOW() WHERE id = $2',
-        [relativePath, bookingId]
-      );
-
-      sendSuccess(res, { voucherPath: relativePath }, 'Voucher generated successfully');
-    });
-
-    stream.on('error', (err) => {
-      console.error('Voucher generation error:', err);
-      sendError(res, err, 'Failed to generate voucher', 500);
-    });
+    sendSuccess(
+      res,
+      { voucherPath: relativePath, emailed: !!emailResult?.success, emailError: emailResult?.error || null },
+      shouldEmail ? 'Voucher generated and emailed' : 'Voucher generated successfully'
+    );
   } catch (err) {
     console.error('voucher endpoint error:', err);
     sendError(res, err, 'Failed to generate voucher', 500);
+  }
+});
+
+// Resend voucher email — regenerates PDF and emails to lead guest.
+router.post('/:bookingId/resend-voucher', adminAuth, async (req, res) => {
+  try {
+    const { bookingId } = req.params;
+    const overrideEmail = req.body?.email && typeof req.body.email === 'string' ? req.body.email.trim() : null;
+
+    const { rows } = await pool.query('SELECT * FROM bookings WHERE id = $1', [bookingId]);
+    if (rows.length === 0) {
+      return sendError(res, null, 'Booking not found', 404);
+    }
+
+    const booking = rows[0];
+    const recipient = overrideEmail || booking.lead_email;
+    if (!recipient) {
+      return sendError(res, null, 'No recipient email available', 400);
+    }
+
+    const { absolutePath, relativePath } = await generateVoucherPDF(booking);
+    await pool.query(
+      'UPDATE bookings SET voucher_path = $1, voucher_generated_at = NOW() WHERE id = $2',
+      [relativePath, bookingId]
+    );
+
+    const result = await sendVoucherEmail({ ...booking, lead_email: recipient }, absolutePath);
+    if (!result.success) {
+      return sendError(res, null, `Failed to send email: ${result.error}`, 502);
+    }
+
+    sendSuccess(res, { voucherPath: relativePath, sentTo: recipient }, 'Voucher resent successfully');
+  } catch (err) {
+    console.error('resend voucher error:', err);
+    sendError(res, err, 'Failed to resend voucher', 500);
+  }
+});
+
+// Initiate / process a refund for a booking.
+// Body: { amount?: number, reason?: string, notify?: boolean }
+router.post(
+  '/:bookingId/refund',
+  adminAuth,
+  body('amount').optional().isFloat({ min: 0.01 }),
+  body('reason').optional().trim(),
+  body('notify').optional().isBoolean(),
+  async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(400).json({ status: 'error', errors: errors.array() });
+    }
+
+    const client = await pool.connect();
+    try {
+      const { bookingId } = req.params;
+      const { amount: amountReq, reason, notify = true } = req.body || {};
+
+      await client.query('BEGIN');
+
+      const { rows } = await client.query(
+        'SELECT * FROM bookings WHERE id = $1 FOR UPDATE',
+        [bookingId]
+      );
+      if (rows.length === 0) {
+        await client.query('ROLLBACK');
+        return sendError(res, null, 'Booking not found', 404);
+      }
+      const booking = rows[0];
+
+      if (booking.is_refundable === false) {
+        await client.query('ROLLBACK');
+        return sendError(res, null, 'This booking is marked non-refundable', 409);
+      }
+      if (booking.payment_status === 'refunded' || booking.status === 'refunded') {
+        await client.query('ROLLBACK');
+        return sendError(res, null, 'This booking has already been refunded', 409);
+      }
+      if (booking.payment_status !== 'paid') {
+        await client.query('ROLLBACK');
+        return sendError(res, null, 'Only paid bookings can be refunded', 409);
+      }
+
+      const refundAmount = amountReq != null ? Number(amountReq) : Number(booking.payment_amount);
+      const paid = Number(booking.payment_amount || 0);
+      if (refundAmount <= 0 || refundAmount > paid) {
+        await client.query('ROLLBACK');
+        return sendError(res, null, `Refund amount must be between 0 and ${paid}`, 400);
+      }
+
+      // Audit: requested
+      await client.query(
+        `INSERT INTO refund_events (booking_id, admin_id, action, amount, currency, notes, payload)
+         VALUES ($1, $2, 'requested', $3, $4, $5, $6)`,
+        [bookingId, req.admin?.id || null, refundAmount, booking.currency, reason || null, JSON.stringify({ initiatedBy: req.admin?.email || 'admin' })]
+      );
+
+      // Call gateway (simulated unless CYBERSOURCE_REFUND_LIVE=true and creds wired)
+      const gateway = await processRefund({
+        paymentReference: booking.payment_reference,
+        amount: refundAmount,
+        currency: booking.currency,
+      });
+
+      if (!gateway.success) {
+        await client.query(
+          `INSERT INTO refund_events (booking_id, admin_id, action, amount, currency, notes, payload)
+           VALUES ($1, $2, 'gateway_failed', $3, $4, $5, $6)`,
+          [bookingId, req.admin?.id || null, refundAmount, booking.currency, gateway.error, JSON.stringify(gateway)]
+        );
+        await client.query('COMMIT');
+        return sendError(res, null, `Gateway refund failed: ${gateway.error}`, 502);
+      }
+
+      await client.query(
+        `INSERT INTO refund_events (booking_id, admin_id, action, amount, currency, gateway_reference, notes, payload)
+         VALUES ($1, $2, 'gateway_initiated', $3, $4, $5, $6, $7)`,
+        [bookingId, req.admin?.id || null, refundAmount, booking.currency, gateway.gatewayReference, gateway.simulated ? 'SIMULATED (live mode disabled)' : 'live gateway', JSON.stringify(gateway)]
+      );
+
+      // Update booking row
+      const isFullRefund = Math.abs(refundAmount - paid) < 0.005;
+      const { rows: updated } = await client.query(
+        `UPDATE bookings SET
+            status = 'refunded',
+            payment_status = 'refunded',
+            refund_amount = $1,
+            refund_currency = $2,
+            refund_reason = $3,
+            refund_reference = $4,
+            refund_initiated_at = COALESCE(refund_initiated_at, NOW()),
+            refund_completed_at = NOW(),
+            refunded_by_admin_id = $5,
+            updated_at = NOW()
+         WHERE id = $6
+         RETURNING *`,
+        [refundAmount, booking.currency, reason || null, gateway.gatewayReference, req.admin?.id || null, bookingId]
+      );
+
+      await client.query(
+        `INSERT INTO refund_events (booking_id, admin_id, action, amount, currency, gateway_reference, notes)
+         VALUES ($1, $2, 'completed', $3, $4, $5, $6)`,
+        [bookingId, req.admin?.id || null, refundAmount, booking.currency, gateway.gatewayReference, isFullRefund ? 'Full refund' : 'Partial refund']
+      );
+
+      await client.query('COMMIT');
+
+      // Email user (fire-and-forget)
+      let emailResult = { success: false };
+      if (notify && updated[0].lead_email) {
+        emailResult = await sendRefundEmail(updated[0], {
+          amount: refundAmount,
+          currency: booking.currency,
+          reason: reason || null,
+          gatewayReference: gateway.gatewayReference,
+        });
+      }
+
+      sendSuccess(
+        res,
+        {
+          booking: updated[0],
+          gateway: { simulated: !!gateway.simulated, reference: gateway.gatewayReference, live: cybersourceLive },
+          emailed: !!emailResult.success,
+        },
+        gateway.simulated
+          ? 'Refund recorded (simulated; live gateway disabled).'
+          : 'Refund processed successfully.'
+      );
+    } catch (err) {
+      try { await client.query('ROLLBACK'); } catch (_) { /* noop */ }
+      console.error('refund error:', err);
+      sendError(res, err, 'Failed to process refund', 500);
+    } finally {
+      client.release();
+    }
+  }
+);
+
+// Get refund history for a booking
+router.get('/:bookingId/refunds', adminAuth, async (req, res) => {
+  try {
+    const { bookingId } = req.params;
+    const { rows } = await pool.query(
+      `SELECT id, action, amount, currency, gateway_reference, notes, payload, created_at, admin_id
+       FROM refund_events WHERE booking_id = $1 ORDER BY created_at DESC`,
+      [bookingId]
+    );
+    sendSuccess(res, { events: rows }, 'Refund events retrieved');
+  } catch (err) {
+    console.error('refund history error:', err);
+    sendError(res, err, 'Failed to load refund events', 500);
   }
 });
 
