@@ -6,6 +6,7 @@ const { sendSuccess, sendError } = require('../../utils/response');
 const { generateVoucherPDF } = require('../../utils/voucher');
 const { sendVoucherEmail, sendRefundEmail } = require('../../utils/mailer');
 const { processRefund, isLive: cybersourceLive } = require('../../utils/cybersource');
+const { evaluateRefund } = require('../../utils/refundPolicy');
 
 const router = express.Router();
 
@@ -267,17 +268,23 @@ router.post(
       }
       const booking = rows[0];
 
-      if (booking.is_refundable === false) {
-        await client.query('ROLLBACK');
-        return sendError(res, null, 'This booking is marked non-refundable', 409);
-      }
-      if (booking.payment_status === 'refunded' || booking.status === 'refunded') {
-        await client.query('ROLLBACK');
-        return sendError(res, null, 'This booking has already been refunded', 409);
-      }
-      if (booking.payment_status !== 'paid') {
-        await client.query('ROLLBACK');
-        return sendError(res, null, 'Only paid bookings can be refunded', 409);
+      const eligibility = evaluateRefund(booking);
+      // Admin can override an expired window by passing { force: true } in the body.
+      // is_refundable === false is *not* overridable from this endpoint — that's a supplier rule.
+      const adminForce = req.body?.force === true || req.body?.force === 'true';
+      if (!eligibility.eligible) {
+        const overridable = eligibility.expired === true;
+        if (!(overridable && adminForce)) {
+          await client.query('ROLLBACK');
+          return sendError(
+            res,
+            null,
+            overridable
+              ? `${eligibility.reason}. Pass { "force": true } to override as admin.`
+              : eligibility.reason,
+            eligibility.alreadyRefunded ? 409 : 409
+          );
+        }
       }
 
       const refundAmount = amountReq != null ? Number(amountReq) : Number(booking.payment_amount);
