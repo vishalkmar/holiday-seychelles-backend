@@ -16,6 +16,7 @@ const userTripsRoutes = require('./routes/user/trips');
 const userQueriesRoutes = require('./routes/user/queries');
 const publicBlogsRoutes = require('./routes/public/blogs');
 const publicBookingsRoutes = require('./routes/public/bookings');
+const cybersourceRoutes = require('./routes/public/cybersource');
 
 const adminAuthRoutes = require('./routes/admin/auth');
 const adminUsersRoutes = require('./routes/admin/users');
@@ -57,6 +58,11 @@ app.use('/api/user/queries', userQueriesRoutes);
 // Public (website) routes
 app.use('/api/blogs', publicBlogsRoutes);
 app.use('/api/bookings', publicBookingsRoutes);
+// Payment gateway — both paths map to the same handler.
+// /api/cybersourcetest → simulation mode (dev, no real credentials).
+// /api/cybersource     → real CyberSource SA (when CS_SA_* env vars are set).
+app.use('/api/cybersource', cybersourceRoutes);
+app.use('/api/cybersourcetest', cybersourceRoutes);
 
 // Admin routes
 app.use('/api/admin/auth', adminAuthRoutes);

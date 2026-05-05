@@ -17,7 +17,7 @@ async function run() {
     await client.query(`
       CREATE TABLE IF NOT EXISTS migrations_log (
         filename VARCHAR(200) PRIMARY KEY,
-        ran_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+        ran_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
       );
     `);
 
@@ -36,7 +36,7 @@ async function run() {
       try {
         await client.query(sql);
         await client.query(
-          'INSERT INTO migrations_log (filename) VALUES ($1) ON CONFLICT DO NOTHING',
+          'INSERT IGNORE INTO migrations_log (filename) VALUES ($1)',
           [file]
         );
         await client.query('COMMIT');

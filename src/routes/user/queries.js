@@ -120,37 +120,40 @@ router.get('/', userAuth, async (req, res) => {
       `SELECT q.id, q.user_id, q.name, q.email, q.mobile, q.subject, q.category, q.status, q.created_at, q.updated_at,
               COALESCE(stats.message_count, 0) AS message_count,
               stats.last_message_at,
-              last_message.sender_type AS last_sender_type,
-              last_message.message AS last_message,
-              last_admin.message AS last_admin_reply,
-              COALESCE(unread_admin.unread_count, 0) AS unread_count
+              (
+                SELECT qm.sender_type
+                FROM query_messages qm
+                WHERE qm.query_id = q.id
+                ORDER BY qm.created_at DESC, qm.id DESC
+                LIMIT 1
+              ) AS last_sender_type,
+              (
+                SELECT qm.message
+                FROM query_messages qm
+                WHERE qm.query_id = q.id
+                ORDER BY qm.created_at DESC, qm.id DESC
+                LIMIT 1
+              ) AS last_message,
+              (
+                SELECT qm.message
+                FROM query_messages qm
+                WHERE qm.query_id = q.id AND qm.sender_type = 'admin'
+                ORDER BY qm.created_at DESC, qm.id DESC
+                LIMIT 1
+              ) AS last_admin_reply,
+              (
+                SELECT COUNT(*)
+                FROM query_messages qm
+                WHERE qm.query_id = q.id
+                  AND qm.sender_type = 'admin'
+                  AND qm.created_at > COALESCE(q.user_last_seen_at, '1970-01-01 00:00:00')
+              ) AS unread_count
        FROM queries q
        LEFT JOIN (
          SELECT query_id, COUNT(*)::int AS message_count, MAX(created_at) AS last_message_at
          FROM query_messages
          GROUP BY query_id
        ) stats ON stats.query_id = q.id
-       LEFT JOIN LATERAL (
-         SELECT sender_type, message
-         FROM query_messages
-         WHERE query_id = q.id
-         ORDER BY created_at DESC, id DESC
-         LIMIT 1
-       ) last_message ON TRUE
-       LEFT JOIN LATERAL (
-         SELECT message
-         FROM query_messages
-         WHERE query_id = q.id AND sender_type = 'admin'
-         ORDER BY created_at DESC, id DESC
-         LIMIT 1
-       ) last_admin ON TRUE
-       LEFT JOIN LATERAL (
-         SELECT COUNT(*)::int AS unread_count
-         FROM query_messages
-         WHERE query_id = q.id
-           AND sender_type = 'admin'
-           AND created_at > COALESCE(q.user_last_seen_at, TO_TIMESTAMP(0))
-       ) unread_admin ON TRUE
        WHERE q.user_id = $1
        ORDER BY COALESCE(stats.last_message_at, q.updated_at, q.created_at) DESC, q.id DESC`,
       [userId]
@@ -164,37 +167,40 @@ router.get('/', userAuth, async (req, res) => {
       `SELECT q.id, q.user_id, q.name, q.email, q.mobile, q.subject, q.category, q.status, q.created_at, q.updated_at,
               COALESCE(stats.message_count, 0) AS message_count,
               stats.last_message_at,
-              last_message.sender_type AS last_sender_type,
-              last_message.message AS last_message,
-              last_admin.message AS last_admin_reply,
-              COALESCE(unread_admin.unread_count, 0) AS unread_count
+              (
+                SELECT qm.sender_type
+                FROM query_messages qm
+                WHERE qm.query_id = q.id
+                ORDER BY qm.created_at DESC, qm.id DESC
+                LIMIT 1
+              ) AS last_sender_type,
+              (
+                SELECT qm.message
+                FROM query_messages qm
+                WHERE qm.query_id = q.id
+                ORDER BY qm.created_at DESC, qm.id DESC
+                LIMIT 1
+              ) AS last_message,
+              (
+                SELECT qm.message
+                FROM query_messages qm
+                WHERE qm.query_id = q.id AND qm.sender_type = 'admin'
+                ORDER BY qm.created_at DESC, qm.id DESC
+                LIMIT 1
+              ) AS last_admin_reply,
+              (
+                SELECT COUNT(*)
+                FROM query_messages qm
+                WHERE qm.query_id = q.id
+                  AND qm.sender_type = 'admin'
+                  AND qm.created_at > COALESCE(q.user_last_seen_at, '1970-01-01 00:00:00')
+              ) AS unread_count
        FROM queries q
        LEFT JOIN (
          SELECT query_id, COUNT(*)::int AS message_count, MAX(created_at) AS last_message_at
          FROM query_messages
          GROUP BY query_id
        ) stats ON stats.query_id = q.id
-       LEFT JOIN LATERAL (
-         SELECT sender_type, message
-         FROM query_messages
-         WHERE query_id = q.id
-         ORDER BY created_at DESC, id DESC
-         LIMIT 1
-       ) last_message ON TRUE
-       LEFT JOIN LATERAL (
-         SELECT message
-         FROM query_messages
-         WHERE query_id = q.id AND sender_type = 'admin'
-         ORDER BY created_at DESC, id DESC
-         LIMIT 1
-       ) last_admin ON TRUE
-       LEFT JOIN LATERAL (
-         SELECT COUNT(*)::int AS unread_count
-         FROM query_messages
-         WHERE query_id = q.id
-           AND sender_type = 'admin'
-           AND created_at > COALESCE(q.user_last_seen_at, TO_TIMESTAMP(0))
-       ) unread_admin ON TRUE
        WHERE q.user_id = $1
        ORDER BY COALESCE(stats.last_message_at, q.updated_at, q.created_at) DESC, q.id DESC`,
       [userId]

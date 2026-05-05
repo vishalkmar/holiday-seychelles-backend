@@ -12,26 +12,36 @@ const router = express.Router();
 let schemaReady = false;
 async function ensureQueryChatSchema() {
   if (schemaReady) return;
+  const ignoreExisting = async (promise) => {
+    try {
+      await promise;
+    } catch (err) {
+      if (!['ER_DUP_FIELDNAME', 'ER_DUP_KEYNAME', 'ER_FK_DUP_NAME'].includes(err.code)) {
+        throw err;
+      }
+    }
+  };
+
   await pool.query(`
     CREATE TABLE IF NOT EXISTS query_messages (
-      id BIGSERIAL PRIMARY KEY,
-      query_id BIGINT NOT NULL REFERENCES queries(id) ON DELETE CASCADE,
+      id BIGINT PRIMARY KEY AUTO_INCREMENT,
+      query_id BIGINT NOT NULL,
       sender_type VARCHAR(20) NOT NULL CHECK (sender_type IN ('user', 'admin', 'system')),
-      sender_user_id BIGINT REFERENCES users(id) ON DELETE SET NULL,
-      sender_admin_id BIGINT REFERENCES admins(id) ON DELETE SET NULL,
+      sender_user_id BIGINT,
+      sender_admin_id BIGINT,
       message TEXT NOT NULL,
       email_sent BOOLEAN NOT NULL DEFAULT FALSE,
-      email_sent_at TIMESTAMPTZ,
-      created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+      email_sent_at DATETIME,
+      created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+      CONSTRAINT fk_query_messages_query_live FOREIGN KEY (query_id) REFERENCES queries(id) ON DELETE CASCADE,
+      CONSTRAINT fk_query_messages_user_live FOREIGN KEY (sender_user_id) REFERENCES users(id) ON DELETE SET NULL,
+      CONSTRAINT fk_query_messages_admin_live FOREIGN KEY (sender_admin_id) REFERENCES admins(id) ON DELETE SET NULL
     );
   `);
-  await pool.query(`CREATE INDEX IF NOT EXISTS idx_query_messages_query_id ON query_messages(query_id, created_at ASC);`);
-  await pool.query(`CREATE INDEX IF NOT EXISTS idx_query_messages_sender_type ON query_messages(sender_type);`);
-  await pool.query(`
-    ALTER TABLE queries
-      ADD COLUMN IF NOT EXISTS user_last_seen_at TIMESTAMPTZ,
-      ADD COLUMN IF NOT EXISTS admin_last_seen_at TIMESTAMPTZ;
-  `);
+  await ignoreExisting(pool.query('ALTER TABLE queries ADD COLUMN user_last_seen_at DATETIME'));
+  await ignoreExisting(pool.query('ALTER TABLE queries ADD COLUMN admin_last_seen_at DATETIME'));
+  await ignoreExisting(pool.query('CREATE INDEX idx_query_messages_query_id_live ON query_messages(query_id, created_at)'));
+  await ignoreExisting(pool.query('CREATE INDEX idx_query_messages_sender_type_live ON query_messages(sender_type)'));
   schemaReady = true;
   console.log('✅ query_messages + seen-tracking schema verified');
 }
@@ -58,8 +68,20 @@ async function getQueryDetail(client, queryId) {
             handler.name AS handled_by_name,
             COALESCE(stats.message_count, 0) AS message_count,
             stats.last_message_at,
-            latest_admin.message AS last_admin_reply,
-            COALESCE(unread_user.unread_count, 0) AS unread_count
+            (
+              SELECT qm.message
+              FROM query_messages qm
+              WHERE qm.query_id = q.id AND qm.sender_type = 'admin'
+              ORDER BY qm.created_at DESC, qm.id DESC
+              LIMIT 1
+            ) AS last_admin_reply,
+            (
+              SELECT COUNT(*)
+              FROM query_messages qm
+              WHERE qm.query_id = q.id
+                AND qm.sender_type = 'user'
+                AND qm.created_at > COALESCE(q.admin_last_seen_at, '1970-01-01 00:00:00')
+            ) AS unread_count
      FROM queries q
      LEFT JOIN admins handler ON handler.id = q.handled_by_admin_id
      LEFT JOIN (
@@ -67,20 +89,6 @@ async function getQueryDetail(client, queryId) {
        FROM query_messages
        GROUP BY query_id
      ) stats ON stats.query_id = q.id
-     LEFT JOIN LATERAL (
-       SELECT message
-       FROM query_messages
-       WHERE query_id = q.id AND sender_type = 'admin'
-       ORDER BY created_at DESC, id DESC
-       LIMIT 1
-     ) latest_admin ON TRUE
-     LEFT JOIN LATERAL (
-       SELECT COUNT(*)::int AS unread_count
-       FROM query_messages
-       WHERE query_id = q.id
-         AND sender_type = 'user'
-         AND created_at > COALESCE(q.admin_last_seen_at, TO_TIMESTAMP(0))
-     ) unread_user ON TRUE
      WHERE q.id = $1`,
     [queryId]
   );
@@ -120,7 +128,10 @@ router.get('/', adminAuth, async (req, res) => {
   try { await ensureQueryChatSchema(); } catch (e) { /* logged inside */ }
   const client = await pool.connect();
   try {
-    const { page = 1, limit = 20, status = '', category = '', search = '' } = req.query;
+    const page = Math.max(parseInt(req.query.page || '1', 10), 1);
+    const requestedLimit = parseInt(req.query.limit || '20', 10);
+    const limit = Math.min(Math.max(requestedLimit, 1), 100);
+    const { status = '', category = '', search = '' } = req.query;
     const offset = (page - 1) * limit;
     const params = [];
     const conditions = [];
@@ -150,10 +161,34 @@ router.get('/', adminAuth, async (req, res) => {
              handler.name AS handled_by_name,
              COALESCE(stats.message_count, 0) AS message_count,
              stats.last_message_at,
-             last_message.sender_type AS last_sender_type,
-             last_message.message AS last_message,
-             last_admin.message AS last_admin_reply,
-             COALESCE(unread_user.unread_count, 0) AS unread_count
+             (
+               SELECT qm.sender_type
+               FROM query_messages qm
+               WHERE qm.query_id = q.id
+               ORDER BY qm.created_at DESC, qm.id DESC
+               LIMIT 1
+             ) AS last_sender_type,
+             (
+               SELECT qm.message
+               FROM query_messages qm
+               WHERE qm.query_id = q.id
+               ORDER BY qm.created_at DESC, qm.id DESC
+               LIMIT 1
+             ) AS last_message,
+             (
+               SELECT qm.message
+               FROM query_messages qm
+               WHERE qm.query_id = q.id AND qm.sender_type = 'admin'
+               ORDER BY qm.created_at DESC, qm.id DESC
+               LIMIT 1
+             ) AS last_admin_reply,
+             (
+               SELECT COUNT(*)
+               FROM query_messages qm
+               WHERE qm.query_id = q.id
+                 AND qm.sender_type = 'user'
+                 AND qm.created_at > COALESCE(q.admin_last_seen_at, '1970-01-01 00:00:00')
+             ) AS unread_count
       FROM queries q
       LEFT JOIN admins handler ON handler.id = q.handled_by_admin_id
       LEFT JOIN (
@@ -161,27 +196,6 @@ router.get('/', adminAuth, async (req, res) => {
         FROM query_messages
         GROUP BY query_id
       ) stats ON stats.query_id = q.id
-      LEFT JOIN LATERAL (
-        SELECT sender_type, message
-        FROM query_messages
-        WHERE query_id = q.id
-        ORDER BY created_at DESC, id DESC
-        LIMIT 1
-      ) last_message ON TRUE
-      LEFT JOIN LATERAL (
-        SELECT message
-        FROM query_messages
-        WHERE query_id = q.id AND sender_type = 'admin'
-        ORDER BY created_at DESC, id DESC
-        LIMIT 1
-      ) last_admin ON TRUE
-      LEFT JOIN LATERAL (
-        SELECT COUNT(*)::int AS unread_count
-        FROM query_messages
-        WHERE query_id = q.id
-          AND sender_type = 'user'
-          AND created_at > COALESCE(q.admin_last_seen_at, TO_TIMESTAMP(0))
-      ) unread_user ON TRUE
       ${whereClause}
       ORDER BY COALESCE(stats.last_message_at, q.updated_at, q.created_at) DESC, q.id DESC
       LIMIT $${params.length + 1} OFFSET $${params.length + 2}
@@ -202,8 +216,8 @@ router.get('/', adminAuth, async (req, res) => {
       {
         queries: finalRows,
         total: countRows[0]?.total || 0,
-        page: Number(page),
-        limit: Number(limit),
+        page,
+        limit,
       },
       'Queries retrieved successfully'
     );

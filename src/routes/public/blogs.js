@@ -7,7 +7,9 @@ const router = express.Router();
 // Get published blogs
 router.get('/', async (req, res) => {
   try {
-    const { page = 1, limit = 10 } = req.query;
+    const page = Math.max(parseInt(req.query.page || '1', 10), 1);
+    const requestedLimit = parseInt(req.query.limit || '10', 10);
+    const limit = Math.min(Math.max(requestedLimit, 1), 100);
     const offset = (page - 1) * limit;
 
     const { rows } = await pool.query(

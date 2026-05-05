@@ -118,7 +118,10 @@ router.post('/upload', adminAuth, upload.single('image'), async (req, res) => {
 // Get all blogs (admin view - includes drafts)
 router.get('/', adminAuth, async (req, res) => {
   try {
-    const { page = 1, limit = 20, status = '' } = req.query;
+    const page = Math.max(parseInt(req.query.page || '1', 10), 1);
+    const requestedLimit = parseInt(req.query.limit || '20', 10);
+    const limit = Math.min(Math.max(requestedLimit, 1), 100);
+    const { status = '' } = req.query;
     const offset = (page - 1) * limit;
 
     let query = `SELECT id, slug, title, excerpt, cover_image, tags, status, published_at, views, created_at

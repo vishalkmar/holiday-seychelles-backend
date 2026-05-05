@@ -33,18 +33,21 @@ async function seedAdmin() {
     const result = await client.query(
       `INSERT INTO admins (email, password_hash, name, role, status, updated_at)
        VALUES ($1, $2, $3, $4, 'active', NOW())
-       ON CONFLICT (email)
-       DO UPDATE SET
-         password_hash = EXCLUDED.password_hash,
-         name = EXCLUDED.name,
-         role = EXCLUDED.role,
+       ON DUPLICATE KEY UPDATE
+         password_hash = VALUES(password_hash),
+         name = VALUES(name),
+         role = VALUES(role),
          status = 'active',
-         updated_at = NOW()
-       RETURNING id, email, name, role, status`,
+         updated_at = NOW()`,
       [email, passwordHash, name, role]
     );
 
-    console.log('Admin upserted successfully:', result.rows[0]);
+    const { rows } = await client.query(
+      'SELECT id, email, name, role, status FROM admins WHERE email = $1 LIMIT 1',
+      [email]
+    );
+
+    console.log('Admin upserted successfully:', rows[0] || { affectedRows: result.rowCount });
   } catch (err) {
     console.error('Failed to upsert admin:', err.message);
     throw err;

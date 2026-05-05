@@ -1,6 +1,6 @@
 -- Users (customers). Auth is via email OTP. Profile fields from My Profile screen.
 CREATE TABLE IF NOT EXISTS users (
-    id BIGSERIAL PRIMARY KEY,
+    id BIGINT PRIMARY KEY AUTO_INCREMENT,
     email VARCHAR(190) NOT NULL UNIQUE,
     first_middle_name VARCHAR(120),
     last_name VARCHAR(120),
@@ -22,10 +22,9 @@ CREATE TABLE IF NOT EXISTS users (
     profile_image VARCHAR(500),
     is_profile_complete BOOLEAN NOT NULL DEFAULT FALSE,
     status VARCHAR(20) NOT NULL DEFAULT 'active',
-    last_login_at TIMESTAMPTZ,
-    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW(),
-    updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    last_login_at DATETIME,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_users_email (email),
+    INDEX idx_users_status (status)
 );
-
-CREATE INDEX IF NOT EXISTS idx_users_email ON users(email);
-CREATE INDEX IF NOT EXISTS idx_users_status ON users(status);
