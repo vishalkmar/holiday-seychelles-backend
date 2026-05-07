@@ -14,9 +14,12 @@ const userAuthRoutes = require('./routes/user/auth');
 const userProfileRoutes = require('./routes/user/profile');
 const userTripsRoutes = require('./routes/user/trips');
 const userQueriesRoutes = require('./routes/user/queries');
+
 const publicBlogsRoutes = require('./routes/public/blogs');
 const publicBookingsRoutes = require('./routes/public/bookings');
 const cybersourceRoutes = require('./routes/public/cybersource');
+
+const tourvisioProxyRoutes = require('./routes/public/tourvisioProxy');
 
 const adminAuthRoutes = require('./routes/admin/auth');
 const adminUsersRoutes = require('./routes/admin/users');
@@ -27,18 +30,32 @@ const adminQueriesRoutes = require('./routes/admin/queries');
 const app = express();
 
 app.use(helmet());
+
 app.use(
   cors({
-    origin: (process.env.CORS_ORIGIN || '').split(',').map((s) => s.trim()).filter(Boolean) || true,
+    origin:
+      (process.env.CORS_ORIGIN || '')
+        .split(',')
+        .map((s) => s.trim())
+        .filter(Boolean).length > 0
+        ? (process.env.CORS_ORIGIN || '')
+            .split(',')
+            .map((s) => s.trim())
+            .filter(Boolean)
+        : true,
     credentials: true,
   })
 );
+
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
-app.use('/uploads', express.static(path.join(__dirname, '..', process.env.UPLOAD_DIR || 'uploads')));
+app.use(
+  '/uploads',
+  express.static(path.join(__dirname, '..', process.env.UPLOAD_DIR || 'uploads'))
+);
 
 app.get('/api/health', async (req, res) => {
   try {
@@ -55,12 +72,14 @@ app.use('/api/user/profile', userProfileRoutes);
 app.use('/api/user/trips', userTripsRoutes);
 app.use('/api/user/queries', userQueriesRoutes);
 
-// Public (website) routes
+// Public website routes
 app.use('/api/blogs', publicBlogsRoutes);
 app.use('/api/bookings', publicBookingsRoutes);
-// Payment gateway — both paths map to the same handler.
-// /api/cybersourcetest → simulation mode (dev, no real credentials).
-// /api/cybersource     → real CyberSource SA (when CS_SA_* env vars are set).
+
+// Tourvisio / Espacelimited proxy
+app.use('/api/tourvisio', tourvisioProxyRoutes);
+
+// Payment gateway routes
 app.use('/api/cybersource', cybersourceRoutes);
 app.use('/api/cybersourcetest', cybersourceRoutes);
 
@@ -78,6 +97,7 @@ app.use((req, res) => {
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
+
 app.listen(PORT, () => {
   console.log(`Holiday Seychelles backend running on :${PORT}`);
 });
