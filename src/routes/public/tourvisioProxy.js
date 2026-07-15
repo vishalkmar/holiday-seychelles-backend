@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const TARGET = 'http://service.espacelimited.com';
+const TARGET = 'https://service.espacelimited.com';
 
 router.all('/*', async (req, res) => {
   const targetPath = req.originalUrl.replace(/^\/api\/tourvisio/, '');
