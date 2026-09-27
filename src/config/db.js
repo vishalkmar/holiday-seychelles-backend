@@ -7,11 +7,39 @@ const poolImpl = mysql.createPool({
   password: process.env.DB_PASSWORD || process.env.MYSQL_PASSWORD || '',
   database: process.env.DB_DATABASE || process.env.MYSQL_DATABASE || 'holiday_seychelles',
   waitForConnections: true,
-  connectionLimit: Number(process.env.DB_POOL_LIMIT || 10),
+  connectionLimit: Number(process.env.DB_POOL_LIMIT || 6),
   queueLimit: 0,
   timezone: 'Z',
   multipleStatements: true,
+  // This database is remote and unhappy about bursts of new connections: a
+  // fresh connect can take >10s under load while a single one takes ~1s. The
+  // settings below are tuned for that host rather than for throughput.
+  //
+  // - a generous connectTimeout, because slow is better than failed
+  // - a smaller pool, because the host tolerates few concurrent new connections
+  // - idle reaping, so a socket the server already closed is never handed out
+  connectTimeout: Number(process.env.DB_CONNECT_TIMEOUT_MS || 30000),
+  enableKeepAlive: true,
+  keepAliveInitialDelay: 10000,
+  maxIdle: Number(process.env.DB_MAX_IDLE || 4),
+  idleTimeout: Number(process.env.DB_IDLE_TIMEOUT_MS || 30000),
 });
+
+// Connection-level failures that mean "the socket died", not "the query was bad".
+const TRANSIENT = new Set([
+  'ECONNRESET',
+  'ETIMEDOUT',
+  'EPIPE',
+  'PROTOCOL_CONNECTION_LOST',
+  'ER_CON_COUNT_ERROR',
+]);
+
+function isTransient(err) {
+  if (!err) return false;
+  if (TRANSIENT.has(err.code) || TRANSIENT.has(err.errorno)) return true;
+  // Pool-acquisition timeouts arrive without a code, only a message.
+  return /ETIMEDOUT|ECONNRESET|closed state|Pool is closed/i.test(err.message || '');
+}
 
 function normalizeSql(sql) {
   return sql
@@ -158,14 +186,38 @@ class DbClient {
   }
 }
 
+const RETRY_ATTEMPTS = Number(process.env.DB_RETRY_ATTEMPTS || 3);
+
 const pool = {
+  /**
+   * Run a query, retrying a dropped connection.
+   *
+   * Only reads are retried. A write that failed mid-flight might actually have
+   * landed, so replaying it could double-insert - those surface to the caller.
+   */
   async query(sql, params = []) {
-    const client = await this.connect();
-    try {
-      return await client.query(sql, params);
-    } finally {
-      client.release();
+    const readOnly = /^\s*(SELECT|SHOW|DESCRIBE|EXPLAIN)/i.test(sql);
+    let lastError;
+
+    for (let attempt = 1; attempt <= (readOnly ? RETRY_ATTEMPTS : 1); attempt += 1) {
+      let client;
+      try {
+        // Acquiring the connection is inside the try on purpose: against this
+        // host the timeout usually happens HERE rather than on the query, and a
+        // retry that only wraps the query never gets a chance to run.
+        client = await this.connect();
+        return await client.query(sql, params);
+      } catch (err) {
+        lastError = err;
+        if (!readOnly || !isTransient(err) || attempt === RETRY_ATTEMPTS) throw err;
+        console.warn(`[db] ${err.code} on attempt ${attempt}, retrying`);
+        await new Promise((resolve) => setTimeout(resolve, 250 * attempt));
+      } finally {
+        if (client) client.release();
+      }
     }
+
+    throw lastError;
   },
 
   async connect() {

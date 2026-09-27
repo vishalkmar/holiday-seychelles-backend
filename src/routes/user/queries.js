@@ -26,6 +26,7 @@ async function getQueryThread(client, queryId) {
      LEFT JOIN (
        SELECT query_id, COUNT(*)::int AS message_count, MAX(created_at) AS last_message_at
        FROM query_messages
+       WHERE is_internal = 0
        GROUP BY query_id
      ) AS message_stats ON message_stats.query_id = q.id
      WHERE q.id = $1`,
@@ -44,6 +45,9 @@ async function getQueryThread(client, queryId) {
      FROM query_messages qm
      LEFT JOIN admins a ON a.id = qm.sender_admin_id
      WHERE qm.query_id = $1
+       -- Internal notes are written by the team for the team. Without this the
+       -- customer reads them in their own dashboard.
+       AND qm.is_internal = 0
      ORDER BY qm.created_at ASC, qm.id ASC`,
     [queryId]
   );
@@ -123,28 +127,28 @@ router.get('/', userAuth, async (req, res) => {
               (
                 SELECT qm.sender_type
                 FROM query_messages qm
-                WHERE qm.query_id = q.id
+                WHERE qm.query_id = q.id AND qm.is_internal = 0
                 ORDER BY qm.created_at DESC, qm.id DESC
                 LIMIT 1
               ) AS last_sender_type,
               (
                 SELECT qm.message
                 FROM query_messages qm
-                WHERE qm.query_id = q.id
+                WHERE qm.query_id = q.id AND qm.is_internal = 0
                 ORDER BY qm.created_at DESC, qm.id DESC
                 LIMIT 1
               ) AS last_message,
               (
                 SELECT qm.message
                 FROM query_messages qm
-                WHERE qm.query_id = q.id AND qm.sender_type = 'admin'
+                WHERE qm.query_id = q.id AND qm.is_internal = 0 AND qm.sender_type = 'admin'
                 ORDER BY qm.created_at DESC, qm.id DESC
                 LIMIT 1
               ) AS last_admin_reply,
               (
                 SELECT COUNT(*)
                 FROM query_messages qm
-                WHERE qm.query_id = q.id
+                WHERE qm.query_id = q.id AND qm.is_internal = 0
                   AND qm.sender_type = 'admin'
                   AND qm.created_at > COALESCE(q.user_last_seen_at, '1970-01-01 00:00:00')
               ) AS unread_count
@@ -152,6 +156,7 @@ router.get('/', userAuth, async (req, res) => {
        LEFT JOIN (
          SELECT query_id, COUNT(*)::int AS message_count, MAX(created_at) AS last_message_at
          FROM query_messages
+         WHERE is_internal = 0
          GROUP BY query_id
        ) stats ON stats.query_id = q.id
        WHERE q.user_id = $1
@@ -170,28 +175,28 @@ router.get('/', userAuth, async (req, res) => {
               (
                 SELECT qm.sender_type
                 FROM query_messages qm
-                WHERE qm.query_id = q.id
+                WHERE qm.query_id = q.id AND qm.is_internal = 0
                 ORDER BY qm.created_at DESC, qm.id DESC
                 LIMIT 1
               ) AS last_sender_type,
               (
                 SELECT qm.message
                 FROM query_messages qm
-                WHERE qm.query_id = q.id
+                WHERE qm.query_id = q.id AND qm.is_internal = 0
                 ORDER BY qm.created_at DESC, qm.id DESC
                 LIMIT 1
               ) AS last_message,
               (
                 SELECT qm.message
                 FROM query_messages qm
-                WHERE qm.query_id = q.id AND qm.sender_type = 'admin'
+                WHERE qm.query_id = q.id AND qm.is_internal = 0 AND qm.sender_type = 'admin'
                 ORDER BY qm.created_at DESC, qm.id DESC
                 LIMIT 1
               ) AS last_admin_reply,
               (
                 SELECT COUNT(*)
                 FROM query_messages qm
-                WHERE qm.query_id = q.id
+                WHERE qm.query_id = q.id AND qm.is_internal = 0
                   AND qm.sender_type = 'admin'
                   AND qm.created_at > COALESCE(q.user_last_seen_at, '1970-01-01 00:00:00')
               ) AS unread_count
@@ -199,6 +204,7 @@ router.get('/', userAuth, async (req, res) => {
        LEFT JOIN (
          SELECT query_id, COUNT(*)::int AS message_count, MAX(created_at) AS last_message_at
          FROM query_messages
+         WHERE is_internal = 0
          GROUP BY query_id
        ) stats ON stats.query_id = q.id
        WHERE q.user_id = $1

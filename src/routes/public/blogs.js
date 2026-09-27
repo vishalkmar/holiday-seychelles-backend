@@ -53,8 +53,25 @@ router.get('/:slug', async (req, res) => {
       return sendError(res, null, 'Blog not found', 404);
     }
 
-    // Increment views
-    await pool.query('UPDATE blogs SET views = views + 1 WHERE id = $1', [rows[0].id]);
+    // Count the read: the lifetime total on the post, and a per-day row so the
+    // admin can see whether a post is still being read or just was once.
+    //
+    // Deliberately not awaited as a blocking step for the reader's benefit -
+    // but errors are caught, because a counter must never turn a working page
+    // into a 500.
+    try {
+      await pool.query(
+        'UPDATE blogs SET views = views + 1, last_viewed_at = NOW() WHERE id = $1',
+        [rows[0].id]
+      );
+      await pool.query(
+        `INSERT INTO blog_views (blog_id, day, views) VALUES ($1, CURDATE(), 1)
+         ON DUPLICATE KEY UPDATE views = views + 1`,
+        [rows[0].id]
+      );
+    } catch (viewErr) {
+      console.error('blog view counter failed:', viewErr.message);
+    }
 
     sendSuccess(res, rows[0], 'Blog retrieved successfully');
   } catch (err) {
