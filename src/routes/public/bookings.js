@@ -131,59 +131,6 @@ router.post(
   }
 );
 
-// Record a payment attempt (success/decline/error). Used by the CyberSource
-// receipt to log every gateway response so admins can audit declines and
-// failed transactions even when no booking row was created.
-router.post(
-  '/payment-attempts',
-  body('transaction_uuid').optional().trim(),
-  body('decision').trim().notEmpty(),
-  body('gateway').optional().trim(),
-  body('gateway_reference').optional().trim(),
-  body('amount').optional().isFloat({ min: 0 }),
-  body('currency').optional().trim(),
-  body('message').optional().trim(),
-  body('booking_id').optional().isInt(),
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).json({ status: 'error', errors: errors.array() });
-    }
-
-    try {
-      const {
-        transaction_uuid = null,
-        decision,
-        gateway = 'cybersource',
-        gateway_reference = null,
-        amount = null,
-        currency = null,
-        message = null,
-        booking_id = null,
-        raw_payload = {},
-      } = req.body;
-
-      const { rows } = await pool.query(
-        `INSERT INTO payment_attempts (
-            booking_id, transaction_uuid, decision, gateway, gateway_reference,
-            amount, currency, message, raw_payload
-         ) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
-         RETURNING id, decision, created_at`,
-        [
-          booking_id, transaction_uuid, String(decision).toUpperCase(), gateway,
-          gateway_reference, amount, currency, message,
-          typeof raw_payload === 'string' ? JSON.parse(raw_payload) : raw_payload,
-        ]
-      );
-
-      sendSuccess(res, rows[0], 'Payment attempt recorded', 201);
-    } catch (err) {
-      console.error('payment attempt log error:', err);
-      sendError(res, err, 'Failed to log payment attempt', 500);
-    }
-  }
-);
-
 // Attach a supplier reservation reference (e.g. TourVisio reservation number)
 // to a booking after the supplier-side save completes. Keyed by payment_reference
 // so the success page can call it without knowing our internal booking id.

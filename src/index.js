@@ -23,7 +23,6 @@ const userOverviewRoutes = require('./routes/user/overview');
 
 const publicBlogsRoutes = require('./routes/public/blogs');
 const publicBookingsRoutes = require('./routes/public/bookings');
-const cybersourceRoutes = require('./routes/public/cybersource');
 const paymentsRoutes = require('./routes/public/payments');
 
 const tourvisioProxyRoutes = require('./routes/public/tourvisioProxy');
@@ -103,10 +102,6 @@ app.use('/api/tourvisio', tourvisioProxyRoutes);
 // Payment gateway routes
 // Current flow: server-priced orders + Secure Acceptance hosted checkout.
 app.use('/api/payments', paymentsRoutes);
-// Legacy browser-priced flow. Kept mounted so old links keep resolving; new
-// checkouts go through /api/payments.
-app.use('/api/cybersource', cybersourceRoutes);
-app.use('/api/cybersourcetest', cybersourceRoutes);
 
 // Admin routes
 // Permissions are enforced at the mount by guardFor(), so a route added to

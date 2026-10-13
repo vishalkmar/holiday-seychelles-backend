@@ -57,8 +57,7 @@ If the file you were handed is a `.pem` containing `Key:` and
 `Shared Secret Key:` wrapped in `-----BEGIN PUBLIC KEY-----`, that is a REST key
 — it belongs in `CYBERSOURCE_API_KEY` / `CYBERSOURCE_SECRET_KEY`, not here.
 
-Also set the receipt URL to the **new** route — the legacy value silently
-overrides the default and sends results to the old unverified handler:
+Set the receipt URL (it overrides the default built from the request host):
 
 ```ini
 CS_SA_RECEIPT_URL=https://<your-api-host>/api/payments/receipt
@@ -209,5 +208,3 @@ same Lambda endpoints before the order is written.
   `NODE_ENV !== 'production'`. It signs its own callbacks, so the signature
   verification path is exercised in development too; there is no "skip the
   check" branch.
-- The legacy `/api/cybersource` route is still mounted but is no longer the
-  entry point for any page.
