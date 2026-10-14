@@ -1,0 +1,12 @@
+CREATE TABLE IF NOT EXISTS website_destinations (
+  id CHAR(36) PRIMARY KEY,
+  slug VARCHAR(160) NOT NULL UNIQUE,
+  name VARCHAR(160) NOT NULL,
+  published BOOLEAN NOT NULL DEFAULT FALSE,
+  sort_order INT NOT NULL DEFAULT 0,
+  content JSON NOT NULL,
+  version INT NOT NULL DEFAULT 1,
+  created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  INDEX destination_public_order (published, sort_order, name)
+);

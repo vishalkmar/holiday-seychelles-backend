@@ -24,6 +24,7 @@ const userOverviewRoutes = require('./routes/user/overview');
 const publicBlogsRoutes = require('./routes/public/blogs');
 const publicBookingsRoutes = require('./routes/public/bookings');
 const paymentsRoutes = require('./routes/public/payments');
+const publicSiteRoutes = require('./routes/public/site');
 
 const tourvisioProxyRoutes = require('./routes/public/tourvisioProxy');
 
@@ -37,6 +38,7 @@ const adminEmailsRoutes = require('./routes/admin/emails');
 const adminDocumentsRoutes = require('./routes/admin/documents');
 const adminReportsRoutes = require('./routes/admin/reports');
 const adminTeamRoutes = require('./routes/admin/team');
+const adminWebsiteRoutes = require('./routes/admin/website');
 const adminAuthMiddleware = require('./middleware/adminAuth');
 const { guardFor } = require('./middleware/routeGuards');
 const unsubscribeRoutes = require('./routes/public/unsubscribe');
@@ -69,6 +71,16 @@ app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
+
+// Website hero media is shown by the public site, which lives on another
+// origin. helmet's default Cross-Origin-Resource-Policy (same-origin) would make
+// the browser refuse those images and videos, so this folder alone opts out.
+app.use(
+  '/uploads/site',
+  express.static(path.join(__dirname, '..', process.env.UPLOAD_DIR || 'uploads', 'site'), {
+    setHeaders: (res) => res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin'),
+  })
+);
 
 app.use(
   '/uploads',
@@ -103,6 +115,10 @@ app.use('/api/tourvisio', tourvisioProxyRoutes);
 // Current flow: server-priced orders + Secure Acceptance hosted checkout.
 app.use('/api/payments', paymentsRoutes);
 
+// Website configuration the public pages read (home hero, logo).
+app.use('/api/site', publicSiteRoutes);
+app.use('/api/destinations', require('./routes/public/destinations'));
+
 // Admin routes
 // Permissions are enforced at the mount by guardFor(), so a route added to
 // one of these files is covered by that section's policy by default.
@@ -116,6 +132,8 @@ app.use('/api/admin/customers', adminAuthMiddleware, guardFor('customers'), admi
 app.use('/api/admin/emails', adminAuthMiddleware, guardFor('emails'), adminEmailsRoutes);
 app.use('/api/admin/documents', adminAuthMiddleware, guardFor('documents'), adminDocumentsRoutes);
 app.use('/api/admin/reports', adminAuthMiddleware, guardFor('reports'), adminReportsRoutes);
+app.use('/api/admin/website', adminAuthMiddleware, guardFor('website'), adminWebsiteRoutes);
+app.use('/api/admin/website/destinations', adminAuthMiddleware, guardFor('website'), require('./routes/admin/destinations'));
 app.use('/api/admin/team', adminTeamRoutes);
 app.use('/api/unsubscribe', unsubscribeRoutes);
 app.use('/api/admin/users', adminAuthMiddleware, guardFor('users'), adminUsersRoutes);
@@ -133,6 +151,7 @@ const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`Holiday Seychelles backend running on :${PORT}`);
+  if (process.env.DISABLE_SCHEDULERS === 'true') return;
   // Morning sweep for trip reminders, abandoned-checkout nudges and thank-yous.
   startScheduler();
   // ...and a five-minute tick that picks up campaigns whose send time arrived.

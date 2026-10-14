@@ -74,6 +74,11 @@ const POLICY = {
     { permission: 'documents.manage' },
   ],
 
+  website: [
+    { method: 'GET', permission: 'website.view' },
+    { permission: 'website.manage' },
+  ],
+
   reports: [
     { method: 'POST', path: /^\/export/, permission: 'reports.export' },
     { method: 'POST', path: /^\/(preview|segments)/, permission: 'reports.view' },

@@ -1,0 +1,2174 @@
+[
+  {
+    "name": "Mahé Island",
+    "slug": "mahe",
+    "region": "Mahé · Seychelles",
+    "tagline": "Beaches, markets & Creole charm",
+    "heroImage": {
+      "url": "/images/destinations/mahe-1.jpg",
+      "alt": "Mahé Island — destination view",
+      "credit": "dronepicr",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aerial_of_Anse_Intendance_beach,_Mahe_Seychelles_(25748165608).jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/mahe-2.jpg",
+        "alt": "Mahé Island — photo 2",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Baie_Lazare_Public_Beach_-_Mahe_-_Seychelles_-_01.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/mahe-3.jpg",
+        "alt": "Mahé Island — photo 3",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Royale_Beach_-_Mahe_-_Seychelles.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/mahe-4.jpg",
+        "alt": "Mahé Island — photo 4",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sunrise_on_the_coast_of_Anse_Royale_-_Mahe_-_Seychelles_-_2025_-_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/mahe-5.jpg",
+        "alt": "Mahé Island — photo 5",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beach_houses_-_Eden_Island_-_Mahe_-_Seychelles.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/mahe-6.jpg",
+      "alt": "Mahé Island — photo 6",
+      "credit": "dronepicr",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sunset_Anse_Intendance_beach,_Mahe_Seychelles_(24751363117).jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    },
+    "shortDescription": "Mountain forest, lively Victoria and a coastline of very different bays make Mahé a rewarding introduction to Seychelles. Stay near the beach, then explore the capital and the green interior at your own pace.",
+    "longDescription": "Mahé is the largest island in Seychelles and the home of its capital, Victoria. It is also the main arrival point for international visitors. The island combines everyday Seychellois life with beaches and steep, forested hills.\n\nA good visit leaves room for both coast and countryside. Beau Vallon provides a convenient beach base in the northwest, while a drive towards the south introduces quieter bays. Distances on the map can be deceptive on winding mountain roads, so group nearby stops together.",
+    "threeDays": "Day 1: Settle into your accommodation and enjoy a gentle afternoon at Beau Vallon.\n\nDay 2: Explore central Victoria, then visit the National Botanical Garden in Mont Fleuri.\n\nDay 3: Choose a suitable trail in the Morne Seychellois area, or take a relaxed south-coast drive.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add a boat excursion to Sainte Anne Marine Park, keeping the day flexible for sea conditions.",
+    "weekend": "Choose one coast as your base. Combine a Victoria morning with a beach afternoon, then keep the second day for a scenic drive rather than trying to circle the entire island.",
+    "whereToStay": [
+      {
+        "area": "Beau Vallon",
+        "description": "A practical base for beach time, dining and exploring the northwest."
+      },
+      {
+        "area": "Victoria / Mont Fleuri",
+        "description": "Convenient for capital sights and onward travel connections."
+      },
+      {
+        "area": "South Mahé",
+        "description": "Consider a guesthouse or resort near the bays you want to explore."
+      }
+    ],
+    "comparison": "Mahé offers more variety in one base than the smaller islands. Choose it for a mix of culture, mountain scenery and beaches; choose La Digue for a more compact cycling holiday.",
+    "couples": "Pair a quiet coastal afternoon with a dinner overlooking the sea. A private scenic drive can leave more time for small bays and photography stops.",
+    "food": "Look for Seychellois Creole cooking: grilled fish, curries, rice and fresh fruit. Ask what is locally available that day and confirm dietary needs when ordering.",
+    "bestTime": "Mahé is visited throughout the year. For outdoor days, use the current forecast and keep a beach or town alternative to a wet mountain walk.",
+    "thingsToDo": [
+      "Explore Victoria on foot.",
+      "Visit the National Botanical Garden.",
+      "Relax beside Beau Vallon Bay.",
+      "Discover the south coast on a scenic drive.",
+      "Choose a guided forest walk suited to your fitness."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Mahé Island?",
+        "answer": "International flights arrive on Mahé. Use a prearranged transfer, taxi or suitable local transport to reach your accommodation."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "A hire car can help with dispersed coastal sights; allow extra time for hills, bends and parking."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Choose one coast as your base. Combine a Victoria morning with a beach afternoon, then keep the second day for a scenic drive rather than trying to circle the entire island."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Tourism Seychelles — the islands",
+        "url": "https://www.seychelles.com/explore-islands/overview"
+      },
+      {
+        "title": "National Botanical Garden",
+        "url": "https://www.spga.gov.sc/parks/national-botanical-garden"
+      }
+    ],
+    "published": true,
+    "sortOrder": 1
+  },
+  {
+    "name": "Praslin Island",
+    "slug": "praslin",
+    "region": "Praslin · Seychelles",
+    "tagline": "Palm forests & stunning beaches",
+    "heroImage": {
+      "url": "/images/destinations/praslin-1.jpg",
+      "alt": "Praslin Island — destination view",
+      "credit": "Yulia Kolosova",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Praslin_Island.jpg",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/praslin-2.jpg",
+        "alt": "Praslin Island — photo 2",
+        "credit": "Svein-Magne Tunli - tunliweb.no",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Georgette_beach_Praslin_Seychelles.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/praslin-3.jpg",
+        "alt": "Praslin Island — photo 3",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cote_D%27Or_Beach_-_Anse_Volbert_-_Praslin_-_Seychelles.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/praslin-4.jpg",
+        "alt": "Praslin Island — photo 4",
+        "credit": "Radosław Botev",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Boudin_Praslin_Seychelles.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/praslin-5.jpg",
+        "alt": "Praslin Island — photo 5",
+        "credit": "Radosław Botev",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Possession_Praslin_Seychelles.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/praslin-6.jpg",
+      "alt": "Praslin Island — photo 6",
+      "credit": "flowcomm",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Georgette,_Seychelles.jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    },
+    "shortDescription": "Praslin brings together the extraordinary palms of Vallée de Mai and the bright bays of Anse Lazio and Anse Georgette. It also makes a useful base for nature-focused boat trips to nearby islands.",
+    "longDescription": "Praslin is Seychelles’ second-largest island. Its scenery changes from coastal settlements to a forested interior, with the protected Vallée de Mai offering a very different experience from the beaches.\n\nBuild your stay around a few unhurried outings. A forest morning, a northern beach afternoon and a separate island excursion make a more comfortable holiday than rushing between every attraction. Côte d’Or and the wider Anse Volbert area are useful starting points for accommodation and excursions.",
+    "threeDays": "Day 1: Arrive on Praslin and unwind around Côte d’Or / Anse Volbert.\n\nDay 2: Spend the morning at Vallée de Mai and the afternoon at a nearby coast.\n\nDay 3: Visit Anse Lazio, leaving time to enjoy the scenery rather than moving straight on.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Arrange a Curieuse or Cousin excursion with a licensed local operator, or plan Anse Georgette access in advance.",
+    "weekend": "For a short stay, pair one palm-forest visit with one beach day. Book onward transfers before adding an offshore excursion.",
+    "whereToStay": [
+      {
+        "area": "Côte d’Or / Anse Volbert",
+        "description": "A convenient base for coastal stays and excursion departures."
+      },
+      {
+        "area": "Grand Anse",
+        "description": "An alternative coastal base with local accommodation choices."
+      },
+      {
+        "area": "Anse Kerlan",
+        "description": "Consider this side of Praslin when planning a visit to Anse Georgette."
+      }
+    ],
+    "comparison": "Praslin combines distinctive forest and beach experiences without the scale of Mahé. Nearby reserve visits make it especially appealing for travellers interested in nature.",
+    "couples": "Allow a full afternoon for one beach, followed by a relaxed Creole dinner. A separate forest walk adds variety without making the trip feel crowded.",
+    "food": "Guesthouses and restaurants around the coastal settlements serve Creole-style meals and seafood. Check opening times before heading to a more secluded beach.",
+    "bestTime": "Plan outdoor and boat activities around current wind and sea conditions. Keep one flexible day if an offshore reserve visit is a priority.",
+    "thingsToDo": [
+      "Walk beneath the palms of Vallée de Mai.",
+      "Photograph Anse Lazio.",
+      "Enjoy Côte d’Or.",
+      "Arrange a Curieuse nature excursion.",
+      "Plan an advance-access visit to Anse Georgette."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Praslin Island?",
+        "answer": "Praslin is reached by inter-island flight or ferry. Confirm current services and allow time between your arrival and any excursion."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Praslin has hills and separated coastal areas; choose transport to match the places you want to visit."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "For a short stay, pair one palm-forest visit with one beach day. Book onward transfers before adding an offshore excursion."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Tourism Seychelles — Praslin",
+        "url": "https://www.seychelles.com/explore-islands/overview"
+      },
+      {
+        "title": "Vallée de Mai visitor information",
+        "url": "https://sif.sc/vdm"
+      }
+    ],
+    "published": true,
+    "sortOrder": 2
+  },
+  {
+    "name": "La Digue Island",
+    "slug": "la-digue",
+    "region": "La Digue · Seychelles",
+    "tagline": "Easy island days & iconic granite",
+    "heroImage": {
+      "url": "/images/destinations/la-digue-1.jpg",
+      "alt": "La Digue Island — destination view",
+      "credit": "Giles Laurent",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:198_Granite_rock_in_La_Digue_Island_at_sunset_Photo_by_Giles_Laurent.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/la-digue-2.jpg",
+        "alt": "La Digue Island — photo 2",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beach_at_Union_Estate_Park_-_La_Digue_-_Seychelles.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/la-digue-3.jpg",
+        "alt": "La Digue Island — photo 3",
+        "credit": "Tobias Alt, Tobi 87",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grand_Anse-La_Digue-Seychellen.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/la-digue-4.jpg",
+        "alt": "La Digue Island — photo 4",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Severe_-_La_Digue_-_Seychelles_-_06.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/la-digue-5.jpg",
+        "alt": "La Digue Island — photo 5",
+        "credit": "Svein-Magne Tunli - tunliweb.no",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Grand_Anse_beach_La_Digue_Seychelles.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/la-digue-6.jpg",
+      "alt": "La Digue Island — photo 6",
+      "credit": "Garth Keeley",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:La_Digue_(254469345).jpeg",
+      "license": "CC0",
+      "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
+    "shortDescription": "La Digue is known for granite-framed beaches and a slower rhythm. Explore around La Passe, visit Anse Source d’Argent and leave time for the north-coast scenery near Anse Severe.",
+    "longDescription": "La Digue’s small scale invites you to slow down. Bicycles are a common way to explore, although routes, heat and gradients still need a little planning. The island’s best-known beach, Anse Source d’Argent, is reached through L’Union Estate.\n\nStay long enough to see more than the famous photograph. The coastline near Anse Severe offers another perspective, while the village area around La Passe provides a place to pause for a meal and arrange local outings. Avoid treating every beach as a safe swimming stop; conditions differ considerably.",
+    "threeDays": "Day 1: Arrive at La Passe, settle in and make a short orientation ride or walk.\n\nDay 2: Visit L’Union Estate and Anse Source d’Argent without rushing the coastal viewpoints.\n\nDay 3: Explore Anse Severe and the northern coast, returning for an easy evening meal.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add a guided nature outing or a further coastal photography trip, chosen with local advice.",
+    "weekend": "Spend one day around the estate and granite beaches, and the other around La Passe and the north coast. Overnight stays leave more time than a rushed day trip.",
+    "whereToStay": [
+      {
+        "area": "La Passe",
+        "description": "Useful for the jetty, dining and bicycle hire."
+      },
+      {
+        "area": "La Réunion",
+        "description": "A convenient area between the village and L’Union Estate."
+      },
+      {
+        "area": "Anse Severe area",
+        "description": "Consider a quieter north-coast stay near the beach."
+      }
+    ],
+    "comparison": "La Digue is more compact than Mahé or Praslin. It suits a slower visit with fewer transfers, but visitors should still allow for heat and the time needed on local roads.",
+    "couples": "Take an unhurried bicycle outing and return to a favourite beach for softer afternoon light. Ask your host about a quiet dinner spot nearby.",
+    "food": "Try local takeaway meals or a small Creole restaurant around the village. Carry water when cycling to beaches away from the main settlement.",
+    "bestTime": "Early mornings are useful for cycling and quieter photographs. Plan water activities for suitable tides and conditions rather than a fixed time of day.",
+    "thingsToDo": [
+      "Visit L’Union Estate.",
+      "Explore Anse Source d’Argent.",
+      "Cycle around the village lanes.",
+      "Watch the changing light at Anse Severe.",
+      "Book a local nature guide."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to La Digue Island?",
+        "answer": "Most visitors arrive by ferry. Confirm the current connection from Mahé or Praslin and arrange luggage transport with your host."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Hire a bicycle only if it suits your ability; local transfer options can be arranged for luggage or reduced mobility."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Spend one day around the estate and granite beaches, and the other around La Passe and the north coast. Overnight stays leave more time than a rushed day trip."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Tourism Seychelles — La Digue",
+        "url": "https://www.seychelles.com/explore-islands/overview"
+      },
+      {
+        "title": "Anse Source d’Argent",
+        "url": "https://en.wikipedia.org/wiki/Anse_Source_d%27Argent"
+      }
+    ],
+    "published": true,
+    "sortOrder": 3
+  },
+  {
+    "name": "Curieuse Island",
+    "slug": "curieuse",
+    "region": "Near Praslin · Seychelles",
+    "tagline": "Giant tortoises & mangrove trails",
+    "heroImage": {
+      "url": "/images/destinations/curieuse-1.jpg",
+      "alt": "Curieuse Island — destination view",
+      "credit": "Salifa Karapeyan, Seychelles News Agency",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Curieuse_Island_Seychelles.jpg",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/curieuse-2.jpg",
+        "alt": "Curieuse Island — photo 2",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Granite_rocks_on_the_coast_of_Curieuse_Island_-_Seychelles_-_06.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/curieuse-3.jpg",
+        "alt": "Curieuse Island — photo 3",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Papaie_with_Sanctuaire_des_Tortues_-_Curieuse_Island.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/curieuse-4.jpg",
+        "alt": "Curieuse Island — photo 4",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aldabra_giant_tortoise_(Aldabrachelys_gigantea)_in_Curieuse_Island_-_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/curieuse-5.jpg",
+        "alt": "Curieuse Island — photo 5",
+        "credit": "KBAs",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Curieuse_island_-_walking_platform.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/curieuse-6.jpg",
+      "alt": "Curieuse Island — photo 6",
+      "credit": "NorbertNagel",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mangrove_tree_-_Curieuse_-_Seychelles.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "shortDescription": "Curieuse is a protected island near Praslin where giant tortoises, mangrove habitats and coastal trails are the focus. Visit as a carefully planned nature excursion rather than a resort stay.",
+    "longDescription": "Curieuse brings together wildlife and a distinctive landscape of granite, reddish earth and mangroves. Giant Aldabra tortoises are among its best-known residents, and marked routes introduce different coastal habitats.\n\nThe island also has a layered human history, including a former leprosy settlement and the Doctor’s House. A local guide can help connect those stories with what you see. Follow ranger instructions, remain on permitted routes and give wildlife space.",
+    "threeDays": "Day 1: Base yourself on Praslin and settle around Anse Volbert.\n\nDay 2: Take a prearranged Curieuse excursion, including permitted trails and the tortoise area.\n\nDay 3: Balance the island outing with a relaxed Praslin beach visit.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add a separate Vallée de Mai morning for another perspective on Seychelles’ unusual plant life.",
+    "weekend": "Make Curieuse the main outing of a Praslin weekend, with a spare half-day for changes in boat conditions.",
+    "whereToStay": [
+      {
+        "area": "Anse Volbert, Praslin",
+        "description": "Stay on Praslin and arrange your departure point with the excursion operator."
+      },
+      {
+        "area": "Other Praslin coastal areas",
+        "description": "Check the collection arrangements before choosing your accommodation."
+      }
+    ],
+    "comparison": "Curieuse is about tortoises, habitats and guided exploration. It complements Praslin’s beaches rather than replacing a beach-based holiday.",
+    "couples": "A shared nature walk and a quiet coastal viewpoint make a memorable day together. Choose a smaller-group outing if a gentle pace matters to you.",
+    "food": "Confirm whether your boat excursion includes lunch. Carry drinking water and take all packaging back with you.",
+    "bestTime": "Choose a day with suitable crossing conditions. Trail access and wildlife activity can vary, so confirm the planned route with your operator.",
+    "thingsToDo": [
+      "Observe giant tortoises respectfully.",
+      "Walk a permitted mangrove route.",
+      "Learn about the Doctor’s House.",
+      "Photograph granite coastal scenery.",
+      "Look for birds with a local guide."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Curieuse Island?",
+        "answer": "Arrange a boat excursion from Praslin and confirm park admission arrangements before departure."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Curieuse is a protected day-visit destination; choose your overnight accommodation on Praslin."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Make Curieuse the main outing of a Praslin weekend, with a spare half-day for changes in boat conditions."
+      }
+    ],
+    "sources": [
+      {
+        "title": "SPGA — Curieuse",
+        "url": "https://www.spga.gov.sc/parks/curieuse"
+      },
+      {
+        "title": "Curieuse National Park designation",
+        "url": "https://www.spga.gov.sc/news/2025-01/curieuse-island-designated-national-park"
+      }
+    ],
+    "published": true,
+    "sortOrder": 4
+  },
+  {
+    "name": "Sainte Anne Marine Park",
+    "slug": "sainte-anne-marine-park",
+    "region": "Off Mahé · Seychelles",
+    "tagline": "Island scenery & marine discovery",
+    "heroImage": {
+      "url": "/images/destinations/sainte-anne-marine-park-1.jpg",
+      "alt": "Sainte Anne Marine Park — destination view",
+      "credit": "Photography by Dino Sassi - Marcel Fayon, Photo Eden LTD",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anne_Marine_NP_aerial_Seychelles.jpg",
+      "license": "Public domain",
+      "licenseUrl": ""
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/sainte-anne-marine-park-2.jpg",
+        "alt": "Sainte Anne Marine Park — photo 2",
+        "credit": "Photography by Dino Sassi - Marcel Fayon, Photo Eden LTD",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sainte_Anne_Seychelles.jpg",
+        "license": "Public domain",
+        "licenseUrl": ""
+      },
+      {
+        "url": "/images/destinations/sainte-anne-marine-park-3.jpg",
+        "alt": "Sainte Anne Marine Park — photo 3",
+        "credit": "Remi Jouan",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ile_Sainte-Anne_(2).JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+      },
+      {
+        "url": "/images/destinations/sainte-anne-marine-park-4.jpg",
+        "alt": "Sainte Anne Marine Park — photo 4",
+        "credit": "David Stanley from Nanaimo, Canada",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ste_Anne_Island_(11105358805).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "url": "/images/destinations/sainte-anne-marine-park-5.jpg",
+        "alt": "Sainte Anne Marine Park — photo 5",
+        "credit": "David Stanley from Nanaimo, Canada",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ile_Sainte_Anne_(32229501074).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/sainte-anne-marine-park-6.jpg",
+      "alt": "Sainte Anne Marine Park — photo 6",
+      "credit": "Prométhée",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eden_Island_-_Sainte_Anne.jpg",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "shortDescription": "The islands and waters of Sainte Anne Marine Park offer an offshore escape close to Mahé. A boat outing can combine coastal scenery, appropriate snorkelling stops and a permitted island visit.",
+    "longDescription": "Sainte Anne Marine Park lies off the northeast side of Mahé. Its island silhouettes and clear-water scenery make it a natural choice for visitors who want an excursion without moving their accommodation to another main island.\n\nRoutes differ between operators. Some focus on time on the water, while others include an island stop such as Moyenne. Ask which landings and activities are actually included, and choose an itinerary that suits your swimming confidence and the day’s conditions.",
+    "threeDays": "Day 1: Stay on Mahé and explore Victoria or a nearby beach.\n\nDay 2: Take a marine-park boat excursion with the stops confirmed in advance.\n\nDay 3: Leave the next day open for a quieter coast or a forest outing on Mahé.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add a dedicated Moyenne visit if it was not included in your boat itinerary.",
+    "weekend": "Use Mahé as your base and reserve one day for the park. Keep the other day free for a beach or town visit in case the boat schedule changes.",
+    "whereToStay": [
+      {
+        "area": "Victoria / east Mahé",
+        "description": "Convenient for arranging departure points and transfers."
+      },
+      {
+        "area": "Beau Vallon",
+        "description": "A beach base on Mahé; confirm transfer time to the jetty."
+      }
+    ],
+    "comparison": "This is a practical marine excursion from Mahé. Curieuse and Cousin are better approached from Praslin, so choose according to your base and the wildlife you most want to see.",
+    "couples": "Choose a quieter cruise with time to enjoy the island scenery. Ask about group size, shade and the balance between swimming and shore stops.",
+    "food": "Check whether lunch and drinking water are included. Island meal stops vary by itinerary and should be confirmed when booking.",
+    "bestTime": "Sea conditions matter more than a fixed calendar date. Confirm the forecast, visibility and operating route before you set out.",
+    "thingsToDo": [
+      "Enjoy the islands from the water.",
+      "Take a guided snorkelling stop when conditions allow.",
+      "Arrange a permitted Moyenne landing.",
+      "Photograph Sainte Anne’s coastline.",
+      "Learn about marine conservation."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Sainte Anne Marine Park?",
+        "answer": "Book with a licensed boat operator on Mahé. Confirm the jetty, transfer, park charges and included stops."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Do not assume that every island in the park is open for unrestricted landing."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Use Mahé as your base and reserve one day for the park. Keep the other day free for a beach or town visit in case the boat schedule changes."
+      }
+    ],
+    "sources": [
+      {
+        "title": "SPGA visitor information",
+        "url": "https://www.spga.gov.sc/visitor-information"
+      },
+      {
+        "title": "Seychelles marine parks",
+        "url": "https://www.spga.gov.sc/"
+      }
+    ],
+    "published": true,
+    "sortOrder": 5
+  },
+  {
+    "name": "Anse Source d’Argent",
+    "slug": "anse-source-dargent",
+    "region": "La Digue · Seychelles",
+    "tagline": "Sculpted granite & luminous shallows",
+    "heroImage": {
+      "url": "/images/destinations/anse-source-dargent-1.jpg",
+      "alt": "Anse Source d’Argent — destination view",
+      "credit": "Tobias Alt, Tobi 87",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Source_d%27Argent_3-La_Digue.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/anse-source-dargent-2.jpg",
+        "alt": "Anse Source d’Argent — photo 2",
+        "credit": "Remi Jouan",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:La_Digue_-_Anse_source_argent_(3).JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+      },
+      {
+        "url": "/images/destinations/anse-source-dargent-3.jpg",
+        "alt": "Anse Source d’Argent — photo 3",
+        "credit": "Remi Jouan",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:La_Digue_-_Anse_source_argent_(5).JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+      },
+      {
+        "url": "/images/destinations/anse-source-dargent-4.jpg",
+        "alt": "Anse Source d’Argent — photo 4",
+        "credit": "Remi Jouan",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:La_Digue_-_Anse_source_argent_(2).JPG",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+      },
+      {
+        "url": "/images/destinations/anse-source-dargent-5.jpg",
+        "alt": "Anse Source d’Argent — photo 5",
+        "credit": "The original uploader was Fabhawk at French Wikipedia.",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_source_d_argent_2.jpg",
+        "license": "CC BY-SA 1.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/1.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/anse-source-dargent-6.jpg",
+      "alt": "Anse Source d’Argent — photo 6",
+      "credit": "Fabhawk",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_source_d_argent.jpg",
+      "license": "CC BY-SA 2.0 fr",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0/fr/deed.en"
+    },
+    "shortDescription": "Anse Source d’Argent is La Digue’s celebrated granite-framed beach. Its small bays, pale sand and changing light reward an unhurried visit, especially when photography is part of your holiday.",
+    "longDescription": "Rounded granite boulders shape a series of intimate coastal scenes at Anse Source d’Argent. The beach is on La Digue’s southwest coast and is accessed through L’Union Estate.\n\nRather than stopping at the first viewpoint, allow time to explore the permitted path and enjoy several perspectives. The appearance of the shallows changes with the tide and light. Plan for the estate’s current entry arrangements and treat the beach as a place to observe carefully, not simply a backdrop for a quick photograph.",
+    "threeDays": "Day 1: Arrive on La Digue and get comfortable with the route from your accommodation.\n\nDay 2: Visit L’Union Estate and spend an extended afternoon around Anse Source d’Argent.\n\nDay 3: Explore La Passe and Anse Severe for a contrasting coastal scene.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Return for a second photography session at a different tide or time of day, subject to entry conditions.",
+    "weekend": "Give the beach one generous half-day and pair it with a separate village and north-coast outing.",
+    "whereToStay": [
+      {
+        "area": "La Réunion",
+        "description": "A useful base along the approach to L’Union Estate."
+      },
+      {
+        "area": "La Passe",
+        "description": "Convenient for arrival, meals and bicycle hire."
+      }
+    ],
+    "comparison": "Choose this beach for intricate granite scenery and sheltered-looking shallows. Anse Lazio offers a broader bay, while Anse Severe is an easier north-coast stop.",
+    "couples": "Allow time for photographs without a tight onward schedule. Softer afternoon light can make a leisurely coastal walk especially appealing.",
+    "food": "Eat in the village or check which estate-area refreshments are available on the day. Bring water for the walk.",
+    "bestTime": "Choose the light and tide that suit your plans. Check the day’s access times and local sea conditions before any water activity.",
+    "thingsToDo": [
+      "Explore the permitted coastal path.",
+      "Photograph the granite formations.",
+      "Visit L’Union Estate.",
+      "Compare the shallows at different tides.",
+      "Enjoy a slow La Digue cycling day."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Anse Source d’Argent?",
+        "answer": "Travel to La Digue, then walk, cycle or arrange local transport to L’Union Estate. Entry arrangements apply."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "An estate visit and a beach visit are linked here; allow time for both rather than planning a very short stop."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Give the beach one generous half-day and pair it with a separate village and north-coast outing."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Anse Source d’Argent location and access",
+        "url": "https://en.wikipedia.org/wiki/Anse_Source_d%27Argent"
+      },
+      {
+        "title": "Tourism Seychelles — beaches",
+        "url": "https://www.seychelles.com/blog-details/5130/highlights/top-beaches-seychelles-where-pristine-sands-meet-crystal-clear-waters"
+      }
+    ],
+    "published": true,
+    "sortOrder": 6
+  },
+  {
+    "name": "Morne Seychellois",
+    "slug": "morne-seychellois",
+    "region": "Mahé · Seychelles",
+    "tagline": "Mountain forest & panoramic trails",
+    "heroImage": {
+      "url": "/images/destinations/morne-seychellois-1.jpg",
+      "alt": "Morne Seychellois — destination view",
+      "credit": "Radosław Botev",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Morne_Seychellois_National_Park_Mahe_Seychelles.jpg",
+      "license": "CC BY 3.0 pl",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/pl/deed.en"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/morne-seychellois-2.jpg",
+        "alt": "Morne Seychellois — photo 2",
+        "credit": "Anass Sedrati",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tea_plantation_in_Morne_Seychellois_national_park.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/morne-seychellois-3.jpg",
+        "alt": "Morne Seychellois — photo 3",
+        "credit": "Radosław Botev",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Morne_Seychellois_National_Park_rainforest.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/morne-seychellois-4.jpg",
+        "alt": "Morne Seychellois — photo 4",
+        "credit": "Anass Sedrati",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Morne_Seychellois_National_Park_4.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/morne-seychellois-5.jpg",
+        "alt": "Morne Seychellois — photo 5",
+        "credit": "Photography by Dino Sassi - Marcel Fayon, Photo Eden LTD",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Morne_Seychellois_NP_footpath.jpg",
+        "license": "Public domain",
+        "licenseUrl": ""
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/morne-seychellois-6.jpg",
+      "alt": "Morne Seychellois — photo 6",
+      "credit": "Radosław Botev",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Morne_Seychellois_National_Park_banner.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "shortDescription": "Mahé’s mountainous interior offers a cooler visual contrast to the coast: rainforest, granite slopes and far-reaching viewpoints. Explore a suitable route in Morne Seychellois National Park with local advice.",
+    "longDescription": "The Morne Seychellois area protects a large part of Mahé’s upland landscape. Forest trails and mountain scenery reveal a side of Seychelles that is easy to miss on a beach-only trip.\n\nNot every trail is a casual stroll, and the summit route should not be confused with the wider national park. Choose a walk that matches your ability, confirm access and consider a qualified guide. Rain, cloud and slippery ground can change the experience quickly.",
+    "threeDays": "Day 1: Base yourself on Mahé and plan a route with your guide or accommodation.\n\nDay 2: Start a suitable forest walk early, carrying water and appropriate footwear.\n\nDay 3: Recover with an easy coast or Victoria day.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add another shorter viewpoint outing only if conditions and energy allow, rather than forcing a summit attempt.",
+    "weekend": "Pair one guided upland walk with a relaxed west-coast afternoon. Keep a lower-level alternative for wet weather.",
+    "whereToStay": [
+      {
+        "area": "Beau Vallon / northwest Mahé",
+        "description": "A coastal base from which to arrange a drive to the relevant trailhead."
+      },
+      {
+        "area": "Victoria area",
+        "description": "Useful for guides, transfers and a town alternative if mountain weather changes."
+      }
+    ],
+    "comparison": "This is a forest and walking destination rather than a beach stop. It adds depth to a Mahé holiday and suits visitors who enjoy terrain, plants and viewpoints.",
+    "couples": "Choose a route you can both enjoy comfortably. A shorter guided walk followed by lunch is often more relaxing than an ambitious summit plan.",
+    "food": "Carry water and a light snack for your walk. Plan a meal in a settled area after returning from the trail.",
+    "bestTime": "A dry morning with a favourable forecast is preferable for walking. Confirm trail conditions locally and avoid exposed or slippery routes in poor weather.",
+    "thingsToDo": [
+      "Take a guided forest walk.",
+      "Look for endemic plants and birds.",
+      "Enjoy a clear-weather viewpoint.",
+      "Explore Mahé’s mountain roads.",
+      "Learn about upland conservation."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Morne Seychellois?",
+        "answer": "Reach the chosen Mahé trailhead by suitable road transport. Check park or trail admission and guide requirements for your route."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "The national park and the summit hike are different experiences; select the route explicitly when arranging a visit."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Pair one guided upland walk with a relaxed west-coast afternoon. Keep a lower-level alternative for wet weather."
+      }
+    ],
+    "sources": [
+      {
+        "title": "SPGA — Morne Seychellois",
+        "url": "https://www.spga.gov.sc/node/130"
+      },
+      {
+        "title": "SPGA visitor information",
+        "url": "https://www.spga.gov.sc/visitor-information"
+      }
+    ],
+    "published": true,
+    "sortOrder": 7
+  },
+  {
+    "name": "Beau Vallon",
+    "slug": "beau-vallon",
+    "region": "Northwest Mahé · Seychelles",
+    "tagline": "A sweeping bay & sunset evenings",
+    "heroImage": {
+      "url": "/images/destinations/beau-vallon-1.jpg",
+      "alt": "Beau Vallon — destination view",
+      "credit": "dronepicr",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aerial_of_Beau_Vallon_Mahe,_Seychelles_(38911468714).jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/beau-vallon-2.jpg",
+        "alt": "Beau Vallon — photo 2",
+        "credit": "Welcomematt22 at English Wikipedia",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beau_Vallon_(Seychelles).jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      {
+        "url": "/images/destinations/beau-vallon-3.jpg",
+        "alt": "Beau Vallon — photo 3",
+        "credit": "prilfish",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beau_Vallon_bay.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "url": "/images/destinations/beau-vallon-4.jpg",
+        "alt": "Beau Vallon — photo 4",
+        "credit": "Salifa Karapetyan, Seychelles News Agency",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beau_Vallon_Seychelles.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+      },
+      {
+        "url": "/images/destinations/beau-vallon-5.jpg",
+        "alt": "Beau Vallon — photo 5",
+        "credit": "David Stanley",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Poissons_grill%C3%A9s_au_Bazar_Labrin_chaque_mercredi_soir_%C3%A0_Beau_Vallon_sur_l%27%C3%AEle_de_Mah%C3%A9.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/beau-vallon-6.jpg",
+      "alt": "Beau Vallon — photo 6",
+      "credit": "dronepicr",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_point_Beau_Vallon_Mahe_(38911490964).jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    },
+    "shortDescription": "Beau Vallon is one of Mahé’s best-known beach areas, with a broad bay and accommodation and dining nearby. It is a convenient choice for combining beach time with other Mahé outings.",
+    "longDescription": "Beau Vallon sits on Mahé’s northwest coast. Its long sweep of sand and established visitor facilities give it a different feel from the smaller, more secluded bays elsewhere on the island.\n\nUse the beach as a base rather than a checklist stop. Take a morning walk, pause for lunch nearby and return later for the changing light. Water activities should always be chosen with the current sea conditions and a reputable operator.",
+    "threeDays": "Day 1: Settle into Beau Vallon and walk along the bay.\n\nDay 2: Visit Victoria and return for a relaxed beach afternoon.\n\nDay 3: Arrange an appropriate water activity or explore another northwest coastal viewpoint.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add a guided Mahé forest outing to balance the beach days.",
+    "weekend": "A simple beach day plus a Victoria morning makes a comfortable short break without repeated long transfers.",
+    "whereToStay": [
+      {
+        "area": "Beau Vallon beachfront",
+        "description": "Choose a hotel or guesthouse near the part of the bay you prefer."
+      },
+      {
+        "area": "Bel Ombre area",
+        "description": "Consider nearby accommodation while checking walking distances and transport."
+      }
+    ],
+    "comparison": "Beau Vallon offers more nearby services than isolated bays. Choose it for convenience; choose a quieter south-coast beach when seclusion is the main aim.",
+    "couples": "A sunset walk and dinner nearby can be the centre of a relaxed evening, with no need to cross the island afterwards.",
+    "food": "Look for local fish dishes, Creole curries and fruit drinks around the bay. Restaurant and market schedules can change, so check locally.",
+    "bestTime": "Visit early for a quieter walk or later for sunset light. Assess swimming conditions on the day even when the bay looks calm.",
+    "thingsToDo": [
+      "Walk the length of the bay.",
+      "Enjoy a sunset view.",
+      "Try a suitable guided water activity.",
+      "Explore nearby local dining.",
+      "Combine the beach with Victoria."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Beau Vallon?",
+        "answer": "Reach Beau Vallon by road from Victoria or elsewhere on Mahé."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "This is a popular public beach; keep valuables secure and respect other beach users."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "A simple beach day plus a Victoria morning makes a comfortable short break without repeated long transfers."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Air Seychelles — island activities",
+        "url": "https://fly.airseychelles.com/en-sc/discover-seychelles/what-do-seychelles"
+      },
+      {
+        "title": "Beau Vallon beach guide",
+        "url": "https://www.seyvillas.com/en/guide/beaches/mahe/47/beau-vallon"
+      }
+    ],
+    "published": true,
+    "sortOrder": 8
+  },
+  {
+    "name": "Anse Lazio",
+    "slug": "anse-lazio",
+    "region": "Northwest Praslin · Seychelles",
+    "tagline": "Golden sand & granite headlands",
+    "heroImage": {
+      "url": "/images/destinations/anse-lazio-1.jpg",
+      "alt": "Anse Lazio — destination view",
+      "credit": "Radosław Botev",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Lazio_Praslin_Seychelles_1.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/anse-lazio-2.jpg",
+        "alt": "Anse Lazio — photo 2",
+        "credit": "Radosław Botev",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Lazio_Praslin_Seychelles_2.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/anse-lazio-3.jpg",
+        "alt": "Anse Lazio — photo 3",
+        "credit": "Bjørn Christian Tørrissen",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Lazio-rama_2015.JPG",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/anse-lazio-4.jpg",
+        "alt": "Anse Lazio — photo 4",
+        "credit": "Radosław Botev",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Lazio_Praslin_4.jpg",
+        "license": "CC BY 3.0 pl",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0/pl/deed.en"
+      },
+      {
+        "url": "/images/destinations/anse-lazio-5.jpg",
+        "alt": "Anse Lazio — photo 5",
+        "credit": "Svein-Magne Tunli - tunliweb.no",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Lazio_beach_Praslin_Seychelles.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/anse-lazio-6.jpg",
+      "alt": "Anse Lazio — photo 6",
+      "credit": "Tobias Alt, Tobi 87",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Lazio-Praslin-Seychellen.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "shortDescription": "Anse Lazio is a broad, photogenic bay in northwest Praslin. Granite at the edges, warm-coloured sand and a lush backdrop make it a natural place to spend several unhurried hours.",
+    "longDescription": "Anse Lazio is one of Praslin’s most recognisable coastal views. Its appeal comes from the combination of a generous sandy beach, boulders and a green inland backdrop.\n\nTreat it as a destination for a relaxed outing rather than an obligatory quick photograph. Bring the essentials, confirm your return transport and assess the sea carefully. A beautiful open bay can still have waves and currents.",
+    "threeDays": "Day 1: Base yourself on Praslin and enjoy a local coastal walk.\n\nDay 2: Spend a beach and photography day at Anse Lazio.\n\nDay 3: Visit Vallée de Mai for a forest contrast.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add a separate boat excursion or another north-coast viewpoint, keeping enough time for transfers.",
+    "weekend": "Combine an Anse Lazio afternoon with a separate palm-forest morning. Avoid crowding both into a tight arrival day.",
+    "whereToStay": [
+      {
+        "area": "Anse Boudin / northern Praslin",
+        "description": "Look for nearby accommodation and confirm the road or walking approach."
+      },
+      {
+        "area": "Anse Volbert",
+        "description": "A wider choice of coastal bases for a day outing to the north."
+      }
+    ],
+    "comparison": "Anse Lazio offers an expansive beach scene; Anse Source d’Argent is more about intimate granite-framed coves. Both reward time beyond a single viewpoint.",
+    "couples": "Choose a quiet part of the bay for a long walk and a few photographs. Leave the afternoon open rather than scheduling several beaches.",
+    "food": "Check nearby meal options and their opening hours before leaving your accommodation. Bring water for the beach.",
+    "bestTime": "Morning or late-afternoon light can be rewarding for photography. Water activities depend on current swell and local advice.",
+    "thingsToDo": [
+      "Photograph the bay from the sand.",
+      "Explore permitted viewpoints near the granite.",
+      "Relax beneath suitable natural shade.",
+      "Enjoy a long beach walk.",
+      "Pair the outing with another Praslin day."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Anse Lazio?",
+        "answer": "Travel by road to the northwest of Praslin and confirm the final approach and return pickup."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Do not assume this open bay is safe for swimming in all conditions."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Combine an Anse Lazio afternoon with a separate palm-forest morning. Avoid crowding both into a tight arrival day."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Anse Lazio",
+        "url": "https://en.wikipedia.org/wiki/Anse_Lazio"
+      },
+      {
+        "title": "Tourism Seychelles — beach highlights",
+        "url": "https://www.seychelles.com/blog-details/5130/highlights/top-beaches-seychelles-where-pristine-sands-meet-crystal-clear-waters"
+      }
+    ],
+    "published": true,
+    "sortOrder": 9
+  },
+  {
+    "name": "Anse Georgette",
+    "slug": "anse-georgette",
+    "region": "Northwest Praslin · Seychelles",
+    "tagline": "A secluded bay of brilliant colour",
+    "heroImage": {
+      "url": "/images/destinations/anse-georgette-1.jpg",
+      "alt": "Anse Georgette — destination view",
+      "credit": "flowcomm",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Georgette,_Seychelles.jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/anse-georgette-2.jpg",
+        "alt": "Anse Georgette — photo 2",
+        "credit": "Didi0032",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_georgette_2-10.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+      },
+      {
+        "url": "/images/destinations/anse-georgette-3.jpg",
+        "alt": "Anse Georgette — photo 3",
+        "credit": "Svein-Magne Tunli - tunliweb.no",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Georgette_beach_Praslin_Seychelles.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/anse-georgette-4.jpg",
+        "alt": "Anse Georgette — photo 4",
+        "credit": "Didi0032",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Georgette_2213.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+      },
+      {
+        "url": "/images/destinations/anse-georgette-5.jpg",
+        "alt": "Anse Georgette — photo 5",
+        "credit": "dronepicr",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Beach_Anse_Georgette,_Anse_Georgette,_Praslin_Seychelles_islands_(25745928388).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/anse-georgette-6.jpg",
+      "alt": "Anse Georgette — photo 6",
+      "credit": "Daria",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Georgette_-_panoramio.jpg",
+      "license": "CC BY 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+    },
+    "shortDescription": "Anse Georgette is a striking small beach on Praslin’s northwest coast. Plan the approach in advance and allow time to enjoy its simple combination of sand, granite and sea.",
+    "longDescription": "Anse Georgette is valued for its relatively secluded setting. The beach feels very different from a busy village shoreline, so preparation matters: access arrangements, water and return transport should be settled before the outing.\n\nThe usual approach is associated with the Constance Lémuria area. Confirm current visitor access directly rather than assuming you can arrive without notice. A more adventurous coastal route is not a substitute for checking terrain, conditions and your own ability.",
+    "threeDays": "Day 1: Stay on Praslin and confirm the beach-access arrangement.\n\nDay 2: Visit Anse Georgette for a slow beach and photography outing.\n\nDay 3: Explore Vallée de Mai or Côte d’Or for a change of scene.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add Anse Lazio on a separate outing rather than treating the two bays as a simple beach-to-beach stroll.",
+    "weekend": "Reserve one generous half-day for the beach and keep your other plans close to your accommodation.",
+    "whereToStay": [
+      {
+        "area": "Anse Kerlan",
+        "description": "Consider a base near the northwest approach; access must still be confirmed."
+      },
+      {
+        "area": "Grand Anse, Praslin",
+        "description": "An alternative coastal base with a planned road transfer."
+      }
+    ],
+    "comparison": "Anse Georgette is appealing for its smaller, tucked-away setting. Anse Lazio provides a wider bay and a different road approach.",
+    "couples": "Plan a leisurely visit with your access and transport organised, leaving more time to enjoy the setting together.",
+    "food": "Do not rely on food stalls on the beach. Eat before the visit or arrange refreshments in accordance with the access rules.",
+    "bestTime": "Select a day with confirmed access and suitable conditions. The beach’s secluded character makes advance planning more useful than a rushed arrival.",
+    "thingsToDo": [
+      "Photograph the turquoise bay.",
+      "Enjoy the sandy shoreline.",
+      "Observe the granite edges from permitted areas.",
+      "Take a quiet coastal break.",
+      "Combine the visit with a Praslin forest day."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Anse Georgette?",
+        "answer": "Confirm the current route and visitor arrangements with the relevant property or your local host before travelling."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "The route from Anse Lazio is not an easy substitute for the usual approach; seek local guidance."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Reserve one generous half-day for the beach and keep your other plans close to your accommodation."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Anse Georgette location",
+        "url": "https://en.wikipedia.org/wiki/Anse_Georgette"
+      },
+      {
+        "title": "Tourism Seychelles — beach highlights",
+        "url": "https://www.seychelles.com/blog-details/5130/highlights/top-beaches-seychelles-where-pristine-sands-meet-crystal-clear-waters"
+      }
+    ],
+    "published": true,
+    "sortOrder": 10
+  },
+  {
+    "name": "Anse Intendance",
+    "slug": "anse-intendance",
+    "region": "South Mahé · Seychelles",
+    "tagline": "Wild surf & an open southern shore",
+    "heroImage": {
+      "url": "/images/destinations/anse-intendance-1.jpg",
+      "alt": "Anse Intendance — destination view",
+      "credit": "Radosław Botev",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Intendance_Mahe_Seychelles_1.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/anse-intendance-2.jpg",
+        "alt": "Anse Intendance — photo 2",
+        "credit": "dronepicr",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Relax_at_Anse_Intendance_Mahe,_Seychelles_(39619395161).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "url": "/images/destinations/anse-intendance-3.jpg",
+        "alt": "Anse Intendance — photo 3",
+        "credit": "dronepicr",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aussichtspunkt_am_Anse_Intendance_Mahe_Seychellen_(38911396944).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "url": "/images/destinations/anse-intendance-4.jpg",
+        "alt": "Anse Intendance — photo 4",
+        "credit": "Radosław Botev",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Intendance_Mahe_Seychelles_2.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/anse-intendance-5.jpg",
+        "alt": "Anse Intendance — photo 5",
+        "credit": "Njohn5188",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Intendance_Facing_North.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/anse-intendance-6.jpg",
+      "alt": "Anse Intendance — photo 6",
+      "credit": "Didi0032",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Intendance.jpg",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "shortDescription": "Anse Intendance is a dramatic south-Mahé beach with an open-ocean feel. Visit for the sweep of sand, the scenery and the sound of the waves, with water safety firmly in mind.",
+    "longDescription": "The broad shore at Anse Intendance is a contrast to the small sheltered-looking coves often associated with Seychelles. Its exposed setting can bring powerful surf and currents.\n\nA visit need not involve swimming. A walk above the wash of the waves, coastal photography and a stop on a wider south-Mahé drive can make a memorable outing. Choose a return time before dark if you are unfamiliar with the roads.",
+    "threeDays": "Day 1: Stay in south Mahé and get to know the local coast.\n\nDay 2: Visit Anse Intendance for a scenic beach outing, without assuming swimming is suitable.\n\nDay 3: Explore another southern bay or take a relaxed inland drive.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add a day in Victoria or a guided nature walk for variety.",
+    "weekend": "Keep the trip focused on south Mahé. Pair the beach with a leisurely lunch and a second nearby coastal stop.",
+    "whereToStay": [
+      {
+        "area": "South Mahé",
+        "description": "Choose accommodation within a comfortable drive of the beach."
+      },
+      {
+        "area": "Anse Royale area",
+        "description": "An alternative coastal base for exploring the south."
+      }
+    ],
+    "comparison": "Anse Intendance suits dramatic coastal scenery. Beau Vallon is a more convenient choice when nearby visitor facilities are the priority.",
+    "couples": "A scenic drive and beach photographs make a relaxed shared outing. Watch the surf from a safe position and keep the plan flexible.",
+    "food": "Plan meals in nearby settled areas and carry water. Do not depend on beach-side food availability.",
+    "bestTime": "Choose favourable weather for walking and photography. Rough seas can make entering the water inappropriate regardless of the season.",
+    "thingsToDo": [
+      "Photograph the open shoreline.",
+      "Enjoy a south-Mahé coastal drive.",
+      "Walk safely above the surf line.",
+      "Observe the changing ocean colours.",
+      "Visit another southern bay."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Anse Intendance?",
+        "answer": "Approach by road in southern Mahé and arrange your return transport in advance."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Strong surf and currents are possible; this guide does not recommend swimming here."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Keep the trip focused on south Mahé. Pair the beach with a leisurely lunch and a second nearby coastal stop."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Anse Intendance",
+        "url": "https://en.wikipedia.org/wiki/Anse_Intendance"
+      },
+      {
+        "title": "Seychelles beach guide",
+        "url": "https://www.seychelles.com/blog-details/5130/highlights/top-beaches-seychelles-where-pristine-sands-meet-crystal-clear-waters"
+      }
+    ],
+    "published": true,
+    "sortOrder": 11
+  },
+  {
+    "name": "Port Launay",
+    "slug": "port-launay",
+    "region": "West Mahé · Seychelles",
+    "tagline": "A green-framed bay & marine park",
+    "heroImage": {
+      "url": "/images/destinations/port-launay-1.jpg",
+      "alt": "Port Launay — destination view",
+      "credit": "Fabio Achilli",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Port_Launay_Marine_Park,_Mahe_Island,_Seychelles.jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/port-launay-2.jpg",
+        "alt": "Port Launay — photo 2",
+        "credit": "Photography by Dino Sassi - Marcel Fayon, Photo Eden LTD",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Port_Launay_Mahe_Seychelles.jpg",
+        "license": "Public domain",
+        "licenseUrl": ""
+      },
+      {
+        "url": "/images/destinations/port-launay-3.jpg",
+        "alt": "Port Launay — photo 3",
+        "credit": "So Seychelles",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Port_Launay,_Mahe,_Seychelles_-_17358482479.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "url": "/images/destinations/port-launay-4.jpg",
+        "alt": "Port Launay — photo 4",
+        "credit": "So Seychelles",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:View_of_Port_Launay_from_Hill_Villas,_Constance_Ephelia,_Seychelles_-_17359061989.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "url": "/images/destinations/port-launay-5.jpg",
+        "alt": "Port Launay — photo 5",
+        "credit": "Seychelles info",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Port_Launay_Beach_view.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/port-launay-6.jpg",
+      "alt": "Port Launay — photo 6",
+      "credit": "Josuevg",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Acropora_muricata,_Port_Launay,_Seychelles.jpg",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "shortDescription": "Port Launay combines a beautiful west-Mahé bay with a protected marine setting. Its shoreline is accessible by land, making it a useful nature-and-coast outing without an offshore transfer.",
+    "longDescription": "Port Launay Marine Park protects a scenic stretch of Mahé’s coast with several beaches. The best-known bay is framed by green hills, while the surrounding marine environment adds interest for visitors who enjoy the sea.\n\nKeep your visit low-impact. Check admission arrangements for marine activities, use appropriate operators and avoid standing on or touching living coral. A simple shoreline walk is an equally valid way to enjoy the landscape.",
+    "threeDays": "Day 1: Settle on Mahé and explore the west-coast approach.\n\nDay 2: Spend a relaxed day at Port Launay with an appropriate marine activity if conditions allow.\n\nDay 3: Add a forest or Victoria outing.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Explore another west-coast viewpoint with time for a leisurely lunch.",
+    "weekend": "Choose one coastal day around the bay and one shorter nature outing. Confirm transport rather than relying on a late return pickup.",
+    "whereToStay": [
+      {
+        "area": "Port Launay / Port Glaud",
+        "description": "Consider local coastal accommodation close to the bay."
+      },
+      {
+        "area": "Northwest Mahé",
+        "description": "A wider base for a planned west-coast day trip."
+      }
+    ],
+    "comparison": "Port Launay offers a protected marine setting accessible by road. Sainte Anne Marine Park is an offshore boat experience from the other side of Mahé.",
+    "couples": "Spend an unhurried afternoon beside the bay and add a gentle viewpoint stop on the return journey.",
+    "food": "Check local restaurants or your accommodation’s arrangements before the outing. Bring water and take litter away.",
+    "bestTime": "Choose the day’s activity according to the water conditions. For photographs, a clear morning or softer afternoon light can both work well.",
+    "thingsToDo": [
+      "Walk beside Port Launay Bay.",
+      "Photograph the green hills and sea.",
+      "Choose a responsible snorkelling outing.",
+      "Learn about marine-park conservation.",
+      "Explore west-Mahé coastal scenery."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Port Launay?",
+        "answer": "Port Launay can be approached by road on Mahé; marine access and activities remain subject to park rules."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Confirm any park admission or activity fees rather than assuming the entire marine visit is free."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Choose one coastal day around the bay and one shorter nature outing. Confirm transport rather than relying on a late return pickup."
+      }
+    ],
+    "sources": [
+      {
+        "title": "SPGA — Port Launay",
+        "url": "https://www.spga.gov.sc/parks/port-launay"
+      },
+      {
+        "title": "Park visitor information",
+        "url": "https://www.spga.gov.sc/visitor-information"
+      }
+    ],
+    "published": true,
+    "sortOrder": 12
+  },
+  {
+    "name": "Victoria",
+    "slug": "victoria",
+    "region": "Mahé · Seychelles",
+    "tagline": "Island heritage & everyday Creole life",
+    "heroImage": {
+      "url": "/images/destinations/victoria-1.jpg",
+      "alt": "Victoria — destination view",
+      "credit": "NorbertNagel",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Big_Ben_Clock_Tower_-_Victoria_-_Mahe_-_Seychelles_-_01.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/victoria-2.jpg",
+        "alt": "Victoria — photo 2",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Arul_Mihu_Navashakti_Vinayakar_Temple_-_Victoria_-_Seychelles_-_02.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/victoria-3.jpg",
+        "alt": "Victoria — photo 3",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:National_Museum_of_History_-_Victoria_-_Mahe_-_Seychelles_-_01.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/victoria-4.jpg",
+        "alt": "Victoria — photo 4",
+        "credit": "No machine-readable author provided. Clipper assumed (based on copyright claims).",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Port-victoria_Seychelles.jpg",
+        "license": "CC BY 2.5",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.5"
+      },
+      {
+        "url": "/images/destinations/victoria-5.jpg",
+        "alt": "Victoria — photo 5",
+        "credit": "Vasilii Martynov",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Victoria_(Seychelles)_1.jpg",
+        "license": "CC0",
+        "licenseUrl": "http://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/victoria-6.jpg",
+      "alt": "Victoria — photo 6",
+      "credit": "Radosław Botev",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Victoria_Seychelles_architecture.jpg",
+      "license": "CC BY 3.0 pl",
+      "licenseUrl": "https://creativecommons.org/licenses/by/3.0/pl/deed.en"
+    },
+    "shortDescription": "Seychelles’ capital adds culture and everyday island life to a coastal holiday. Explore the clock tower area, local streets and heritage sights, then visit the Botanical Garden nearby.",
+    "longDescription": "Victoria is the capital of Seychelles, on Mahé’s northeast side. Its compact centre includes the familiar clock tower, civic buildings and religious landmarks, with the National Museum of History offering further context.\n\nA city outing works best as a slow walk with a few chosen stops. Opening hours, market arrangements and access to buildings can change, so check before planning around a particular interior visit. The National Botanical Garden in Mont Fleuri provides a green extension to the day.",
+    "threeDays": "Day 1: Explore the central clock tower area and nearby streets.\n\nDay 2: Visit a museum or heritage attraction and the Botanical Garden, checking opening arrangements.\n\nDay 3: Take a Mahé beach day to contrast with the city.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Arrange a guided cultural outing or a mountain-road excursion on Mahé.",
+    "weekend": "Combine a central walking route with the Botanical Garden and a separate beach afternoon. Keep time for a café or local meal.",
+    "whereToStay": [
+      {
+        "area": "Victoria / Mont Fleuri",
+        "description": "Convenient for a city-focused stay and access to services."
+      },
+      {
+        "area": "Beau Vallon",
+        "description": "A beach base with a road journey into the capital."
+      }
+    ],
+    "comparison": "Victoria offers heritage, shopping and local life rather than a resort-beach atmosphere. It complements the islands’ nature experiences.",
+    "couples": "Take a heritage walk, browse small shops and share a local lunch before returning to the coast.",
+    "food": "Look for Creole takeaway dishes, bakery snacks and seasonal fruit. Ask locally about current markets and operating hours.",
+    "bestTime": "A weekday morning often suits a city outing, but confirm individual opening times. Carry water and allow breaks from the heat.",
+    "thingsToDo": [
+      "See the Victoria clock tower.",
+      "Explore the National Museum of History when open.",
+      "Visit the National Botanical Garden.",
+      "Observe the city’s varied architecture.",
+      "Try a local lunch."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Victoria?",
+        "answer": "Victoria is reached by road from Mahé’s airport and coastal areas. Plan a walking route after arrival."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Ask before photographing people or entering places of worship, and dress appropriately for religious sites."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Combine a central walking route with the Botanical Garden and a separate beach afternoon. Keep time for a café or local meal."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Victoria visitor landmarks",
+        "url": "https://en.wikipedia.org/wiki/Victoria%2C_Seychelles"
+      },
+      {
+        "title": "National Botanical Garden",
+        "url": "https://www.spga.gov.sc/parks/national-botanical-garden"
+      }
+    ],
+    "published": true,
+    "sortOrder": 13
+  },
+  {
+    "name": "Vallée de Mai",
+    "slug": "vallee-de-mai",
+    "region": "Praslin · Seychelles",
+    "tagline": "Ancient palms & a forest unlike any other",
+    "heroImage": {
+      "url": "/images/destinations/vallee-de-mai-1.jpg",
+      "alt": "Vallée de Mai — destination view",
+      "credit": "Radosław Botev",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vallee_de_Mai_Praslin_Seychelles.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/vallee-de-mai-2.jpg",
+        "alt": "Vallée de Mai — photo 2",
+        "credit": "Denis Costa",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vallee_de_Mai.jpg",
+        "license": "Public domain",
+        "licenseUrl": ""
+      },
+      {
+        "url": "/images/destinations/vallee-de-mai-3.jpg",
+        "alt": "Vallée de Mai — photo 3",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vall%C3%A9e_De_Mai_-_National_Park_-_Praslin_-_Seychelles_-_03.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/vallee-de-mai-4.jpg",
+        "alt": "Vallée de Mai — photo 4",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vall%C3%A9e_De_Mai_-_National_Park_-_Praslin_-_Seychelles_-_02.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/vallee-de-mai-5.jpg",
+        "alt": "Vallée de Mai — photo 5",
+        "credit": "Reed Wiedower",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Vall%C3%A9e_de_Mai,_Praslin,_Seychelles_001.jpg",
+        "license": "CC BY-SA 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/vallee-de-mai-6.jpg",
+      "alt": "Vallée de Mai — photo 6",
+      "credit": "Fabiologist",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ailuronyx_tachyscopaeus_in_Vall%C3%A9e_de_Mai;_Praslin.jpg",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+    },
+    "shortDescription": "Vallée de Mai is Praslin’s remarkable protected palm forest and a UNESCO World Heritage site. Walk beneath a dense canopy and learn about the coco de mer and the reserve’s conservation work.",
+    "longDescription": "Vallée de Mai protects an exceptional palm ecosystem in Praslin’s interior. The coco de mer is its most famous plant, but a visit becomes richer when you notice the forest as a whole: leaves, light, sounds and small wildlife.\n\nA guide can explain what makes the reserve unusual and help you look for species that are easy to miss. Choose a suitable trail, move slowly and keep to the permitted paths. The reserve is a daytime nature visit, not an overnight destination.",
+    "threeDays": "Day 1: Stay on Praslin and enjoy a coastal orientation day.\n\nDay 2: Visit Vallée de Mai with time for a guided interpretation walk.\n\nDay 3: Contrast the forest with Anse Lazio or Côte d’Or.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add a separate reserve or island excursion rather than trying to combine every nature visit in one day.",
+    "weekend": "Pair a morning in the palm forest with a relaxed coastal afternoon and keep a second day for another part of Praslin.",
+    "whereToStay": [
+      {
+        "area": "Anse Volbert",
+        "description": "A coastal base with road access to the reserve."
+      },
+      {
+        "area": "Grand Anse",
+        "description": "Another Praslin base from which to arrange a forest visit."
+      }
+    ],
+    "comparison": "Vallée de Mai is a palm-forest experience. Curieuse adds tortoises and mangroves, while Praslin’s beaches supply a completely different landscape.",
+    "couples": "A guided forest walk offers a quiet shared experience away from the beach. Leave time afterwards for a leisurely meal.",
+    "food": "Plan meals in Praslin’s settled areas. Carry drinking water and follow the reserve’s rules about food and litter.",
+    "bestTime": "Visit during the reserve’s current opening hours. A morning start can make walking more comfortable; carry rain protection if the forecast calls for showers.",
+    "thingsToDo": [
+      "Learn about the coco de mer.",
+      "Follow a permitted forest trail.",
+      "Listen for native birdlife.",
+      "Take close-up photographs of palm textures.",
+      "Discover conservation work with a guide."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Vallée de Mai?",
+        "answer": "Reach the reserve by road on Praslin and check current tickets and guided-visit arrangements with SIF."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Do not collect plants, seeds or other natural materials from the reserve."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Pair a morning in the palm forest with a relaxed coastal afternoon and keep a second day for another part of Praslin."
+      }
+    ],
+    "sources": [
+      {
+        "title": "SIF — Vallée de Mai",
+        "url": "https://sif.sc/vdm"
+      },
+      {
+        "title": "UNESCO — Vallée de Mai Nature Reserve",
+        "url": "https://whc.unesco.org/en/list/261/"
+      }
+    ],
+    "published": true,
+    "sortOrder": 14
+  },
+  {
+    "name": "Aride Island",
+    "slug": "aride",
+    "region": "North of Praslin · Seychelles",
+    "tagline": "Seabird colonies & protected nature",
+    "heroImage": {
+      "url": "/images/destinations/aride-1.jpg",
+      "alt": "Aride Island — destination view",
+      "credit": "Gerard Larose, Seychelles Tourism Board",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aride_Island_Seychelles.jpg",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/aride-2.jpg",
+        "alt": "Aride Island — photo 2",
+        "credit": "Seychelles News Agency",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aride_Island_path.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+      },
+      {
+        "url": "/images/destinations/aride-3.jpg",
+        "alt": "Aride Island — photo 3",
+        "credit": "Gerard Larose, Seychelles Tourism Board",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aride_Island_Seychelles_2.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+      },
+      {
+        "url": "/images/destinations/aride-4.jpg",
+        "alt": "Aride Island — photo 4",
+        "credit": "Gerard Larose, Seychelles Tourism Board",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Tropical_shearwater_-_Aride_Island_Seychelles.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+      },
+      {
+        "url": "/images/destinations/aride-5.jpg",
+        "alt": "Aride Island — photo 5",
+        "credit": "Island Conservation Society",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aride_Island.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/aride-6.jpg",
+      "alt": "Aride Island — photo 6",
+      "credit": "Colin J Taylor",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Seychelles_Aride_Island_Beach_-_panoramio.jpg",
+      "license": "CC BY-SA 3.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "shortDescription": "Aride is a nature-reserve island known for its seabirds and conservation value. A visit is a planned wildlife excursion, with access dependent on the reserve’s arrangements and sea conditions.",
+    "longDescription": "Aride’s importance lies in its habitats and birdlife. Breeding seabirds, native vegetation and a carefully managed visitor experience make it very different from a beach-resort island.\n\nArrange the visit through an operator and confirm that landing is possible for your date. Once ashore, follow the reserve team’s instructions and let wildlife determine the pace. Weather-related changes are part of visiting an exposed island, so avoid placing this outing immediately before a crucial onward connection.",
+    "threeDays": "Day 1: Stay on Praslin and confirm the reserve excursion.\n\nDay 2: Visit Aride if the operator and reserve approve the landing conditions.\n\nDay 3: Keep a flexible Praslin day for a beach or forest alternative.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add another wildlife outing on a separate day, allowing time to absorb rather than rush the experience.",
+    "weekend": "Treat Aride as a weather-dependent highlight of a Praslin weekend, with an alternative plan ready.",
+    "whereToStay": [
+      {
+        "area": "Praslin",
+        "description": "Use an established accommodation base and arrange the boat visit separately."
+      },
+      {
+        "area": "Anse Volbert area",
+        "description": "A useful place to discuss local excursion options and transfers."
+      }
+    ],
+    "comparison": "Aride is particularly appealing for birdwatching. Curieuse places more emphasis on tortoises and mangroves; neither should be treated as an unrestricted resort island.",
+    "couples": "A guided wildlife outing suits couples who enjoy learning and observing together. Bring binoculars and leave expectations of resort facilities behind.",
+    "food": "Confirm meal arrangements with the operator and carry the agreed essentials. Do not rely on shops or casual restaurant service on the reserve.",
+    "bestTime": "Reserve access and landing conditions determine whether a trip runs. Check directly before booking and ask about seasonal bird activity.",
+    "thingsToDo": [
+      "Observe seabirds without disturbing them.",
+      "Join the permitted guided route.",
+      "Photograph native coastal vegetation.",
+      "Learn about island conservation.",
+      "Enjoy the approach from the boat."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Aride Island?",
+        "answer": "Arrange a permitted excursion, generally from Praslin, with a local operator who confirms reserve access."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Landings may change or be cancelled because of the sea; keep your itinerary flexible."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Treat Aride as a weather-dependent highlight of a Praslin weekend, with an alternative plan ready."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Aride Island Nature Reserve",
+        "url": "https://www.arideisland.com/"
+      },
+      {
+        "title": "Aride seabirds",
+        "url": "https://www.arideisland.com/seabirds.html"
+      }
+    ],
+    "published": true,
+    "sortOrder": 15
+  },
+  {
+    "name": "Cousin Island",
+    "slug": "cousin",
+    "region": "Near Praslin · Seychelles",
+    "tagline": "A sanctuary for birds & wildlife",
+    "heroImage": {
+      "url": "/images/destinations/cousin-1.jpg",
+      "alt": "Cousin Island — destination view",
+      "credit": "tiarescott",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cousin_Island_Seychelles.jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/cousin-2.jpg",
+        "alt": "Cousin Island — photo 2",
+        "credit": "fred_pnd",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anous_stolidus_-Cousin_Island_-Seychelles_adult_on_nest-8.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "url": "/images/destinations/cousin-3.jpg",
+        "alt": "Cousin Island — photo 3",
+        "credit": "fred_pnd",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Phaethon_lepturus_-Cousin_Island,_Seychelles_-juvenile.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "url": "/images/destinations/cousin-4.jpg",
+        "alt": "Cousin Island — photo 4",
+        "credit": "fred_pnd",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gygis_alba_-Cousin_Island_-Seychelles-8.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "url": "/images/destinations/cousin-5.jpg",
+        "alt": "Cousin Island — photo 5",
+        "credit": "Marion Schneider & Christoph Aistleitner",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cousin_island.jpg",
+        "license": "Public domain",
+        "licenseUrl": ""
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/cousin-6.jpg",
+      "alt": "Cousin Island — photo 6",
+      "credit": "tiarescott",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Cousin_Island_beach.jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    },
+    "shortDescription": "Cousin Island Special Reserve is a conservation-led excursion near Praslin. Guided visits introduce its birds and habitats while keeping protection of the island at the centre of the experience.",
+    "longDescription": "Cousin is a Special Reserve managed for biodiversity conservation. A visit is organised around the reserve’s procedures and a warden-guided tour rather than independent wandering.\n\nThe landing process is part of the island’s protection measures. Expect to follow the instructions of the reserve team and keep your belongings and footwear suitable for the visit. There is no overnight visitor accommodation, so plan the outing from a base on Praslin.",
+    "threeDays": "Day 1: Stay on Praslin and arrange a Cousin excursion through a local operator.\n\nDay 2: Join the reserve’s guided visit and return to Praslin afterwards.\n\nDay 3: Enjoy a slower beach or Vallée de Mai day.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add another Praslin nature experience, keeping each reserve visit on its own comfortable schedule.",
+    "weekend": "Make Cousin one carefully arranged outing rather than the base of the weekend. Ask about the current visit schedule before choosing the day.",
+    "whereToStay": [
+      {
+        "area": "Praslin",
+        "description": "Choose a hotel or guesthouse and ask for help arranging a permitted excursion."
+      },
+      {
+        "area": "Anse Volbert",
+        "description": "A practical coastal area for discussing local boat and transfer options."
+      }
+    ],
+    "comparison": "Cousin offers a structured conservation visit focused on wildlife. It differs from an island where you can stay overnight or spend the day independently.",
+    "couples": "Share a guided birdwatching experience and keep the afternoon free after returning to Praslin.",
+    "food": "The reserve has no visitor shops or meal facilities. Bring water and agreed essentials, and plan your meal back on Praslin.",
+    "bestTime": "Check the reserve’s current visitor arrangements and your operator’s sea assessment. Wildlife sightings are seasonal and never guaranteed.",
+    "thingsToDo": [
+      "Join a warden-led wildlife walk.",
+      "Observe seabirds respectfully.",
+      "Learn about island restoration.",
+      "Look for native land birds.",
+      "Photograph wildlife without disturbance."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Cousin Island?",
+        "answer": "Use a local excursion operator. Final landing follows the reserve’s own boat and biosecurity procedures."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "There is no overnight visitor accommodation on Cousin Island."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Make Cousin one carefully arranged outing rather than the base of the weekend. Ask about the current visit schedule before choosing the day."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Cousin Island visitor information",
+        "url": "https://www.cousinisland.net/visit/"
+      },
+      {
+        "title": "Nature Seychelles — conservation and tourism",
+        "url": "https://natureseychelles.org/news/latest-news/turtles-and-tourism-best-practices-from-cousin-island-special-reserve/"
+      }
+    ],
+    "published": true,
+    "sortOrder": 16
+  },
+  {
+    "name": "Bird Island",
+    "slug": "bird-island",
+    "region": "Northern Seychelles",
+    "tagline": "Open horizons & extraordinary birdlife",
+    "heroImage": {
+      "url": "/images/destinations/bird-island-1.jpg",
+      "alt": "Bird Island — destination view",
+      "credit": "Seychelles News Agency",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bird_Island_aerial_view_Seychelles.jpg",
+      "license": "CC BY 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/bird-island-2.jpg",
+        "alt": "Bird Island — photo 2",
+        "credit": "Gerard Larose, Seychelles Tourism Board",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bird_Island_Seychelles_bird_flocks_1.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+      },
+      {
+        "url": "/images/destinations/bird-island-3.jpg",
+        "alt": "Bird Island — photo 3",
+        "credit": "Gerard Larose, Seychelles Tourism Board",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bird_Island_Seychelles.jpg",
+        "license": "CC BY 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/4.0"
+      },
+      {
+        "url": "/images/destinations/bird-island-4.jpg",
+        "alt": "Bird Island — photo 4",
+        "credit": "Photography by Dino Sassi - Marcel Fayon, Photo Eden LTD",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bird_flocks_Bird_Island_Seychelles.jpg",
+        "license": "Public domain",
+        "licenseUrl": ""
+      },
+      {
+        "url": "/images/destinations/bird-island-5.jpg",
+        "alt": "Bird Island — photo 5",
+        "credit": "Tribalninja",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Sooty_Tern_Bird_Island_Seychelles.jpg",
+        "license": "CC BY 3.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/3.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/bird-island-6.jpg",
+      "alt": "Bird Island — photo 6",
+      "credit": "original: Phil Guest; derivation: Radosław Botev",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bird_Island_aerial.jpg",
+      "license": "CC BY-SA 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    },
+    "shortDescription": "Bird Island is a low coral island known for its birdlife and broad coastal horizons. It suits a deliberately planned nature stay with access and accommodation confirmed in advance.",
+    "longDescription": "Bird Island offers a different landscape from the granite islands around Mahé and Praslin. The attraction is the close relationship between open coast, seabirds and the island’s conservation setting.\n\nPlan around the wildlife rather than a long list of attractions. Bird activity changes through the year, and the island’s own team is the best source for seasonal guidance. Confirm current transfers, accommodation and visitor arrangements directly before adding it to your route.",
+    "threeDays": "Day 1: Arrive on the confirmed transfer and take an orientation walk with local guidance.\n\nDay 2: Spend time observing birds and exploring permitted coastal routes.\n\nDay 3: Enjoy a second slow nature day before your planned departure.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Use an additional day for patient photography and repeat visits to suitable observation points.",
+    "weekend": "A short stay is only practical if the current transfer timetable works. Avoid squeezing it between tight international-flight connections.",
+    "whereToStay": [
+      {
+        "area": "Bird Island",
+        "description": "Book directly with the island’s current accommodation operation and confirm the stay format."
+      },
+      {
+        "area": "Mahé before or after",
+        "description": "Consider a buffer night around the island transfer."
+      }
+    ],
+    "comparison": "Bird Island has an open coral-island character rather than the mountainous granite landscape of Mahé. Choose it for a focused nature escape.",
+    "couples": "Shared walks, coastal light and time away from a packed sightseeing schedule are the appeal. Confirm the island’s current facilities before booking.",
+    "food": "Confirm catering, self-catering and supply arrangements directly with your accommodation before arrival.",
+    "bestTime": "Ask the island team which dates match the birds you want to see. Seasonal wildlife patterns and transfer arrangements are more useful than a generic beach-season recommendation.",
+    "thingsToDo": [
+      "Watch birds from approved observation areas.",
+      "Explore permitted nature trails.",
+      "Photograph the open coastline.",
+      "Learn about seasonal wildlife.",
+      "Enjoy a slower island rhythm."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Bird Island?",
+        "answer": "Arrange the island’s current transfer and accommodation together; do not assume a public daily ferry is available."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Stay out of nesting areas unless the island team specifically directs you along a permitted route."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "A short stay is only practical if the current transfer timetable works. Avoid squeezing it between tight international-flight connections."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Bird Island — birdwatching",
+        "url": "https://www.birdislandseychelles.com/activities/nature-trails-and-bird-watching/"
+      },
+      {
+        "title": "A year on Bird Island",
+        "url": "https://www.birdislandseychelles.com/the-island/about-bird-island/year-on-bird-island/"
+      }
+    ],
+    "published": true,
+    "sortOrder": 17
+  },
+  {
+    "name": "Silhouette Island",
+    "slug": "silhouette",
+    "region": "Northwest of Mahé · Seychelles",
+    "tagline": "Forest-covered mountains & quiet shores",
+    "heroImage": {
+      "url": "/images/destinations/silhouette-1.jpg",
+      "alt": "Silhouette Island — destination view",
+      "credit": "Fabio Achilli from Milano, Italy",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Silhouette_Island,_Seychelles_(6291538872).jpg",
+      "license": "CC BY 2.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/silhouette-2.jpg",
+        "alt": "Silhouette Island — photo 2",
+        "credit": "Fabio Achilli from Milano, Italy",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Silhouette_Island,_Seychelles_(6291528600).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "url": "/images/destinations/silhouette-3.jpg",
+        "alt": "Silhouette Island — photo 3",
+        "credit": "Acp",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Silhouette.jpg",
+        "license": "CC BY-SA 3.0",
+        "licenseUrl": "http://creativecommons.org/licenses/by-sa/3.0/"
+      },
+      {
+        "url": "/images/destinations/silhouette-4.jpg",
+        "alt": "Silhouette Island — photo 4",
+        "credit": "Shoichi Iwashita",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Natureza_intacta_e_selvagem_aqui_na_ilha_Silhouette_em_Seychelles_(29925294021).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "url": "/images/destinations/silhouette-5.jpg",
+        "alt": "Silhouette Island — photo 5",
+        "credit": "David Stanley from Nanaimo, Canada",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Silhouette_Island_(11161236583).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/silhouette-6.jpg",
+      "alt": "Silhouette Island — photo 6",
+      "credit": "Cybersister27",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Silhouette_Museum.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "shortDescription": "Silhouette’s mountainous outline hints at a wilder interior than a simple beach escape. Plan a stay or arranged visit that balances the coast with suitable guided nature experiences.",
+    "longDescription": "Silhouette lies northwest of Mahé and is known for its steep, green landscape. Much of its appeal is the feeling of a less developed island, with forested slopes rising behind the shoreline.\n\nTravel and activities need more advance organisation than a day on Mahé. Confirm your boat transfer and accommodation arrangements, then choose walks with local guidance. Do not assume remote trails are straightforward or that every beach is easy to reach independently.",
+    "threeDays": "Day 1: Arrive on your arranged transfer and settle into the island setting.\n\nDay 2: Choose a guided nature walk that suits your ability.\n\nDay 3: Enjoy a quieter coastal day before departure.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add another gentle island outing or a rest day rather than trying to cover every remote route.",
+    "weekend": "An overnight stay can make more sense than a rushed day trip. Check transfer times before committing to a short break.",
+    "whereToStay": [
+      {
+        "area": "La Passe, Silhouette",
+        "description": "Confirm the island’s available accommodation and arrival arrangements."
+      },
+      {
+        "area": "Mahé transfer base",
+        "description": "Allow a practical buffer before or after a Silhouette stay."
+      }
+    ],
+    "comparison": "Silhouette suits a quiet nature-and-coast escape. Mahé has more independent transport and dining choices, while La Digue is easier to explore on a compact village-based visit.",
+    "couples": "A slower island stay with one guided walk and plenty of coastal time can be a rewarding alternative to repeated island transfers.",
+    "food": "Dining options are tied to the island’s limited facilities. Confirm meal plans and dietary requirements with your accommodation.",
+    "bestTime": "Choose dates that work with the transfer timetable and keep walking plans flexible for rain and trail conditions.",
+    "thingsToDo": [
+      "Explore the coast near your base.",
+      "Take a guided forest walk.",
+      "Photograph the mountain profile.",
+      "Learn about the island’s history.",
+      "Enjoy time in a quieter natural setting."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Silhouette Island?",
+        "answer": "Arrange a boat transfer and visit or stay through the relevant island operator; confirm the Mahé departure point."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Independent access to remote trails and beaches should not be assumed."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "An overnight stay can make more sense than a rushed day trip. Check transfer times before committing to a short break."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Silhouette Island",
+        "url": "https://en.wikipedia.org/wiki/Silhouette_Island"
+      },
+      {
+        "title": "Island Development Company — islands",
+        "url": "https://idc.sc/islands/"
+      }
+    ],
+    "published": true,
+    "sortOrder": 18
+  },
+  {
+    "name": "Moyenne Island",
+    "slug": "moyenne",
+    "region": "Sainte Anne Marine Park · Seychelles",
+    "tagline": "A tiny island with a conservation story",
+    "heroImage": {
+      "url": "/images/destinations/moyenne-1.jpg",
+      "alt": "Moyenne Island — destination view",
+      "credit": "Photography by Dino Sassi - Marcel Fayon, Photo Eden LTD",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Moyenne_Island_Seychelles.jpg",
+      "license": "Public domain",
+      "licenseUrl": ""
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/moyenne-2.jpg",
+        "alt": "Moyenne Island — photo 2",
+        "credit": "Camera Eye from UAE",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Moyenne_Island.jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "url": "/images/destinations/moyenne-3.jpg",
+        "alt": "Moyenne Island — photo 3",
+        "credit": "David Stanley from Nanaimo, Canada",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ile_Moyenne_(32255732113).jpg",
+        "license": "CC BY 2.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by/2.0"
+      },
+      {
+        "url": "/images/destinations/moyenne-4.jpg",
+        "alt": "Moyenne Island — photo 4",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aldabra_giant_tortoise_(Aldabrachelys_gigantea)_-_Ile_Moyenne_-_Seychelles_-_04.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/moyenne-5.jpg",
+        "alt": "Moyenne Island — photo 5",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ile_Moyenne_-_Saint-Anne_Marine_National_Park_-_Seychelles_-_05.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/moyenne-6.jpg",
+      "alt": "Moyenne Island — photo 6",
+      "credit": "NorbertNagel",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ile_Moyenne_-_Saint-Anne_Marine_National_Park_-_Seychelles_-_01.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "shortDescription": "Moyenne is a small island in Sainte Anne Marine Park, often visited on a boat outing from Mahé. Its paths, coastal viewpoints and giant tortoises make it a memorable shore stop.",
+    "longDescription": "Moyenne’s appeal is its small scale and the story of caring for an island landscape. Visitors can explore permitted paths and look for tortoises while enjoying views across the surrounding marine park.\n\nDo not assume that every Sainte Anne excursion includes a landing here. Check the itinerary explicitly, along with admission and the time allowed ashore. A slower walk with attention to the island’s conservation story is more rewarding than rushing between photo stops.",
+    "threeDays": "Day 1: Stay on Mahé and arrange a marine-park excursion that explicitly includes Moyenne.\n\nDay 2: Visit the island and enjoy the boat journey through the park.\n\nDay 3: Spend a separate day exploring Victoria or another Mahé coast.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Add a guided Mahé nature outing to compare the small island with the larger island’s forest landscape.",
+    "weekend": "Combine a Moyenne boat day with a relaxed Mahé day. Keep a weather alternative in mind.",
+    "whereToStay": [
+      {
+        "area": "Mahé",
+        "description": "Choose your accommodation according to the departure jetty and transfer arrangements."
+      },
+      {
+        "area": "Victoria / east-coast area",
+        "description": "A practical base for discussing marine-park outings."
+      }
+    ],
+    "comparison": "Moyenne is a compact shore visit within a marine excursion. Curieuse is a separate nature destination near Praslin with a different landscape and travel plan.",
+    "couples": "A coastal walk and views across the park offer a gentle shared outing. Confirm the time ashore if you prefer an unhurried visit.",
+    "food": "Ask the operator whether the day includes an island meal or lunch aboard. Carry water regardless of the meal plan.",
+    "bestTime": "Visit when the boat operator confirms suitable conditions and island access. Choose a plan with enough time ashore.",
+    "thingsToDo": [
+      "Follow permitted island paths.",
+      "Observe giant tortoises without touching them.",
+      "Learn about the conservation story.",
+      "Enjoy marine-park viewpoints.",
+      "Photograph the island from the boat."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Moyenne Island?",
+        "answer": "Arrange a permitted boat excursion from Mahé and verify that Moyenne landing is included."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Keep to marked routes and follow local guidance around wildlife."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Combine a Moyenne boat day with a relaxed Mahé day. Keep a weather alternative in mind."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Moyenne Island",
+        "url": "https://en.wikipedia.org/wiki/Moyenne_Island"
+      },
+      {
+        "title": "Seychelles parks visitor information",
+        "url": "https://www.spga.gov.sc/visitor-information"
+      }
+    ],
+    "published": true,
+    "sortOrder": 19
+  },
+  {
+    "name": "Anse Severe",
+    "slug": "anse-severe",
+    "region": "North La Digue · Seychelles",
+    "tagline": "North-coast colour & easy island pauses",
+    "heroImage": {
+      "url": "/images/destinations/anse-severe-1.jpg",
+      "alt": "Anse Severe — destination view",
+      "credit": "NorbertNagel",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Severe_-_La_Digue_-_Seychelles_-_02.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "gallery": [
+      {
+        "url": "/images/destinations/anse-severe-2.jpg",
+        "alt": "Anse Severe — photo 2",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Severe_-_La_Digue_-_Seychelles_-_06.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/anse-severe-3.jpg",
+        "alt": "Anse Severe — photo 3",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Severe_-_La_Digue_-_Seychelles_-_07.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/anse-severe-4.jpg",
+        "alt": "Anse Severe — photo 4",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Severe_-_La_Digue_-_Seychelles_-_04.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      },
+      {
+        "url": "/images/destinations/anse-severe-5.jpg",
+        "alt": "Anse Severe — photo 5",
+        "credit": "NorbertNagel",
+        "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Severe_-_La_Digue_-_Seychelles_-_05.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      }
+    ],
+    "bannerImage": {
+      "url": "/images/destinations/anse-severe-6.jpg",
+      "alt": "Anse Severe — photo 6",
+      "credit": "NorbertNagel",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Anse_Severe_-_La_Digue_-_Seychelles_-_08.jpg",
+      "license": "CC BY-SA 4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "shortDescription": "Anse Severe is a useful north-coast stop on La Digue, with beach scenery and a slower atmosphere near the village side of the island. Combine it with a gentle walk or bicycle outing.",
+    "longDescription": "Anse Severe offers another side of La Digue beyond its famous southwest granite beach. The northern coastline is well suited to a deliberately slow outing, with time to pause and enjoy the view.\n\nThe appearance of the beach and shallows changes with the tide. Choose any swimming or snorkelling according to local conditions and advice, and avoid stepping on living coral. It can be a pleasant place to return to at a different time of day rather than adding another long transfer.",
+    "threeDays": "Day 1: Arrive on La Digue and settle near La Passe or the north coast.\n\nDay 2: Make an unhurried outing to Anse Severe and nearby permitted viewpoints.\n\nDay 3: Visit L’Union Estate and Anse Source d’Argent for a contrasting coastal scene.",
+    "fourDays": "Follow the three-day suggestion above, then add a fourth day: Keep an extra day for a guided nature activity or a repeat beach visit in different light.",
+    "weekend": "Base yourself on La Digue and combine Anse Severe with village time and one other coastal outing.",
+    "whereToStay": [
+      {
+        "area": "Anse Severe area",
+        "description": "Look for north-coast accommodation and check access from the jetty."
+      },
+      {
+        "area": "La Passe",
+        "description": "A practical base for meals, bicycle hire and a north-coast outing."
+      }
+    ],
+    "comparison": "Anse Severe is a convenient northern-coast complement to Anse Source d’Argent. Visit both for different views rather than expecting the same beach experience.",
+    "couples": "Take a slow bicycle outing, stop for refreshments where available and leave time for the changing coastal light.",
+    "food": "Check nearby cafés or beach refreshments on the day, or plan a meal in La Passe. Bring water when cycling.",
+    "bestTime": "Early or late in the day can be comfortable for a slow outing. Water activities depend on tide and sea conditions.",
+    "thingsToDo": [
+      "Enjoy the north-coast beach scenery.",
+      "Take a gentle bicycle outing.",
+      "Photograph the changing light.",
+      "Explore nearby permitted viewpoints.",
+      "Combine the beach with La Passe."
+    ],
+    "faqs": [
+      {
+        "question": "How do I get to Anse Severe?",
+        "answer": "Reach the north coast from La Passe by a suitable local walk, bicycle route or arranged transfer."
+      },
+      {
+        "question": "What should I know before visiting?",
+        "answer": "Shallow-looking water is not a guarantee of safe conditions; ask locally before entering."
+      },
+      {
+        "question": "How can I plan a short visit?",
+        "answer": "Base yourself on La Digue and combine Anse Severe with village time and one other coastal outing."
+      }
+    ],
+    "sources": [
+      {
+        "title": "Anse Severe local accommodation and setting",
+        "url": "https://anse-severe.com/"
+      },
+      {
+        "title": "La Digue island overview",
+        "url": "https://www.seychelles.com/explore-islands/overview"
+      }
+    ],
+    "published": true,
+    "sortOrder": 20
+  }
+]

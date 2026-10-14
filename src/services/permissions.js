@@ -76,6 +76,13 @@ const CATALOGUE = [
     ],
   },
   {
+    group: 'Website',
+    permissions: [
+      { key: 'website.view', label: 'See the website configuration' },
+      { key: 'website.manage', label: 'Change the home page, hero media and logo' },
+    ],
+  },
+  {
     group: 'Documents',
     permissions: [
       { key: 'documents.view', label: 'See vouchers and invoices' },
