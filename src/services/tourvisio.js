@@ -11,6 +11,8 @@
  * the response body and re-login once.
  */
 
+const { tourvisioRequest } = require('./tourvisioHttp');
+
 const BASE_URL = (process.env.TOURVISIO_BASE_URL || 'https://service.espacelimited.com').replace(/\/$/, '');
 const AGENCY = process.env.TOURVISIO_AGENCY || 'B2C';
 const USER = process.env.TOURVISIO_USER || 'B2C';
@@ -28,12 +30,14 @@ async function login(force = false) {
   if (!force && _token && Date.now() < _tokenExpiresAt) return _token;
   if (!PASSWORD) throw new Error('TOURVISIO_PASSWORD is not set');
 
-  const res = await fetch(`${BASE_URL}/api/authenticationservice/login`, {
+  // Retries/connection handling: see tourvisioHttp (login is a safe read).
+  const res = await tourvisioRequest(`${BASE_URL}/api/authenticationservice/login`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ Agency: AGENCY, User: USER, Password: PASSWORD }),
   });
-  const data = await res.json().catch(() => null);
+  let data = null;
+  try { data = JSON.parse(res.text); } catch { /* not JSON */ }
   const token = data?.body?.token;
   if (!token) {
     throw new Error(`TourVisio login failed: ${JSON.stringify(data?.header?.messages || data).slice(0, 300)}`);
@@ -51,13 +55,15 @@ function isTokenError(payload) {
 /** POST to a TourVisio service, re-authenticating once on a stale token. */
 async function call(path, body, { retried = false } = {}) {
   const token = await login();
-  const res = await fetch(`${BASE_URL}/api${path}`, {
+  // Booking/payment paths are never re-sent once they reach TourVisio; only a
+  // connection that never opened is retried (see tourvisioHttp).
+  const res = await tourvisioRequest(`${BASE_URL}/api${path}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
     body: JSON.stringify(body),
   });
 
-  const text = await res.text();
+  const text = res.text;
   let data;
   try { data = JSON.parse(text); } catch { data = { raw: text }; }
 
@@ -66,7 +72,7 @@ async function call(path, body, { retried = false } = {}) {
     return call(path, body, { retried: true });
   }
 
-  const ok = res.ok && data?.header?.success !== false && !isTokenError(data);
+  const ok = res.status >= 200 && res.status < 300 && data?.header?.success !== false && !isTokenError(data);
   return { ok, status: res.status, data, messages: data?.header?.messages || [] };
 }
 

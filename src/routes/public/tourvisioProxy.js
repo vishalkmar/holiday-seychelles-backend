@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const { proxyRequest } = require('../../services/tourvisioProxyRequest');
 
 const TARGET = 'https://service.espacelimited.com';
 
@@ -23,14 +24,19 @@ router.all('/*', async (req, res) => {
       fetchOptions.body = JSON.stringify(req.body);
     }
 
-    const upstream = await fetch(targetUrl, fetchOptions);
-    const contentType = upstream.headers.get('content-type') || 'application/json';
-    const text = await upstream.text();
-
-    res.status(upstream.status).set('Content-Type', contentType).send(text);
+    const upstream = await proxyRequest(targetUrl, fetchOptions);
+    res.status(upstream.status).set('Content-Type', upstream.contentType).send(upstream.text);
   } catch (err) {
     console.error(`[tourvisio-proxy] ${req.method} ${req.originalUrl} →`, err.message);
-    res.status(502).json({ error: 'proxy_error', message: err.message });
+    const timedOut = err.name === 'TimeoutError';
+    const message = timedOut
+      ? 'The hotel supplier took too long to respond. Please try again.'
+      : 'The hotel supplier is temporarily unavailable. Please try again.';
+    res.status(timedOut ? 504 : 502).json({
+      error: timedOut ? 'upstream_timeout' : 'proxy_error',
+      message,
+      header: { success: false, messages: [{ code: 'SupplierUnavailable', message }] },
+    });
   }
 });
 

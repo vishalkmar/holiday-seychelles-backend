@@ -103,6 +103,7 @@ app.use('/api/user/trips', userTripsRoutes);
 app.use('/api/user/queries', userQueriesRoutes);
 app.use('/api/user/transactions', userTransactionsRoutes);
 app.use('/api/user/overview', userOverviewRoutes);
+app.use('/api/user/wishlist', require('./routes/user/wishlist'));
 
 // Public website routes
 app.use('/api/blogs', publicBlogsRoutes);
