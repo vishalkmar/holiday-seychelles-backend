@@ -1,0 +1,418 @@
+{
+  "key": "excursions",
+  "name": "Excursions & Tours",
+  "entry": "x0",
+  "triggers": {
+    "chips": [
+      "Excursions",
+      "Things to do"
+    ],
+    "keywords": [
+      "excursion",
+      "excursions",
+      "tour",
+      "tours",
+      "activity",
+      "activities",
+      "snorkelling",
+      "snorkeling",
+      "diving",
+      "cruise",
+      "catamaran",
+      "boat trip",
+      "fishing",
+      "day trip"
+    ],
+    "greeting": {
+      "show": true,
+      "emoji": "🏝",
+      "label": "Excursions",
+      "order": 2
+    }
+  },
+  "nodes": [
+    {
+      "id": "x0",
+      "type": "message",
+      "data": {
+        "text": "Let's find something fun to do 🏝"
+      }
+    },
+    {
+      "id": "x1",
+      "type": "condition",
+      "data": {
+        "cases": [
+          {
+            "when": "{{island}} notempty",
+            "port": "byIsland"
+          }
+        ]
+      }
+    },
+    {
+      "id": "x2",
+      "type": "choice",
+      "data": {
+        "text": "How would you like to browse?",
+        "var": "browse",
+        "allowOther": false,
+        "options": [
+          {
+            "label": "By kind of trip",
+            "value": "category"
+          },
+          {
+            "label": "By island",
+            "value": "island"
+          },
+          {
+            "label": "Search by name",
+            "value": "name"
+          }
+        ]
+      }
+    },
+    {
+      "id": "x3",
+      "type": "choice",
+      "data": {
+        "text": "What kind of trip?",
+        "var": "category",
+        "allowOther": false,
+        "options": [
+          {
+            "label": "Boat trips & cruises",
+            "value": "cruise"
+          },
+          {
+            "label": "Snorkelling & marine parks",
+            "value": "marine"
+          },
+          {
+            "label": "Diving",
+            "value": "diving"
+          },
+          {
+            "label": "Island hopping",
+            "value": "islands"
+          },
+          {
+            "label": "Island tours",
+            "value": "tours"
+          },
+          {
+            "label": "Nature & hiking",
+            "value": "nature"
+          },
+          {
+            "label": "Water & adventure",
+            "value": "adventure"
+          },
+          {
+            "label": "Fishing",
+            "value": "fishing"
+          },
+          {
+            "label": "Culture & sightseeing",
+            "value": "culture"
+          }
+        ]
+      }
+    },
+    {
+      "id": "x4",
+      "type": "choice",
+      "data": {
+        "text": "Which island?",
+        "var": "island",
+        "allowOther": true,
+        "options": [
+          {
+            "label": "Mahé",
+            "value": "Mahé"
+          },
+          {
+            "label": "Praslin",
+            "value": "Praslin"
+          },
+          {
+            "label": "La Digue",
+            "value": "La Digue"
+          }
+        ]
+      }
+    },
+    {
+      "id": "x5",
+      "type": "input",
+      "data": {
+        "text": "Type a name or a word — e.g. “catamaran”, “Sun Chaser”, “Vallée de Mai”.",
+        "var": "name",
+        "acceptQuestions": true
+      }
+    },
+    {
+      "id": "x6",
+      "type": "date",
+      "data": {
+        "text": "Which day would you like to go? I'll also show the next dates each trip runs.",
+        "range": false,
+        "var": "date"
+      }
+    },
+    {
+      "id": "x7",
+      "type": "tool",
+      "data": {
+        "tool": "excursions.search",
+        "var": "trips",
+        "input": {
+          "date": "{{date}}",
+          "category": "{{category}}",
+          "island": "{{island}}",
+          "name": "{{name}}",
+          "adults": "{{pax.adults}}"
+        }
+      }
+    },
+    {
+      "id": "x8",
+      "type": "cards",
+      "data": {
+        "from": "trips",
+        "text": "Here's what's on — each card shows the next date it runs if it isn't on your day:",
+        "limit": 8,
+        "seeAllLabel": "See all excursions"
+      }
+    },
+    {
+      "id": "x9",
+      "type": "message",
+      "data": {
+        "text": "I couldn't find trips for that in the next 30 days. Try another kind of trip or another island?"
+      }
+    },
+    {
+      "id": "x10",
+      "type": "choice",
+      "data": {
+        "text": "Anything else?",
+        "var": "next",
+        "allowOther": false,
+        "options": [
+          {
+            "label": "Another day",
+            "value": "date"
+          },
+          {
+            "label": "Different kind of trip",
+            "value": "browse"
+          },
+          {
+            "label": "Talk to an expert",
+            "value": "handoff"
+          }
+        ],
+        "alwaysAsk": true
+      }
+    },
+    {
+      "id": "s1",
+      "type": "set",
+      "data": {
+        "assign": {
+          "date": null
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "type": "set",
+      "data": {
+        "assign": {
+          "category": null,
+          "island": null,
+          "name": null
+        }
+      }
+    },
+    {
+      "id": "err",
+      "type": "message",
+      "data": {
+        "text": "Live excursion prices are unavailable right now — please try again in a moment."
+      }
+    },
+    {
+      "id": "h1",
+      "type": "handoff",
+      "data": {
+        "text": "Our team knows every trip on the islands — send us a query and we'll reply by email."
+      }
+    },
+    {
+      "id": "end",
+      "type": "end"
+    }
+  ],
+  "edges": [
+    {
+      "from": "x0",
+      "to": "x1"
+    },
+    {
+      "from": "x1",
+      "port": "byIsland",
+      "to": "x6"
+    },
+    {
+      "from": "x1",
+      "port": "else",
+      "to": "x2"
+    },
+    {
+      "from": "x2",
+      "port": "category",
+      "to": "x3"
+    },
+    {
+      "from": "x2",
+      "port": "island",
+      "to": "x4"
+    },
+    {
+      "from": "x2",
+      "port": "name",
+      "to": "x5"
+    },
+    {
+      "from": "x3",
+      "port": "cruise",
+      "to": "x6"
+    },
+    {
+      "from": "x3",
+      "port": "marine",
+      "to": "x6"
+    },
+    {
+      "from": "x3",
+      "port": "diving",
+      "to": "x6"
+    },
+    {
+      "from": "x3",
+      "port": "islands",
+      "to": "x6"
+    },
+    {
+      "from": "x3",
+      "port": "tours",
+      "to": "x6"
+    },
+    {
+      "from": "x3",
+      "port": "nature",
+      "to": "x6"
+    },
+    {
+      "from": "x3",
+      "port": "adventure",
+      "to": "x6"
+    },
+    {
+      "from": "x3",
+      "port": "fishing",
+      "to": "x6"
+    },
+    {
+      "from": "x3",
+      "port": "culture",
+      "to": "x6"
+    },
+    {
+      "from": "x4",
+      "port": "Mahé",
+      "to": "x6"
+    },
+    {
+      "from": "x4",
+      "port": "Praslin",
+      "to": "x6"
+    },
+    {
+      "from": "x4",
+      "port": "La Digue",
+      "to": "x6"
+    },
+    {
+      "from": "x4",
+      "port": "other",
+      "to": "x6"
+    },
+    {
+      "from": "x5",
+      "port": "ok",
+      "to": "x6"
+    },
+    {
+      "from": "x6",
+      "to": "x7"
+    },
+    {
+      "from": "x7",
+      "port": "ok",
+      "to": "x8"
+    },
+    {
+      "from": "x7",
+      "port": "empty",
+      "to": "x9"
+    },
+    {
+      "from": "x7",
+      "port": "error",
+      "to": "err"
+    },
+    {
+      "from": "x8",
+      "to": "x10"
+    },
+    {
+      "from": "x9",
+      "to": "x10"
+    },
+    {
+      "from": "x10",
+      "port": "date",
+      "to": "s1"
+    },
+    {
+      "from": "x10",
+      "port": "browse",
+      "to": "s2"
+    },
+    {
+      "from": "x10",
+      "port": "handoff",
+      "to": "h1"
+    },
+    {
+      "from": "s1",
+      "to": "x6"
+    },
+    {
+      "from": "s2",
+      "to": "x2"
+    },
+    {
+      "from": "err",
+      "to": "h1"
+    },
+    {
+      "from": "h1",
+      "to": "end"
+    }
+  ]
+}

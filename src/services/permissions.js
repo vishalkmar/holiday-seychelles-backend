@@ -98,6 +98,22 @@ const CATALOGUE = [
     ],
   },
   {
+    // AI assistant (docs/rag-system). Changing what the AI knows, says or may
+    // call is sensitive: a bad change speaks to every visitor at once.
+    group: 'AI Assistant',
+    permissions: [
+      { key: 'rag.view', label: 'See the AI assistant overview, analytics and playground' },
+      { key: 'rag.knowledge.manage', label: 'Edit destinations, FAQs and training documents' },
+      { key: 'rag.flows.manage', label: 'Build and publish chat flows (Bot Connection)' },
+      { key: 'rag.conversations.view', label: 'Read visitor chat transcripts' },
+      { key: 'rag.audit.view', label: 'Read the AI change and security log' },
+      { key: 'rag.index.manage', label: 'Re-index knowledge and switch the vector database', sensitive: true },
+      { key: 'rag.tools.manage', label: 'Choose which live data the AI may use', sensitive: true },
+      { key: 'rag.prompt.edit', label: 'Edit and publish the AI system prompt', sensitive: true },
+      { key: 'rag.settings.manage', label: 'Change AI models, keys and limits', sensitive: true },
+    ],
+  },
+  {
     group: 'Administration',
     permissions: [
       { key: 'audit.view', label: 'Read the audit log' },

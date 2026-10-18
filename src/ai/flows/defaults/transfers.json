@@ -1,0 +1,370 @@
+{
+  "key": "transfers",
+  "name": "Airport & Hotel Transfers",
+  "entry": "t0",
+  "triggers": {
+    "chips": [
+      "Transfers",
+      "Book a transfer"
+    ],
+    "keywords": [
+      "transfer",
+      "transfers",
+      "taxi",
+      "cab",
+      "pick up",
+      "pickup",
+      "pick-up",
+      "drop off",
+      "airport transfer",
+      "ride"
+    ],
+    "greeting": {
+      "show": true,
+      "emoji": "🚐",
+      "label": "Transfers",
+      "order": 3
+    }
+  },
+  "nodes": [
+    {
+      "id": "t0",
+      "type": "message",
+      "data": {
+        "text": "Happy to arrange your ride 🚐"
+      }
+    },
+    {
+      "id": "t1",
+      "type": "choice",
+      "data": {
+        "text": "Which way are you going?",
+        "var": "direction",
+        "allowOther": false,
+        "options": [
+          {
+            "label": "Arriving — to my hotel",
+            "value": "1"
+          },
+          {
+            "label": "Leaving — from my hotel",
+            "value": "2"
+          }
+        ]
+      }
+    },
+    {
+      "id": "t2",
+      "type": "choice",
+      "data": {
+        "text": "Where should we pick you up? Pick one, or type the place.",
+        "var": "from",
+        "allowOther": true,
+        "options": {
+          "source": "tool",
+          "tool": "transfers.departures",
+          "input": {
+            "direction": "{{direction}}"
+          },
+          "map": {
+            "label": "name",
+            "value": "id"
+          },
+          "limit": 10
+        }
+      }
+    },
+    {
+      "id": "t2b",
+      "type": "choice",
+      "data": {
+        "text": "Which of these is it?",
+        "var": "from",
+        "allowOther": false,
+        "options": {
+          "source": "tool",
+          "tool": "transfers.departures",
+          "input": {
+            "direction": "{{direction}}",
+            "query": "{{from}}"
+          },
+          "map": {
+            "label": "name",
+            "value": "id"
+          },
+          "limit": 10
+        }
+      }
+    },
+    {
+      "id": "t3",
+      "type": "choice",
+      "data": {
+        "text": "And where to? These are the places we can drop you from {{fromLabel}} — or type your hotel.",
+        "var": "to",
+        "allowOther": true,
+        "options": {
+          "source": "tool",
+          "tool": "transfers.arrivals",
+          "input": {
+            "departureId": "{{fromItem.id}}",
+            "departureType": "{{fromItem.type}}",
+            "direction": "{{direction}}"
+          },
+          "map": {
+            "label": "name",
+            "value": "id"
+          },
+          "limit": 10
+        }
+      }
+    },
+    {
+      "id": "t3b",
+      "type": "choice",
+      "data": {
+        "text": "Which of these is it?",
+        "var": "to",
+        "allowOther": false,
+        "options": {
+          "source": "tool",
+          "tool": "transfers.arrivals",
+          "input": {
+            "departureId": "{{fromItem.id}}",
+            "departureType": "{{fromItem.type}}",
+            "direction": "{{direction}}",
+            "query": "{{to}}"
+          },
+          "map": {
+            "label": "name",
+            "value": "id"
+          },
+          "limit": 10
+        }
+      }
+    },
+    {
+      "id": "t4",
+      "type": "date",
+      "data": {
+        "text": "Which day?",
+        "range": false,
+        "var": "date"
+      }
+    },
+    {
+      "id": "t5",
+      "type": "guests",
+      "data": {
+        "text": "How many passengers?",
+        "var": "pax"
+      }
+    },
+    {
+      "id": "t6",
+      "type": "tool",
+      "data": {
+        "tool": "transfers.search",
+        "var": "transfers",
+        "input": {
+          "departureId": "{{fromItem.id}}",
+          "departureType": "{{fromItem.type}}",
+          "departureName": "{{fromLabel}}",
+          "arrivalId": "{{toItem.id}}",
+          "arrivalType": "{{toItem.type}}",
+          "arrivalName": "{{toLabel}}",
+          "date": "{{date}}",
+          "adults": "{{pax.adults}}",
+          "childAges": "{{pax.childAges}}",
+          "direction": "{{direction}}"
+        }
+      }
+    },
+    {
+      "id": "t7",
+      "type": "cards",
+      "data": {
+        "from": "transfers",
+        "text": "Here are the transfers from {{fromLabel}} to {{toLabel}} — prices are per vehicle:",
+        "limit": 4,
+        "seeAllLabel": "Book on the website"
+      }
+    },
+    {
+      "id": "t8",
+      "type": "message",
+      "data": {
+        "text": "There's no transfer between those places on that day. Try another date or a nearby drop-off?"
+      }
+    },
+    {
+      "id": "t9",
+      "type": "choice",
+      "data": {
+        "text": "Anything else?",
+        "var": "next",
+        "allowOther": false,
+        "options": [
+          {
+            "label": "Change date",
+            "value": "date"
+          },
+          {
+            "label": "Different places",
+            "value": "places"
+          },
+          {
+            "label": "Talk to an expert",
+            "value": "handoff"
+          }
+        ],
+        "alwaysAsk": true
+      }
+    },
+    {
+      "id": "s1",
+      "type": "set",
+      "data": {
+        "assign": {
+          "date": null
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "type": "set",
+      "data": {
+        "assign": {
+          "from": null,
+          "to": null
+        }
+      }
+    },
+    {
+      "id": "err",
+      "type": "message",
+      "data": {
+        "text": "Live transfer prices are unavailable right now — please try again in a moment."
+      }
+    },
+    {
+      "id": "h1",
+      "type": "handoff",
+      "data": {
+        "text": "Our team can arrange any pick-up for you — send us a query and we'll reply by email."
+      }
+    },
+    {
+      "id": "end",
+      "type": "end"
+    }
+  ],
+  "edges": [
+    {
+      "from": "t0",
+      "to": "t1"
+    },
+    {
+      "from": "t1",
+      "port": "1",
+      "to": "t2"
+    },
+    {
+      "from": "t1",
+      "port": "2",
+      "to": "t2"
+    },
+    {
+      "from": "t2",
+      "port": "picked",
+      "to": "t3"
+    },
+    {
+      "from": "t2",
+      "port": "other",
+      "to": "t2b"
+    },
+    {
+      "from": "t2b",
+      "port": "picked",
+      "to": "t3"
+    },
+    {
+      "from": "t3",
+      "port": "picked",
+      "to": "t4"
+    },
+    {
+      "from": "t3",
+      "port": "other",
+      "to": "t3b"
+    },
+    {
+      "from": "t3b",
+      "port": "picked",
+      "to": "t4"
+    },
+    {
+      "from": "t4",
+      "to": "t5"
+    },
+    {
+      "from": "t5",
+      "to": "t6"
+    },
+    {
+      "from": "t6",
+      "port": "ok",
+      "to": "t7"
+    },
+    {
+      "from": "t6",
+      "port": "empty",
+      "to": "t8"
+    },
+    {
+      "from": "t6",
+      "port": "error",
+      "to": "err"
+    },
+    {
+      "from": "t7",
+      "to": "t9"
+    },
+    {
+      "from": "t8",
+      "to": "t9"
+    },
+    {
+      "from": "t9",
+      "port": "date",
+      "to": "s1"
+    },
+    {
+      "from": "t9",
+      "port": "places",
+      "to": "s2"
+    },
+    {
+      "from": "t9",
+      "port": "handoff",
+      "to": "h1"
+    },
+    {
+      "from": "s1",
+      "to": "t4"
+    },
+    {
+      "from": "s2",
+      "to": "t2"
+    },
+    {
+      "from": "err",
+      "to": "h1"
+    },
+    {
+      "from": "h1",
+      "to": "end"
+    }
+  ]
+}

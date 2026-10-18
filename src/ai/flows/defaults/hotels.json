@@ -1,0 +1,314 @@
+{
+  "key": "hotels",
+  "name": "Looking for Hotels",
+  "entry": "n1",
+  "triggers": {
+    "chips": [
+      "Hotels",
+      "Find a hotel"
+    ],
+    "keywords": [
+      "hotel",
+      "hotels",
+      "stay",
+      "resort",
+      "resorts",
+      "accommodation",
+      "villa",
+      "villas"
+    ],
+    "greeting": {
+      "show": true,
+      "emoji": "🏨",
+      "label": "Hotels",
+      "order": 1
+    }
+  },
+  "nodes": [
+    {
+      "id": "n1",
+      "type": "message",
+      "data": {
+        "text": "Great! Let's find you a stay 🏨"
+      }
+    },
+    {
+      "id": "n2",
+      "type": "choice",
+      "data": {
+        "text": "Which island would you like to stay on?",
+        "var": "island",
+        "allowOther": true,
+        "options": [
+          {
+            "label": "Mahé",
+            "value": "Mahé"
+          },
+          {
+            "label": "Praslin",
+            "value": "Praslin"
+          },
+          {
+            "label": "La Digue",
+            "value": "La Digue"
+          },
+          {
+            "label": "Silhouette",
+            "value": "Silhouette"
+          }
+        ]
+      }
+    },
+    {
+      "id": "n3",
+      "type": "date",
+      "data": {
+        "text": "When are you travelling?",
+        "range": true,
+        "varFrom": "checkIn",
+        "varTo": "checkOut"
+      }
+    },
+    {
+      "id": "n4",
+      "type": "guests",
+      "data": {
+        "text": "Who's coming?",
+        "var": "pax"
+      }
+    },
+    {
+      "id": "n5",
+      "type": "tool",
+      "data": {
+        "tool": "hotels.search",
+        "var": "hotels",
+        "input": {
+          "destination": "{{island}}",
+          "checkIn": "{{checkIn}}",
+          "checkOut": "{{checkOut}}",
+          "adults": "{{pax.adults}}",
+          "childAges": "{{pax.childAges}}",
+          "maxPrice": "{{budget}}"
+        }
+      }
+    },
+    {
+      "id": "n6",
+      "type": "cards",
+      "data": {
+        "from": "hotels",
+        "text": "Here are the best live options in {{island}} — prices are for your whole stay:",
+        "limit": 6,
+        "seeAllLabel": "See all hotels"
+      }
+    },
+    {
+      "id": "n6e",
+      "type": "message",
+      "data": {
+        "text": "I couldn't find rooms in {{island}} for those dates{{budgetNote}}. Try other dates, another island or a bigger budget?"
+      }
+    },
+    {
+      "id": "n7",
+      "type": "choice",
+      "data": {
+        "text": "What would you like to do next?",
+        "var": "next",
+        "allowOther": false,
+        "options": [
+          {
+            "label": "Under €1,000 total",
+            "value": "b1000"
+          },
+          {
+            "label": "Under €2,000 total",
+            "value": "b2000"
+          },
+          {
+            "label": "Change dates",
+            "value": "dates"
+          },
+          {
+            "label": "Another island",
+            "value": "island"
+          },
+          {
+            "label": "Talk to an expert",
+            "value": "handoff"
+          }
+        ],
+        "alwaysAsk": true
+      }
+    },
+    {
+      "id": "s1",
+      "type": "set",
+      "data": {
+        "assign": {
+          "budget": 1000,
+          "budgetNote": " under €1,000"
+        }
+      }
+    },
+    {
+      "id": "s2",
+      "type": "set",
+      "data": {
+        "assign": {
+          "budget": 2000,
+          "budgetNote": " under €2,000"
+        }
+      }
+    },
+    {
+      "id": "s3",
+      "type": "set",
+      "data": {
+        "assign": {
+          "checkIn": null,
+          "checkOut": null
+        }
+      }
+    },
+    {
+      "id": "s4",
+      "type": "set",
+      "data": {
+        "assign": {
+          "island": null
+        }
+      }
+    },
+    {
+      "id": "err",
+      "type": "message",
+      "data": {
+        "text": "Live hotel prices are unavailable right now — please try again in a moment."
+      }
+    },
+    {
+      "id": "h1",
+      "type": "handoff",
+      "data": {
+        "text": "Our travel experts will be happy to help you choose. Send us a query and we'll reply by email."
+      }
+    },
+    {
+      "id": "end",
+      "type": "end"
+    }
+  ],
+  "edges": [
+    {
+      "from": "n1",
+      "to": "n2"
+    },
+    {
+      "from": "n2",
+      "port": "Mahé",
+      "to": "n3"
+    },
+    {
+      "from": "n2",
+      "port": "Praslin",
+      "to": "n3"
+    },
+    {
+      "from": "n2",
+      "port": "La Digue",
+      "to": "n3"
+    },
+    {
+      "from": "n2",
+      "port": "Silhouette",
+      "to": "n3"
+    },
+    {
+      "from": "n2",
+      "port": "other",
+      "to": "n3"
+    },
+    {
+      "from": "n3",
+      "to": "n4"
+    },
+    {
+      "from": "n4",
+      "to": "n5"
+    },
+    {
+      "from": "n5",
+      "port": "ok",
+      "to": "n6"
+    },
+    {
+      "from": "n5",
+      "port": "empty",
+      "to": "n6e"
+    },
+    {
+      "from": "n5",
+      "port": "error",
+      "to": "err"
+    },
+    {
+      "from": "n6",
+      "to": "n7"
+    },
+    {
+      "from": "n6e",
+      "to": "n7"
+    },
+    {
+      "from": "n7",
+      "port": "b1000",
+      "to": "s1"
+    },
+    {
+      "from": "n7",
+      "port": "b2000",
+      "to": "s2"
+    },
+    {
+      "from": "n7",
+      "port": "dates",
+      "to": "s3"
+    },
+    {
+      "from": "n7",
+      "port": "island",
+      "to": "s4"
+    },
+    {
+      "from": "n7",
+      "port": "handoff",
+      "to": "h1"
+    },
+    {
+      "from": "s1",
+      "to": "n5"
+    },
+    {
+      "from": "s2",
+      "to": "n5"
+    },
+    {
+      "from": "s3",
+      "to": "n3"
+    },
+    {
+      "from": "s4",
+      "to": "n2"
+    },
+    {
+      "from": "err",
+      "to": "h1"
+    },
+    {
+      "from": "h1",
+      "to": "end"
+    }
+  ]
+}

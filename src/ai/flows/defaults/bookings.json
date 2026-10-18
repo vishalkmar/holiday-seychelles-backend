@@ -1,0 +1,32 @@
+{
+  "key": "bookings",
+  "name": "My bookings",
+  "entry": "b1",
+  "triggers": {
+    "chips": ["My bookings"],
+    "keywords": ["my booking", "my bookings", "my trip", "my trips", "my reservation", "my reservations"],
+    "greeting": { "show": true, "emoji": "🧳", "label": "My bookings", "order": 6, "signedInOnly": true }
+  },
+  "nodes": [
+    { "id": "b1", "type": "condition", "data": { "when": "{{user.id}} notempty" } },
+    { "id": "b2", "type": "tool", "data": { "tool": "bookings.mine", "var": "bookings", "input": { "upcomingOnly": false } } },
+    { "id": "b3", "type": "cards", "data": { "from": "bookings", "text": "Here are your bookings:", "limit": 6, "seeAllLabel": "Open My trips" } },
+    { "id": "b4", "type": "message", "data": { "text": "You don't have any bookings with us yet. Shall we find you a stay?" } },
+    { "id": "b5", "type": "message", "data": { "text": "Please log in to see your bookings — they're in your dashboard under My trips." } },
+    { "id": "b6", "type": "link", "data": { "label": "Log in / My trips", "page": "dashboard", "params": { "tab": "trips" } } },
+    { "id": "err", "type": "message", "data": { "text": "Your bookings can't be loaded right now — you can always see them in your dashboard." } },
+    { "id": "end", "type": "end" }
+  ],
+  "edges": [
+    { "from": "b1", "port": "true", "to": "b2" },
+    { "from": "b1", "port": "false", "to": "b5" },
+    { "from": "b2", "port": "ok", "to": "b3" },
+    { "from": "b2", "port": "empty", "to": "b4" },
+    { "from": "b2", "port": "error", "to": "err" },
+    { "from": "b3", "to": "end" },
+    { "from": "b4", "to": "end" },
+    { "from": "b5", "to": "b6" },
+    { "from": "err", "to": "b6" },
+    { "from": "b6", "to": "end" }
+  ]
+}

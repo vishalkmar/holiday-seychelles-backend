@@ -87,6 +87,37 @@ const POLICY = {
     { permission: 'reports.manage' },
   ],
 
+  // AI assistant. Specific write rules first; reads need rag.view; anything
+  // unmatched falls to the most restrictive key.
+  rag: [
+    // Settings hold the model choice and the API key: read and write both need settings.manage.
+    { path: /^\/settings/, permission: 'rag.settings.manage' },
+    // Original uploaded files can be internal (rate sheets): downloading needs knowledge.manage.
+    { method: 'GET', path: /^\/documents\/\d+\/file/, permission: 'rag.knowledge.manage' },
+    { method: 'GET', path: /^\/conversations/, permission: 'rag.conversations.view' },
+    // 👎 answers carry the visitor's words, like transcripts (Phase 19).
+    { method: 'GET', path: /^\/feedback/, permission: 'rag.conversations.view' },
+    { method: 'GET', path: /^\/audit/, permission: 'rag.audit.view' },
+    { method: 'GET', permission: 'rag.view' },
+    { method: 'POST', path: /^\/(playground|tests|retrieval)/, permission: 'rag.view' },
+    // Saved test cases are the admin's own checks: any AI admin may edit them.
+    { path: /^\/tests/, permission: 'rag.view' },
+    // Fixing feedback, drafting FAQs from unanswered questions, resolving conflicts.
+    { path: /^\/(feedback|suggestions|conflicts)/, permission: 'rag.knowledge.manage' },
+    { path: /^\/(sources|documents|faqs|destinations|jobs)/, permission: 'rag.knowledge.manage' },
+    { path: /^\/flows/, permission: 'rag.flows.manage' },
+    { path: /^\/index/, permission: 'rag.index.manage' },
+    { path: /^\/tools/, permission: 'rag.tools.manage' },
+    // API connectors (extra track 2.3 / 2.4): what the assistant may call.
+    { path: /^\/connectors/, permission: 'rag.tools.manage' },
+    { path: /^\/prompt/, permission: 'rag.prompt.edit' },
+    // Step-up itself is open to any AI admin: the gated route checks its own permission
+    // and the token is bound to the action. Approving or rejecting needs prompt.edit.
+    { method: 'POST', path: /^\/security\/step-up/, permission: 'rag.view' },
+    { path: /^\/security\/pending/, permission: 'rag.prompt.edit' },
+    { permission: 'rag.settings.manage' },
+  ],
+
   security: [
     { method: 'GET', path: /^\/audit/, permission: 'audit.view' },
     { method: 'GET', permission: 'security.manage' },

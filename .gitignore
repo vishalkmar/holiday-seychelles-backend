@@ -11,3 +11,6 @@ yarn-error.log*
 .DS_Store
 dist/
 coverage/
+
+# AI assistant: private uploaded training documents
+storage/

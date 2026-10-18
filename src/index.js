@@ -1,5 +1,17 @@
 require('dotenv').config();
 
+// The dev server twice stopped with no stack in the log. Say why: an unhandled
+// rejection (e.g. the remote MySQL dropping a socket) is logged and the server
+// keeps running; an uncaught exception is logged, then the process exits.
+process.on('unhandledRejection', (err) => console.error('[process] unhandled rejection:', err?.stack || err));
+process.on('uncaughtException', (err) => {
+  console.error('[process] uncaught exception:', err?.stack || err);
+  process.exit(1);
+});
+process.on('exit', (code) => {
+  if (code) console.error(`[process] exiting with code ${code}`);
+});
+
 const path = require('path');
 const express = require('express');
 const cors = require('cors');
@@ -67,6 +79,8 @@ app.use(
   })
 );
 
+// Pasted FAQ text can be large (thousands of questions); only this route gets more room.
+app.use('/api/admin/rag/faqs/import/preview-text', express.json({ limit: '6mb' }));
 app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -142,6 +156,10 @@ app.use('/api/admin/bookings', adminAuthMiddleware, guardFor('bookings'), adminB
 app.use('/api/admin/blogs', adminAuthMiddleware, guardFor('blogs'), adminBlogsRoutes);
 app.use('/api/admin/queries', adminAuthMiddleware, guardFor('queries'), adminQueriesRoutes);
 
+// AI assistant (RAG, live tools, Bot Connection): /api/admin/rag + /api/chat.
+// Self-contained module; see docs/rag-system.
+require('./ai').mountAi(app, { adminAuth: adminAuthMiddleware, guardFor });
+
 app.use((req, res) => {
   res.status(404).json({ status: 'error', message: 'Route not found' });
 });
@@ -161,4 +179,6 @@ app.listen(PORT, () => {
   startBlogScheduler();
   // ...and one that emails saved reports on their cadence.
   startReportScheduler();
+  // ...and one that deletes expired OTPs, codes and tokens (TTL, every 15 minutes).
+  require('./services/expiryCleanup').startExpiryCleanup();
 });

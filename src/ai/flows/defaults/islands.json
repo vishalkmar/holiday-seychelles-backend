@@ -1,0 +1,189 @@
+{
+  "key": "islands",
+  "name": "Explore the Islands",
+  "entry": "i1",
+  "triggers": {
+    "chips": [
+      "Islands",
+      "Explore islands",
+      "Which island?"
+    ],
+    "keywords": [
+      "explore islands",
+      "explore the islands",
+      "island guide"
+    ],
+    "greeting": {
+      "show": true,
+      "emoji": "🗺",
+      "label": "Explore islands",
+      "order": 4
+    }
+  },
+  "nodes": [
+    {
+      "id": "i1",
+      "type": "choice",
+      "data": {
+        "text": "Which island would you like to know about?",
+        "var": "island",
+        "allowOther": true,
+        "options": [
+          {
+            "label": "Mahé",
+            "value": "mahe"
+          },
+          {
+            "label": "Praslin",
+            "value": "praslin"
+          },
+          {
+            "label": "La Digue",
+            "value": "la-digue"
+          },
+          {
+            "label": "Silhouette",
+            "value": "silhouette"
+          },
+          {
+            "label": "Curieuse",
+            "value": "curieuse"
+          },
+          {
+            "label": "Bird Island",
+            "value": "bird-island"
+          }
+        ]
+      }
+    },
+    {
+      "id": "i2",
+      "type": "knowledge",
+      "data": {
+        "query": "What is {{islandLabel}} like? Best time to visit and the top things to do there."
+      }
+    },
+    {
+      "id": "i3",
+      "type": "link",
+      "data": {
+        "label": "Read the {{islandLabel}} guide",
+        "page": "island",
+        "params": {
+          "slug": "{{island}}"
+        }
+      }
+    },
+    {
+      "id": "i4",
+      "type": "choice",
+      "data": {
+        "text": "Would you like to see more?",
+        "var": "next",
+        "allowOther": false,
+        "options": [
+          {
+            "label": "Hotels here",
+            "value": "hotels"
+          },
+          {
+            "label": "Things to do here",
+            "value": "excursions"
+          },
+          {
+            "label": "Another island",
+            "value": "island"
+          }
+        ],
+        "alwaysAsk": true
+      }
+    },
+    {
+      "id": "j1",
+      "type": "jump",
+      "data": {
+        "flow": "hotels"
+      }
+    },
+    {
+      "id": "j2",
+      "type": "jump",
+      "data": {
+        "flow": "excursions"
+      }
+    },
+    {
+      "id": "s1",
+      "type": "set",
+      "data": {
+        "assign": {
+          "island": null
+        }
+      }
+    }
+  ],
+  "edges": [
+    {
+      "from": "i1",
+      "port": "mahe",
+      "to": "i2"
+    },
+    {
+      "from": "i1",
+      "port": "praslin",
+      "to": "i2"
+    },
+    {
+      "from": "i1",
+      "port": "la-digue",
+      "to": "i2"
+    },
+    {
+      "from": "i1",
+      "port": "silhouette",
+      "to": "i2"
+    },
+    {
+      "from": "i1",
+      "port": "curieuse",
+      "to": "i2"
+    },
+    {
+      "from": "i1",
+      "port": "bird-island",
+      "to": "i2"
+    },
+    {
+      "from": "i1",
+      "port": "other",
+      "to": "i2"
+    },
+    {
+      "from": "i2",
+      "to": "i3"
+    },
+    {
+      "from": "i3",
+      "to": "i4"
+    },
+    {
+      "from": "i4",
+      "port": "hotels",
+      "to": "j1"
+    },
+    {
+      "from": "i4",
+      "port": "excursions",
+      "to": "j2"
+    },
+    {
+      "from": "i4",
+      "port": "island",
+      "to": "s1"
+    },
+    {
+      "from": "s1",
+      "to": "i1"
+    }
+  ]
+}
