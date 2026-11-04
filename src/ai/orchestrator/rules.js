@@ -128,6 +128,21 @@ function findGuests(text) {
   return out;
 }
 
+// Wishes beyond place, dates and guests ("near the beach", "Indian food", "top 5"):
+// such a request needs the AI to read the results, not just a fixed flow.
+const WISH = /\b(near (the )?(beach|sea)|beach ?front|on the beach|be[ae]ch (hotels?|resorts?)|sea ?view|ocean ?view|spa|wellness|family|kids?|children|honeymoon|romantic|couples?|adults? only|luxury|luxurious|boutique|quiet|peaceful|nature|eco|pool|all[- ]inclusive|half board|full board|indian|vegetarian|veg|vegan|halal|jain|food|cuisine|restaurant|top \d+|\d+ (best|top)|top rated|list them|list (some|all|the)?|best|cheapest|budget|walking distance|close to)\b/i;
+const PREFER_WORDS = {
+  beach: /\b(be[ae]ch(es)?|sea ?view|ocean|seaside|sea)\b/i,
+  spa: /\b(spa|wellness|massage)\b/i,
+  family: /\b(family|kids?|children)\b/i,
+  romantic: /\b(honeymoon|romantic|couples?|adults? only)\b/i,
+  luxury: /\b(luxury|luxurious|boutique|5[- ]?star|five[- ]star)\b/i,
+  nature: /\b(nature|eco|quiet|peaceful|forest|garden)\b/i,
+};
+const hasWish = (text) => WISH.test(String(text || ''));
+/** Hotel-search preference keys named in the text (see hotels.search `prefer`). */
+const preferFrom = (text) => Object.keys(PREFER_WORDS).filter((k) => PREFER_WORDS[k].test(String(text || '')));
+
 /** → { kind: 'greeting'|'thanks'|'bye'|'handoff'|null, dates: [], guests: {} } */
 function prepass(message, { today }) {
   const t = String(message || '').trim();
@@ -139,4 +154,4 @@ function prepass(message, { today }) {
   return { kind, dates: findDates(t, today), guests: findGuests(t) };
 }
 
-module.exports = { prepass, findDates, findGuests, addDays };
+module.exports = { prepass, findDates, findGuests, addDays, hasWish, preferFrom };

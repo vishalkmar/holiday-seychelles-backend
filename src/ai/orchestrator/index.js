@@ -21,7 +21,7 @@ const defaultLlm = require('../llm');
 const defaultTools = require('../tools');
 const defaultRetriever = require('../retrieve');
 const settingsStore = require('../settings');
-const { prepass } = require('./rules');
+const { prepass, hasWish, preferFrom } = require('./rules');
 const { extract } = require('./extract');
 const { ground, looksLikeToolCall } = require('./grounding');
 const { createSafeStream } = require('./stream');
@@ -29,6 +29,14 @@ const prompt = require('../prompt');
 const { links } = require('../tools/catalog/site');
 
 const MAX_TOOL_CALLS = 3;
+// Time budget for one turn's model calls. The router gets a short slice (rules
+// cover it when it's slow); the answer must be done by the turn deadline, so
+// the visitor gets a reply (or the canned fallback) instead of a broken stream.
+const ROUTER_BUDGET_MS = 12000;
+const TURN_BUDGET_MS = 40000;
+// A live hotel search alone can take 15–40 s: the answer always gets at least
+// this much after the tools finish (the stream pings keep the connection open).
+const ANSWER_BUDGET_MS = 30000;
 
 const ISLANDS = /^(mah[eé]|praslin|la digue|silhouette|curieuse|cousin|aride|bird|denis|fr[eé]gate|desroches|north|moyenne|f[eé]licit[eé]|alphonse)( island)?$/i;
 const ON_TOPIC = /seychell|mah[eé]\b|praslin|la digue|silhouette|curieuse|vall[eé]e de mai|beau vallon|anse |victoria|sainte anne|hotel|resort|villa|excursion|tour\b|cruise|snorkel|diving|transfer|ferry|airport|beach|island|office|address|phone|e-?mail|contact|company|owner|who are you|about (you|us)/i;
@@ -141,9 +149,9 @@ async function resolveTransfer(tools, slots, ctx) {
 }
 
 /** The product's search, straight from the slots (no model needed to pick it). */
-async function runProduct(product, slots, tools, ctx) {
+async function runProduct(product, slots, tools, ctx, { prefer = [] } = {}) {
   if (product === 'hotels') {
-    return [await tools.run('hotels.search', { destination: slots.destination, checkIn: slots.checkIn, checkOut: slots.checkOut, adults: slots.adults || 2, childAges: slots.childAges || [], ...(slots.budget ? { maxPrice: slots.budget } : {}) }, ctx)];
+    return [await tools.run('hotels.search', { destination: slots.destination, checkIn: slots.checkIn, checkOut: slots.checkOut, adults: slots.adults || 2, childAges: slots.childAges || [], ...(slots.budget ? { maxPrice: slots.budget } : {}), ...(prefer.length ? { prefer } : {}) }, ctx)];
   }
   if (product === 'excursions') {
     const input = { adults: slots.adults || 2, childAges: slots.childAges || [] };
@@ -219,7 +227,8 @@ async function handleTurn(input, deps = {}) {
   // 2. Intent and slots.
   const tm = {};
   let tStep = Date.now();
-  const x = await extract({ message, history, state, rules, today, llm, model: s.routerModel || undefined, sessionId: input.sessionId });
+  let deadlineAt = t0 + (deps.turnBudgetMs || TURN_BUDGET_MS);
+  const x = await extract({ message, history, state, rules, today, llm, model: s.routerModel || undefined, sessionId: input.sessionId, deadlineAt: Math.min(deadlineAt, Date.now() + ROUTER_BUDGET_MS) });
   trace.extract = { intent: x.intent, product: x.product, language: x.language, extracted: x.extracted, via: x.via, error: x.error };
   tm.extractMs = Date.now() - tStep;
   // The router sometimes calls plain English "fr" because of one accented name ("vallée de mai tour cost").
@@ -227,6 +236,16 @@ async function handleTurn(input, deps = {}) {
   let route = x.intent;
   let product = x.product;
   const slots = x.slots;
+  // The router missed the island of a product request (slow, or a typo like
+  // "pralin"): read it from the words. Not for questions ("how do I get there
+  // from Praslin?" must not replace the island being planned).
+  if (!x.extracted.destination && !state.pending && productFromWords(message)) {
+    const island = require('../flows').varsFromText(message, today).island;
+    if (island) {
+      slots.destination = island;
+      trace.steps.push(`island from words: ${island}`);
+    }
+  }
   // The router sometimes names the intent but forgets the product ("I am looking
   // for a hotel" → flow_entry, product null): words decide then.
   if (!product && ['live_search', 'flow_entry', 'both'].includes(route)) {
@@ -268,7 +287,7 @@ async function handleTurn(input, deps = {}) {
     route = 'knowledge';
     trace.steps.push('out_of_scope overridden: on-topic words');
   }
-  if (['knowledge', 'smalltalk'].includes(route) && RECOMMEND.test(message) && productFromWords(message)) {
+  if (['knowledge', 'smalltalk'].includes(route) && (RECOMMEND.test(message) || hasWish(message)) && productFromWords(message)) {
     product = productFromWords(message);
     route = 'flow_entry';
     nextState.product = product;
@@ -310,7 +329,11 @@ async function handleTurn(input, deps = {}) {
   tm.retrievalMs = Date.now() - tStep;
   tStep = Date.now();
   if ((route === 'live_search' || route === 'both') && product) {
-    const r = await runProduct(product, slots, tools, ctx);
+    // Wishes from this message or the visitor's recent ones ("near the beach" two turns ago, then dates).
+    const wishText = [message, ...history.filter((h) => h.role === 'user').slice(-3).map((h) => h.content)].join(' ');
+    const prefer = preferFrom(wishText);
+    if (prefer.length) trace.steps.push(`hotel wishes: ${prefer.join(', ')}`);
+    const r = await runProduct(product, slots, tools, ctx, { prefer });
     results.push(...r);
   }
   // API connectors (extra track 2.3 / 2.4): a question that matches one gets
@@ -338,8 +361,8 @@ async function handleTurn(input, deps = {}) {
   const business = deps.business || (await prompt.publishedBusiness().catch(() => require('../prompt/store').SEED));
   const manifest = deps.manifest !== undefined ? deps.manifest : (await require('../prompt/manifest').get().catch(() => ({ text: '' }))).text;
   const routeNote = {
-    knowledge: apiData ? 'Answer from the live data below (tool results) and the knowledge if it is relevant (cite knowledge).' : connectorRound ? 'If a live data tool fits the question, call it; otherwise answer from the knowledge below and cite it.' : retrieval?.insufficient ? 'The knowledge below has nothing relevant: say so briefly and offer to connect the visitor with the team. Do not answer from general knowledge.' : 'Answer from the knowledge below and cite it.',
-    live_search: 'Summarise the live results below in 1–3 sentences (the visitor also sees them as cards). If there are none, say so and suggest other dates or islands.',
+    knowledge: apiData ? 'Answer from the live data below (tool results) and the knowledge if it is relevant (cite knowledge).' : connectorRound ? 'If a live data tool fits the question, call it; otherwise answer from the knowledge below and cite it.' : retrieval?.insufficient ? 'Our knowledge has nothing on this. If it is a general Seychelles travel question, answer helpfully and briefly from well-established general knowledge (no product names, prices or policies) and suggest a next step on our site; otherwise say you do not have that information and offer to connect the visitor with the team.' : 'Answer from the knowledge below and cite it; add well-established general Seychelles context only where it helps.',
+    live_search: 'Summarise the live results below in 2–4 sentences (the visitor also sees them as cards). If the visitor asked for something specific (near the beach, spa, family, honeymoon, a number of options, a kind of food), say which results fit it, using only the result fields (themes, matches, area, board, stars, price), and say honestly when the results do not show it (for example, restaurants or cuisine are not listed — the hotel page has details). If there are none, say so and suggest other dates or islands.',
     both: 'Combine the knowledge (cite it) with the live results below.',
     out_of_scope: 'This request is outside what you help with. Decline in one friendly sentence and offer help with a Seychelles trip.',
     smalltalk: 'Reply briefly and offer help with the trip.',
@@ -363,6 +386,7 @@ async function handleTurn(input, deps = {}) {
   const known = [retrieval?.context, deps.memory, ...history.map((h) => h.content)].filter(Boolean).join(' ');
   trace.prompt = { tokens: built.tokens, trimmed: built.trimmed, draft: Boolean(deps.business) };
 
+  deadlineAt = Math.max(deadlineAt, Date.now() + (deps.answerBudgetMs || ANSWER_BUDGET_MS));
   let text = null;
   let calls = results.length ? 1 : 0; // the product search counts as one
   // Streaming (Phase 14): the answer is streamed without tools, through the
@@ -379,12 +403,12 @@ async function handleTurn(input, deps = {}) {
         if (streaming && !allowTools) {
           const safe = createSafeStream({ evidence: { toolData: results.filter((x) => x.ok).map((x) => x.data), slots, userText: message, known }, emit: deps.onToken });
           // eslint-disable-next-line no-await-in-loop
-          r = await llm.chatStream({ messages, purpose: 'answer', sessionId: input.sessionId, onToken: (d) => safe.push(d) });
+          r = await llm.chatStream({ messages, purpose: 'answer', sessionId: input.sessionId, deadlineAt, onToken: (d) => safe.push(d) });
           streamed = safe.end();
           r.toolCalls = [];
         } else {
           // eslint-disable-next-line no-await-in-loop
-          r = await llm.chat({ messages, tools: allowTools ? enabled : undefined, purpose: 'answer', sessionId: input.sessionId });
+          r = await llm.chat({ messages, tools: allowTools ? enabled : undefined, purpose: 'answer', sessionId: input.sessionId, deadlineAt });
         }
       } catch (err) {
         // Every model refused the request with tools (or failed): answer once
@@ -392,7 +416,7 @@ async function handleTurn(input, deps = {}) {
         if (!allowTools) throw err;
         trace.steps.push(`answer with tools failed (${err.code || 'ERROR'}) → retry without tools`);
         // eslint-disable-next-line no-await-in-loop
-        r = await llm.chat({ messages, purpose: 'answer', sessionId: input.sessionId });
+        r = await llm.chat({ messages, purpose: 'answer', sessionId: input.sessionId, deadlineAt });
         r.toolCalls = [];
       }
       trace.llm.push({ model: r.model, ms: r.latencyMs, failed: (r.failures || []).map((f) => `${f.model}: ${f.code}`), tokensIn: r.usage?.prompt_tokens, tokensOut: r.usage?.completion_tokens, fallbackUsed: r.fallbackUsed, toolCalls: r.toolCalls?.length || 0 });

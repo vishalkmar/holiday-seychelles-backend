@@ -73,7 +73,7 @@ function cleanSlots(raw = {}, today) {
  * → { intent, product, language, slots (merged), extracted (this turn), via: 'llm'|'rules' }
  * llm: the gateway (injectable); history: last messages [{ role, content }].
  */
-async function extract({ message, history = [], state = {}, rules, today, llm, model, sessionId }) {
+async function extract({ message, history = [], state = {}, rules, today, llm, model, sessionId, deadlineAt }) {
   let parsed = null;
   let error = null;
   try {
@@ -81,6 +81,7 @@ async function extract({ message, history = [], state = {}, rules, today, llm, m
       model,
       purpose: 'route',
       sessionId,
+      deadlineAt,
       temperature: 0,
       maxTokens: 600,
       messages: [

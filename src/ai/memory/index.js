@@ -74,6 +74,24 @@ async function summarise({ llm, previous, turns, sessionId }) {
  * input: { visitorId, userId?, sessionId?, message, ipHash?, userAgent?, audience? }
  * → { sessionId, reply, trace, state }
  */
+/**
+ * May a place-name answer take this turn? Yes unless a flow waits for typed
+ * input: any node but a fixed-option choice, or a choice that accepts other
+ * text, or one of its options was typed.
+ */
+async function placeAllowed(flowState, message, flows) {
+  if (!flowState?.waiting || !flows) return true;
+  try {
+    const flow = await require('../flows/store').version(flowState.key, flowState.version);
+    const node = flow?.graph.nodes.find((n) => n.id === flowState.nodeId);
+    if (!node || node.type !== 'choice' || node.data?.allowOther) return false;
+    const typed = String(message || '').trim().toLowerCase();
+    return !(node.data?.options || []).some((o) => String(o.label || '').toLowerCase() === typed || String(o.value || '').toLowerCase() === typed);
+  } catch {
+    return false;
+  }
+}
+
 async function runTurn(input, deps = {}) {
   const store = deps.store || defaultStore;
   const orchestrator = deps.orchestrator || require('../orchestrator');
@@ -123,7 +141,30 @@ async function runTurn(input, deps = {}) {
   // questions in the middle of a flow are answered by the AI, then the flow asks again.
   const flows = deps.flows === undefined ? require('../flows') : deps.flows;
   let out = null;
-  if (flows) {
+
+  // A bare place name ("mahe", "beau vallon", "tell me about praslin"): an intro
+  // from Destination Knowledge and chips into the flows, without a model call.
+  // Not when the bot is waiting for a typed answer (a flow asking "Which
+  // island?", a name, an email…) — then the text is that answer.
+  const places = deps.places === undefined ? require('../orchestrator/places') : deps.places;
+  if (places && !session.state?.pending && (!input.action || input.action.type === 'message') && (await placeAllowed(session.state?.flow, input.message, flows))) {
+    const p = await places.answer(input.message, { tools: deps.orchestratorDeps?.tools || require('../tools') }).catch(() => null);
+    if (p) {
+      const island = p.place.island || (p.place.kind === 'island' ? p.place.name : null);
+      out = {
+        reply: p.reply,
+        state: {
+          slots: { ...slotsForTurn, ...(island ? { destination: island } : {}) },
+          product: session.state?.product || null,
+          language: turnInput.state.language,
+          flow: null,
+        },
+        trace: { route: 'place', place: { name: p.place.name, kind: p.place.kind, island: p.place.island || null }, llm: [], tools: [], steps: ['place name → intro + chips (no model)'] },
+      };
+    }
+  }
+
+  if (flows && !out) {
     const aiTrace = [];
     const ai = async (q) => {
       const r = await orchestrator.handleTurn({ ...turnInput, message: q, state: { ...turnInput.state, pending: null } }, { ...orchDeps, onToken: undefined });

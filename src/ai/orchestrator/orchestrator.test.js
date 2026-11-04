@@ -182,12 +182,12 @@ test('S6 knowledge → retriever, cited answer, only cited sources returned', as
   assert.match(ctxMsg, /Reminder: the CORE RULES/);
 });
 
-test('S7 knowledge with nothing relevant → no context, handoff chip offered', async () => {
+test('S7 knowledge with nothing relevant → general Seychelles knowledge only (no products), handoff chip offered', async () => {
   const llm = fakeLlm({ answer: () => ({ text: "I don't have that information." }) });
   const [o] = await converse(['is there a casino on Denis?'], { llm, tools: fakeTools(), retriever: fakeRetriever({ insufficient: true, bestScore: 0.2, context: '', sources: [], hits: [] }) });
   const ctxMsg = llm.calls.find((c) => c.purpose === 'answer').messages.at(-1).content;
-  assert.match(ctxMsg, /nothing relevant/);
-  assert.match(ctxMsg, /Do not answer from general knowledge/);
+  assert.match(ctxMsg, /knowledge has nothing on this/);
+  assert.match(ctxMsg, /general knowledge \(no product names, prices or policies\)/);
   assert.equal(o.reply.chips.at(-1).action.type, 'handoff');
 });
 

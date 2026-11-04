@@ -142,6 +142,9 @@ async function prefilled(node, vars, deps) {
     const options = await optionsFor(node, vars, deps);
     const hit = matchOption(options, vars[d.var]);
     if (hit) { vars[d.var] = hit.value; vars[`${d.var}Label`] = hit.label; if (hit.item) vars[`${d.var}Item`] = hit.item; return hit.item ? 'picked' : hit.value; }
+    // Not one of the options, but the node takes typed answers ("Beau Vallon
+    // Bay" for "Which island?" — the hotel search knows it): same as typing it.
+    if (d.allowOther === true && Array.isArray(d.options) && String(vars[d.var]).length <= 60) return 'other';
     return null;
   }
   if (node.type === 'date') {

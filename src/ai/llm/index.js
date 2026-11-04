@@ -64,6 +64,9 @@ function chatBody(s, model, { messages, tools, temperature, maxTokens, stream })
     max_tokens: maxTokens ?? s.maxTokens,
     ...(tools?.length ? { tools, tool_choice: 'auto' } : {}),
     ...(stream ? { stream: true } : {}),
+    // Nemotron models "think" before answering (6–12 s, hundreds of tokens) —
+    // not needed for a chat reply or routing JSON: measured 4 s instead.
+    ...(/nemotron/i.test(model) ? { chat_template_kwargs: { enable_thinking: false } } : {}),
   };
 }
 
@@ -101,17 +104,28 @@ function chain(s, only) {
   );
 }
 
-async function withFallback(s, models, run) {
+// deadlineAt (ms timestamp, optional): the whole chain must finish by then. A
+// chat turn has a time budget; without it a slow chain (several models, each
+// with its own timeout and retry) could run for minutes and the visitor's
+// connection would break ("The answer was interrupted").
+async function withFallback(s, models, run, deadlineAt) {
   const failures = [];
   for (let i = 0; i < models.length; i += 1) {
     const model = models[i];
     const isLast = i === models.length - 1;
+    const left = deadlineAt ? deadlineAt - Date.now() : Infinity;
+    if (left < 1500) {
+      const err = new LlmError('TIMEOUT', 'The assistant ran out of time for this answer.');
+      err.failures = failures;
+      throw err;
+    }
     try {
       // A model with a fallback behind it gets a shorter wait and no same-model retry.
+      const timeoutMs = Math.min(isLast ? s.timeoutMs : Math.min(s.timeoutMs, s.fallbackAfterMs || s.timeoutMs), left);
       // eslint-disable-next-line no-await-in-loop
       const out = await run(model, {
-        timeoutMs: isLast ? s.timeoutMs : Math.min(s.timeoutMs, s.fallbackAfterMs || s.timeoutMs),
-        retries: isLast ? 1 : 0,
+        timeoutMs,
+        retries: isLast && left > timeoutMs * 2 ? 1 : 0,
       });
       return { ...out, model, fallbackUsed: i > 0, failures };
     } catch (err) {
@@ -129,7 +143,7 @@ async function withFallback(s, models, run) {
  * opts.model forces one model with no fallback (used by "Test model").
  * The result says which model answered and whether a fallback was needed.
  */
-async function chat({ messages, tools, temperature, maxTokens, purpose = 'chat', sessionId = null, model: only }) {
+async function chat({ messages, tools, temperature, maxTokens, purpose = 'chat', sessionId = null, model: only, deadlineAt }) {
   const s = await prepare();
   return withFallback(s, chain(s, only), (model, { timeoutMs, retries }) =>
     timed(purpose, model, s, sessionId, async () => {
@@ -140,7 +154,8 @@ async function chat({ messages, tools, temperature, maxTokens, purpose = 'chat',
         throw new LlmError('EMPTY', `${model} returned no answer${parsed.finishReason === 'length' ? ' (ran out of tokens while reasoning)' : ''}.`);
       }
       return { ...parsed, usage: json.usage || { prompt_tokens: estimateMessages(messages), completion_tokens: 0 } };
-    })
+    }),
+    deadlineAt
   );
 }
 
@@ -149,7 +164,7 @@ async function chat({ messages, tools, temperature, maxTokens, purpose = 'chat',
  * Falls back to the next model only if a model fails before its first token —
  * once text has reached the visitor, switching models mid-answer would garble it.
  */
-async function chatStream({ messages, temperature, maxTokens, onToken = () => {}, purpose = 'chat', sessionId = null, model: only }) {
+async function chatStream({ messages, temperature, maxTokens, onToken = () => {}, purpose = 'chat', sessionId = null, model: only, deadlineAt }) {
   const s = await prepare();
   return withFallback(s, chain(s, only), (model, { timeoutMs, retries }) =>
     timed(purpose, model, s, sessionId, async () => {
@@ -198,7 +213,8 @@ async function chatStream({ messages, temperature, maxTokens, onToken = () => {}
         finishReason,
         usage: usage || { prompt_tokens: estimateMessages(messages), completion_tokens: estimateTokens(text) },
       };
-    })
+    }),
+    deadlineAt
   );
 }
 

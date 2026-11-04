@@ -21,7 +21,8 @@ function mountAi(app, { adminAuth, guardFor }) {
   require('./memory/retention').start();
   require('./monitor').start(); // Phase 20: email the owners when the assistant is failing
   // Load the in-memory vector index now, so the first visitor question doesn't wait for it.
-  setTimeout(() => require('./vector/mysqlDriver').ensureLoaded().catch(() => {}), 5000).unref?.();
+  // The first embedding call to NVIDIA is slow (~8 s cold): make it here too.
+  setTimeout(() => require('./vector/mysqlDriver').ensureLoaded().catch(() => {}).then(() => require('./llm').embed({ inputs: ['warm up'], inputType: 'query', purpose: 'warmup' })).catch(() => {}), 5000).unref?.();
 }
 
 module.exports = { mountAi };

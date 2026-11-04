@@ -110,11 +110,40 @@ async function resolveLocation(supplier, name) {
   if (hit && Date.now() - hit.at < 6 * 3600 * 1000) return hit.loc;
   const query = name.replace(/\b(island|isl\.?)\b/gi, '').trim() || name;
   const r = await supplier.call('/productservice/getarrivalautocomplete', { ProductType: 2, Query: query, Culture: 'en-US' });
-  const items = r.body.items || [];
+  // The autocomplete is worldwide ("anse royale" also finds hotels in Canada): Seychelles first.
+  const all = r.body.items || [];
+  const items = all.filter((i) => i.country?.id === 'SC').length ? all.filter((i) => i.country?.id === 'SC') : all;
   const city = items.find((i) => i.type !== 2 && i.city?.id) || items.find((i) => i.city?.id);
   const loc = city ? { id: String(city.city.id), name: city.city.name } : null;
   locationCache.set(key, { at: Date.now(), loc });
   return loc;
+}
+
+// Visitor wishes → supplier hotel themes ("Beach Hotel", "Spa Hotel"…).
+const PREFER = {
+  beach: /beach|sea|ocean|island/i,
+  spa: /spa|wellness/i,
+  family: /family|kids|child/i,
+  romantic: /romantic|honeymoon|couple|adults? only/i,
+  luxury: /luxury|boutique|design|exclusive|villa/i,
+  nature: /nature|eco|garden|mountain|green/i,
+  city: /city|town/i,
+};
+const PREFER_KEYS = Object.keys(PREFER);
+const matchesFor = (themes, prefer = []) => prefer.filter((k) => themes.some((t) => PREFER[k].test(t)));
+
+// Rough island boxes (lat/long) for places the autocomplete returns without an island.
+const ISLAND_BOXES = [
+  { island: 'Praslin', lat: [-4.37, -4.28], lon: [55.63, 55.78] },
+  { island: 'La Digue', lat: [-4.40, -4.32], lon: [55.80, 55.88] },
+  { island: 'Silhouette', lat: [-4.52, -4.45], lon: [55.20, 55.27] },
+  { island: 'Mahé', lat: [-4.82, -4.54], lon: [55.36, 55.57] },
+];
+function islandAt(geo) {
+  const lat = Number(geo?.latitude);
+  const lon = Number(geo?.longitude);
+  if (!Number.isFinite(lat) || !Number.isFinite(lon)) return null;
+  return ISLAND_BOXES.find((b) => lat >= b.lat[0] && lat <= b.lat[1] && lon >= b.lon[0] && lon <= b.lon[1])?.island || null;
 }
 
 const SEARCH_SCHEMA = {
@@ -130,6 +159,7 @@ const SEARCH_SCHEMA = {
     maxPrice: { type: 'number', minimum: 0, description: 'Total stay budget in the result currency' },
     minStars: { type: 'number', minimum: 1, maximum: 5 },
     sort: { type: 'string', enum: ['price', 'stars'], default: 'price' },
+    prefer: { type: 'array', items: { type: 'string', enum: PREFER_KEYS }, maxItems: 4, description: 'What the visitor wants (e.g. beach, spa): matching hotels come first and are marked' },
   },
 };
 
@@ -184,13 +214,43 @@ module.exports = {
             room: pretty(offer.rooms?.[0]?.roomName || ''),
             refundable: Boolean(offer.isRefundable),
             thumbnail: h.thumbnailFull || h.thumbnail || null,
+            themes: [...new Set((h.themes || []).map((t) => pretty(t.name || '')).filter(Boolean))].slice(0, 5),
             url: links.hotel({ hotelId: h.id, provider: h.provider || 2, searchId: r.body.searchId, offerId: offer.offerId || offer.id, location: loc.name, locationId: loc.id, checkIn, checkOut, adults, childAges }),
           };
         });
         if (input.minStars) items = items.filter((h) => (h.stars || 0) >= input.minStars);
         if (input.maxPrice) items = items.filter((h) => h.price !== null && h.price <= input.maxPrice);
         items.sort(input.sort === 'stars' ? (a, b) => (b.stars || 0) - (a.stars || 0) || (a.price ?? Infinity) - (b.price ?? Infinity) : (a, b) => (a.price ?? Infinity) - (b.price ?? Infinity));
+        // Wishes ("near the beach"): matching hotels first, each marked; the rest keep their order.
+        if (input.prefer?.length) {
+          items.forEach((h) => { h.matches = matchesFor(h.themes, input.prefer); });
+          items = [...items.filter((h) => h.matches.length), ...items.filter((h) => !h.matches.length)];
+        }
         return { location: loc.name, checkIn, checkOut, nights, adults, children: childAges.length, currency: r.currency, total: items.length, items, url: listUrl };
+      },
+    },
+    {
+      name: 'hotels.locations',
+      title: 'Hotel locations',
+      description: 'Seychelles places and hotels matching a name, as in the website hotel search box (areas like Beau Vallon or Anse Royale, and hotel names). Each has its island when known.',
+      permission: 'public',
+      timeoutMs: 8000,
+      cacheSec: 21600,
+      maxResults: 8,
+      schema: {
+        type: 'object',
+        additionalProperties: false,
+        required: ['query'],
+        properties: { query: { type: 'string', minLength: 2, maxLength: 80 } },
+      },
+      async run({ query }, ctx) {
+        const r = await ctx.supplier.call('/productservice/getarrivalautocomplete', { ProductType: 2, Query: query, Culture: 'en-US' });
+        const items = (r.body.items || [])
+          .filter((i) => i.country?.id === 'SC' && i.city?.name)
+          .map((i) => (i.type === 2 && i.hotel
+            ? { kind: 'hotel', id: String(i.hotel.id), name: pretty(i.hotel.name), area: pretty(i.city.name), areaId: String(i.city.id), island: islandAt(i.geolocation) }
+            : { kind: 'area', id: String(i.city.id), name: pretty(i.city.name), area: pretty(i.city.name), areaId: String(i.city.id), island: islandAt(i.geolocation) }));
+        return { query, total: items.length, items };
       },
     },
     {

@@ -14,9 +14,17 @@
 
 const store = require('./store');
 const engine = require('./engine');
-const { prepass } = require('../orchestrator/rules');
+const { prepass, hasWish } = require('../orchestrator/rules');
 const { islandSlug } = require('../memory/slots');
 const { links } = require('../tools/catalog/site');
+const { findKnown } = require('../orchestrator/places');
+
+const ISLAND_NAMES = [
+  { name: 'Mahé', names: ['mahe'] },
+  { name: 'Praslin', names: ['praslin'] },
+  { name: 'La Digue', names: ['la digue', 'ladigue'] },
+  { name: 'Silhouette', names: ['silhouette'] },
+];
 
 const QUESTION = /\?\s*$|^(what|which|how|is|are|can|do|does|where|when|why|tell me)\b/i;
 const REQUEST = /\b(find|search|book|show|looking for|need|want|get me|check)\b/i;
@@ -41,6 +49,9 @@ async function match({ text, action }) {
   const byChip = flows.find((f) => (f.graph.triggers?.chips || []).some((c) => c.toLowerCase() === label));
   if (byChip) return byChip;
   if (!text || (QUESTION.test(text) && !REQUEST.test(text))) return null;
+  // A request with wishes ("beach hotels in Praslin with Indian food") goes to the AI,
+  // which searches live and says which results fit; the fixed flow can't.
+  if (hasWish(text)) return null;
   // The flow whose keyword comes first wins: "book a taxi to my hotel" is a transfer.
   let best = null;
   for (const f of flows) {
@@ -48,6 +59,13 @@ async function match({ text, action }) {
     if (at >= 0 && (!best || at < best.at)) best = { f, at };
   }
   return best ? best.f : null;
+}
+
+/** A chip that starts a flow may carry a place ("Hotels in Beau Vallon"). Only known, short values. */
+function chipVars(action) {
+  const v = action?.type === 'flow' && action.vars && typeof action.vars === 'object' ? action.vars : {};
+  const island = typeof v.island === 'string' ? v.island.trim().slice(0, 80) : '';
+  return island ? { island } : {};
 }
 
 /** What this message already tells us (no model): island, dates, guests. */
@@ -62,6 +80,15 @@ function varsFromText(text, today) {
   if (r.guests.adults) v.pax = { adults: r.guests.adults, childAges: r.guests.childAges || [] };
   const island = String(text || '').match(/\b(mah[eé]|praslin|la ?digue|silhouette|curieuse|bird island|denis|fr[eé]gate)\b/i);
   if (island) v.island = islandSlug(island[1]) || island[1];
+  else {
+    // "hotels in pralin": a near miss of an island name (one or two letters off).
+    const words = String(text || '').toLowerCase().split(/[^a-zé]+/).filter((w) => w.length >= 4);
+    const pairs = words.slice(1).map((w, i) => `${words[i]} ${w}`);
+    for (const w of [...pairs, ...words]) {
+      const hit = findKnown(ISLAND_NAMES, w);
+      if (hit) { v.island = hit.name; break; }
+    }
+  }
   return v;
 }
 
@@ -132,7 +159,7 @@ async function turn(ctx) {
     version: flow.version,
     nodeId: flow.graph.entry,
     waiting: false,
-    vars: { ...engine.prefillVars(ctx.slots), ...varsFromText(ctx.text, ctx.today), ...(await userVars(ctx.userId)), today: ctx.today },
+    vars: { ...engine.prefillVars(ctx.slots), ...varsFromText(ctx.text, ctx.today), ...chipVars(ctx.action), ...(await userVars(ctx.userId)), today: ctx.today },
   };
   const input = running ? { text: ctx.text, action: ctx.action } : {};
   const r = await engine.run({ graph: flow.graph, state, input, deps });
