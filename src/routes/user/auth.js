@@ -9,6 +9,20 @@ const userAuth = require('../../middleware/userAuth');
 
 const router = express.Router();
 
+/**
+ * Store-review demo account (Google Play "App access" credentials).
+ * When REVIEW_DEMO_EMAIL and a 6-digit REVIEW_DEMO_OTP are both set, that one
+ * address logs in with the fixed code and no email is sent. Unset = off.
+ * Use a non-Gmail address: the request email is normalizeEmail()'d, which for
+ * Gmail also strips dots and +tags, while this side is only lower-cased.
+ */
+function reviewDemoOtp(email) {
+  const demoEmail = String(process.env.REVIEW_DEMO_EMAIL || '').trim().toLowerCase();
+  const demoOtp = String(process.env.REVIEW_DEMO_OTP || '').trim();
+  if (!demoEmail || !/^\d{6}$/.test(demoOtp)) return null;
+  return email === demoEmail ? demoOtp : null;
+}
+
 const userSelectFields = `
   id, email, first_middle_name, last_name, gender, date_of_birth,
   country, mobile_country_code, mobile_number, is_profile_complete,
@@ -46,8 +60,9 @@ router.post(
         );
       }
 
-      // Generate OTP
-      const otp = generateOTP(6);
+      // Generate OTP (the store-review demo account uses its fixed code)
+      const demoOtp = reviewDemoOtp(email);
+      const otp = demoOtp || generateOTP(6);
       const codeHash = hashOTP(otp);
       const ttlMinutes = parseInt(process.env.OTP_TTL_MINUTES || '10');
       const expiresAt = new Date(Date.now() + ttlMinutes * 60 * 1000);
@@ -66,8 +81,8 @@ router.post(
         ]
       );
 
-      // Send OTP email
-      const mailResult = await sendOTPEmail(email, otp);
+      // Send OTP email (none for the demo account - reviewers have the code)
+      const mailResult = demoOtp ? { success: true } : await sendOTPEmail(email, otp);
 
       if (!mailResult.success) {
         return sendError(res, mailResult.error, 'Failed to send OTP email', 500);
@@ -211,15 +226,21 @@ router.post(
   userAuth,
   body('first_middle_name').trim().notEmpty(),
   body('last_name').trim().notEmpty(),
-  body('mobile_number').optional().trim(),
-  body('mobile_country_code').optional().trim(),
-  body('country').optional().trim(),
-  body('date_of_birth').optional().isISO8601(),
-  body('gender').optional().isIn(['male', 'female', 'other']),
+  // The sign-up form sends null (or "") for anything left blank - "can be
+  // updated later" - so blank optional fields are skipped, not rejected.
+  body('mobile_number').optional({ values: 'falsy' }).trim(),
+  body('mobile_country_code').optional({ values: 'falsy' }).trim(),
+  body('country').optional({ values: 'falsy' }).trim(),
+  body('date_of_birth').optional({ values: 'falsy' }).isISO8601(),
+  body('gender').optional({ values: 'falsy' }).isIn(['male', 'female', 'other']),
   async (req, res) => {
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-      return res.status(400).json({ status: 'error', errors: errors.array() });
+      return res.status(400).json({
+        status: 'error',
+        message: `Please check ${errors.array()[0].path.replace(/_/g, ' ')}`,
+        errors: errors.array(),
+      });
     }
 
     try {

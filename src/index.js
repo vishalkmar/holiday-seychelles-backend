@@ -118,6 +118,7 @@ app.use('/api/user/queries', userQueriesRoutes);
 app.use('/api/user/transactions', userTransactionsRoutes);
 app.use('/api/user/overview', userOverviewRoutes);
 app.use('/api/user/wishlist', require('./routes/user/wishlist'));
+app.use('/api/user/account', require('./routes/user/account'));
 
 // Public website routes
 app.use('/api/blogs', publicBlogsRoutes);
@@ -144,6 +145,7 @@ app.use('/api/admin/overview', adminAuthMiddleware, guardFor('overview'), adminO
 app.use('/api/admin/transactions', adminAuthMiddleware, guardFor('transactions'), adminTransactionsRoutes);
 app.use('/api/admin/revenue', adminAuthMiddleware, guardFor('revenue'), adminRevenueRoutes);
 app.use('/api/admin/customers', adminAuthMiddleware, guardFor('customers'), adminCustomersRoutes);
+app.use('/api/admin/account-deletions', adminAuthMiddleware, guardFor('customers'), require('./routes/admin/accountDeletions'));
 app.use('/api/admin/emails', adminAuthMiddleware, guardFor('emails'), adminEmailsRoutes);
 app.use('/api/admin/documents', adminAuthMiddleware, guardFor('documents'), adminDocumentsRoutes);
 app.use('/api/admin/reports', adminAuthMiddleware, guardFor('reports'), adminReportsRoutes);
